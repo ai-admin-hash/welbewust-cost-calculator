@@ -212,6 +212,41 @@
     font-weight: 500;
   }
 
+  .panel-wide {
+    grid-column: 1 / -1;
+  }
+
+  .panel-subnote {
+    font-size: 0.83rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    max-width: 70ch;
+    margin: -0.6rem 0 1.3rem;
+  }
+
+  .storage-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  @media (max-width: 700px) {
+    .storage-grid { grid-template-columns: 1fr; }
+  }
+
+  .storage-ledger {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+
+  .field-note {
+    font-size: 0.76rem;
+    color: var(--ink-soft);
+    line-height: 1.45;
+    margin: 0.35rem 0 0;
+  }
+
   /* ---------- Inputs ---------- */
 
   .field {
@@ -648,6 +683,11 @@
       <span class="total-label">Email-AI / mo</span>
       <span class="total-value mono" id="outTotalEmail">$0</span>
     </div>
+    <div class="total-plus">+</div>
+    <div class="total-block">
+      <span class="total-label">Transcript storage / mo</span>
+      <span class="total-value mono" id="outTotalStorage">$0</span>
+    </div>
     <div class="total-equals">=</div>
     <div class="total-block grand">
       <span class="total-label">Monthly total</span>
@@ -714,7 +754,7 @@
         <div class="field-head"><label>Mode</label></div>
         <div class="mode-toggle">
           <label><input type="radio" name="mode" value="live" checked /> Live (real-time)</label>
-          <label><input type="radio" name="mode" value="batch" /> Batch (after the fact)</label>
+          <label><input type="radio" name="mode" value="batch" /> Dynamic Batch (up to 24h)</label>
         </div>
 
         <div class="mode-compare">
@@ -733,20 +773,20 @@
 
           <div class="mode-card" id="modeCardBatch">
             <div class="mode-card-head">
-              <span class="mode-name">Batch <span class="mode-price mono">≈$0.004/min<sup>*</sup></span></span>
+              <span class="mode-name">Dynamic Batch <span class="mode-price mono">$0.004/min</span></span>
               <span class="mode-flag" id="flagBatch">selected</span>
             </div>
-            <p class="mode-desc">The session is recorded first. Once it's over, that recording is sent off and transcribed afterward — the write-up isn't ready right away, it comes back later.</p>
+            <p class="mode-desc">The session is recorded, then submitted to Google's discounted "Dynamic Batch" queue — a specific, named pricing mode, not just "the non-live option." The discount is a deliberate trade: Google can take up to 24 hours to return it, in exchange for the lower price.</p>
             <ul class="mode-points">
-              <li><span class="pt-label">Use it when</span>the transcript is only needed afterward — session notes, documentation, billing records — nobody needs the words the instant they're spoken.</li>
-              <li><span class="pt-label">Why it costs less</span>roughly a quarter of the live price, because Google processes it as a stored file on its own schedule rather than a live feed.</li>
-              <li><span class="pt-label">The trade-off</span>there's a delay before the transcript exists (minutes to longer, depending on length and processing load), and it can't support anything that needs to happen live.</li>
+              <li><span class="pt-label">Use it when</span>a same-day (or next-day) transcript is genuinely fine — end-of-week documentation, billing records, retrospective note-writing. Not for anything you or the client will want to see today.</li>
+              <li><span class="pt-label">Why it costs less</span>this is Google's real, published "Dynamic Batch" rate (confirmed 4x cheaper than the standard $0.016/min) — it exists specifically to sell spare processing capacity in exchange for accepting a long, unguaranteed wait.</li>
+              <li><span class="pt-label">The trade-off</span>up to 24 hours before the transcript exists, by Google's own design — not a technical limitation to engineer around, but the deliberate price of the discount. It cannot support anything that needs to happen live, or even same-hour.</li>
               <li><span class="pt-label">Data footprint</span>this mode needs a recording of the session to exist, even briefly. Recording a session is a separate thing to get patient consent for, on top of transcribing it, and needs its own privacy sign-off — the lower price comes with more paperwork, not less.</li>
             </ul>
           </div>
         </div>
 
-        <p class="mode-bottom-line"><strong>In short:</strong> live costs more because you're paying for the transcript to exist the instant it's spoken. Batch costs less, but the trade is a delay before it's ready, plus an extra consent/privacy step for keeping a recording in the first place. <span class="mono">*</span> batch rate is an estimate — see notes below.</p>
+        <p class="mode-bottom-line"><strong>In short:</strong> live costs more because you're paying for the transcript to exist the instant it's spoken. Dynamic Batch costs a quarter as much, but the trade isn't a short delay — it's Google's own up-to-24-hour window, plus an extra consent/privacy step for keeping a recording in the first place. There's no cheaper middle ground: a "chunk the audio to fake live" approach doesn't get the discount, because the discount is specifically for accepting the 24-hour wait, not for using the batch endpoint (see notes below).</p>
       </div>
 
       <div class="ledger">
@@ -871,6 +911,77 @@
       </div>
     </article>
 
+    <article class="panel panel-wide">
+      <h2>Transcript storage <span class="unit-tag">Cloud Storage &middot; per GiB-month</span></h2>
+      <p class="panel-subnote">Storing the transcript as a small text/markdown file per session &mdash; separate from the transcription cost above, and separate from the Google contract question (the existing agreement already covers storage, see the notes below).</p>
+
+      <div class="storage-grid">
+        <div class="storage-inputs">
+          <div class="field">
+            <div class="field-head">
+              <label for="fileSizeKb">Avg. size per transcript (.md)</label>
+              <span class="field-value"><span id="valFileSizeKb">40</span> KB</span>
+            </div>
+            <div class="field-controls">
+              <input type="range" id="fileSizeKb" min="5" max="300" step="5" value="40" />
+              <input type="number" id="fileSizeKbNum" min="1" max="2000" step="1" value="40" />
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-head">
+              <label for="storagePercent">Share of sessions saved</label>
+              <span class="field-value"><span id="valStoragePercent">100</span>%</span>
+            </div>
+            <div class="field-controls">
+              <input type="range" id="storagePercent" min="0" max="100" step="5" value="100" />
+              <input type="number" id="storagePercentNum" min="0" max="100" step="1" value="100" />
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-head">
+              <label for="retentionMonths">Retention period</label>
+              <span class="field-value"><span id="valRetentionMonths">24</span> mo</span>
+            </div>
+            <div class="field-controls">
+              <input type="range" id="retentionMonths" min="1" max="240" step="1" value="24" />
+              <input type="number" id="retentionMonthsNum" min="1" max="600" step="1" value="24" />
+            </div>
+            <p class="field-note">Set this to whatever the practice's actual record-retention policy requires &mdash; not a legal default.</p>
+          </div>
+        </div>
+
+        <div class="ledger storage-ledger">
+          <div class="ledger-row">
+            <span class="lbl">Sessions transcribed / month</span>
+            <span class="leader"></span>
+            <span class="val mono" id="outSessionsForStorage">0</span>
+          </div>
+          <div class="ledger-row">
+            <span class="lbl">Files stored / month</span>
+            <span class="leader"></span>
+            <span class="val mono" id="outFilesPerMonth">0</span>
+          </div>
+          <div class="ledger-row">
+            <span class="lbl">New data added / month</span>
+            <span class="leader"></span>
+            <span class="val mono" id="outNewDataMonth">0 MB</span>
+          </div>
+          <div class="ledger-row">
+            <span class="lbl">Steady-state total stored<span class="tier-pill" id="outRetentionPill">at 24 mo</span></span>
+            <span class="leader"></span>
+            <span class="val mono" id="outTotalStored">0 GiB</span>
+          </div>
+          <div class="ledger-row headline">
+            <span class="lbl">Total storage / month</span>
+            <span class="leader"></span>
+            <span class="val mono" id="outCostMonthS">$0</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
   </section>
 
   <footer class="notes">
@@ -878,8 +989,10 @@
     <ul>
       <li>Rates sourced from Google's official pricing pages, verified 7 Jul 2026. Both Chirp and the Gemini 2.5 series price identically regardless of region — europe-west4 (NL) costs the same as global, so residency is free here.</li>
       <li>Transcription volume tiers ($0.016 &rarr; $0.010 &rarr; $0.008 &rarr; $0.004 per minute) are applied as graduated bands past 500k / 1M / 2M minutes a month, the standard model for usage-based cloud pricing &mdash; worth confirming against Google's actual billing behaviour if volume gets close to a threshold.</li>
-      <li>The batch/async rate (&#36;0.004/min) is carried over from the top volume tier as a placeholder &mdash; confirm against Google's actual asynchronous Speech-to-Text SKU before relying on it. (See the Live vs. Batch comparison above for what else differs between the two.)</li>
-      <li>Figures are model-inference cost only: orchestration (e.g. n8n), storage, logging and human-review time are not included.</li>
+      <li>The &#36;0.004/min Dynamic Batch rate is confirmed against Google's Speech-to-Text V2 launch announcement, not a placeholder &mdash; but it only applies when the request explicitly opts into Google's <code>DYNAMIC_BATCHING</code> processing strategy, which caps latency at up to 24 hours. There is no cheaper tier for "batch, but fast": sending short audio chunks to the batch endpoint without that flag bills at the same $0.016/min as live, and Google's own docs say batch recognition isn't designed for clips under 60 seconds in the first place &mdash; so chunking audio to emulate live transcription would not save any money.</li>
+      <li>Figures are model-inference and storage cost only: orchestration (e.g. n8n), logging and human-review time are not included.</li>
+      <li>The transcript storage total assumes a steady state: once the practice has been running longer than the chosen retention period, old files age out roughly as fast as new ones arrive, so total stored data plateaus at (monthly volume &times; retention) rather than growing forever. In the first few months &mdash; before that many months have actually elapsed &mdash; the real bill will be lower than this figure.</li>
+      <li>The 40 KB default transcript size is a rough estimate for a 45&ndash;60 minute conversation rendered as plain-text/markdown &mdash; measure an actual sample transcript and adjust the slider once one exists.</li>
       <li>The &euro; figure is a simple conversion at the rate entered above &mdash; edit it to the live rate for precision.</li>
     </ul>
   </footer>
@@ -904,6 +1017,7 @@
     { upto: Infinity, rate: 0.004, name: "Tier 4 · $0.004/min" }
   ];
   const BATCH_RATE = 0.004;
+  const STORAGE_RATE_PER_GIB = 0.02; // Cloud Storage Standard, europe-west4, $/GiB-month
 
   function fmtUsd(n) {
     if (n >= 1000) return "$" + n.toLocaleString("en-US", { maximumFractionDigits: 0 });
@@ -946,7 +1060,7 @@
     let costT = 0, tierLabel = "";
     if (mode === "batch") {
       costT = totalMinutes * BATCH_RATE;
-      tierLabel = "Batch · $0.004/min (unconfirmed)";
+      tierLabel = "Dynamic Batch · $0.004/min (up to 24h)";
     } else {
       let remaining = totalMinutes, prevCap = 0, topTier = TIERS[0];
       for (const t of TIERS) {
@@ -1016,8 +1130,35 @@
     $("outCostMonthE").textContent = fmtUsd(sel.costPerMonth);
     $("outTotalEmail").textContent = fmtUsd(sel.costPerMonth);
 
+    // ---------- Transcript storage ----------
+    // Sessions transcribed/month reuses the Transcription panel's own volume —
+    // every transcribed session is a candidate .md file, scaled by the % actually kept.
+    const sessionsPerMonth = therapists * sessionsPerDay * workDaysT;
+    const storagePercent = Number($("storagePercent").value) / 100;
+    const fileSizeKb = Number($("fileSizeKb").value);
+    const retentionMonths = Number($("retentionMonths").value);
+
+    const filesPerMonth = sessionsPerMonth * storagePercent;
+    const newDataPerMonthKb = filesPerMonth * fileSizeKb;
+    const newDataPerMonthGiB = newDataPerMonthKb / (1024 * 1024);
+    // Steady state: once the pipeline has been running longer than the retention
+    // window, old files fall off as fast as new ones arrive, so total stored data
+    // plateaus at (monthly volume × retention) rather than growing forever.
+    const steadyStateGiB = newDataPerMonthGiB * retentionMonths;
+    const costS = steadyStateGiB * STORAGE_RATE_PER_GIB;
+
+    $("outSessionsForStorage").textContent = fmtInt(sessionsPerMonth);
+    $("outFilesPerMonth").textContent = fmtInt(filesPerMonth);
+    $("outNewDataMonth").textContent = newDataPerMonthGiB >= 1
+      ? newDataPerMonthGiB.toLocaleString("en-US", { maximumFractionDigits: 2 }) + " GiB"
+      : (newDataPerMonthKb / 1024).toLocaleString("en-US", { maximumFractionDigits: 1 }) + " MB";
+    $("outRetentionPill").textContent = "at " + retentionMonths + " mo";
+    $("outTotalStored").textContent = steadyStateGiB.toLocaleString("en-US", { maximumFractionDigits: 2 }) + " GiB";
+    $("outCostMonthS").textContent = fmtUsd(costS);
+    $("outTotalStorage").textContent = fmtUsd(costS);
+
     // ---------- Grand total ----------
-    const grand = costT + sel.costPerMonth;
+    const grand = costT + sel.costPerMonth + costS;
     const fx = Number($("fxRate").value) || 0.92;
     $("outGrandTotal").textContent = fmtUsd(grand);
     $("outGrandTotalEur").textContent = "≈ €" + Math.round(grand * fx).toLocaleString("en-US");
@@ -1032,6 +1173,9 @@
   link("inputTokens", "inputTokensNum", "valInputTokens", recalc, (v) => Number(v).toLocaleString("en-US"));
   link("outputTokens", "outputTokensNum", "valOutputTokens", recalc, (v) => Number(v).toLocaleString("en-US"));
   link("workDaysE", "workDaysENum", "valWorkDaysE", recalc);
+  link("fileSizeKb", "fileSizeKbNum", "valFileSizeKb", recalc);
+  link("storagePercent", "storagePercentNum", "valStoragePercent", recalc);
+  link("retentionMonths", "retentionMonthsNum", "valRetentionMonths", recalc);
 
   document.querySelectorAll('input[name="mode"]').forEach((r) => r.addEventListener("change", recalc));
   $("modelSelect").addEventListener("change", recalc);
