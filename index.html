@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WelBewust — Transcription &amp; Email-AI Cost Calculator</title>
+<style>
+  :root {
+    --paper: #EFF2EF;
+    --panel: #FBFCFB;
+    --ink: #161B1A;
+    --ink-soft: #4B5652;
+    --petrol: #1F4B4A;
+    --petrol-tint: #E4ECEA;
+    --rust: #9C4A2E;
+    --rust-tint: #F3E6DF;
+    --moss: #3F6B4F;
+    --moss-tint: #E4EDE4;
+    --line: #D7DED9;
+    --line-strong: #B9C4BE;
+    --radius: 3px;
+  }
+
+  * { box-sizing: border-box; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 2.75rem 1.5rem 4rem;
+  }
+
+  h1, h2, h3 {
+    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", serif;
+    color: var(--ink);
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  .mono {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, "Cascadia Code", monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- Masthead ---------- */
+
+  .masthead {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding-bottom: 1.75rem;
+    border-bottom: 1px solid var(--line-strong);
+    margin-bottom: 1.75rem;
+  }
+
+  .eyebrow {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--petrol);
+    margin: 0;
+  }
+
+  .masthead h1 {
+    font-size: 2.05rem;
+    font-weight: 600;
+    line-height: 1.15;
+  }
+
+  .dek {
+    max-width: 62ch;
+    color: var(--ink-soft);
+    font-size: 0.98rem;
+    line-height: 1.55;
+    margin: 0.15rem 0 0;
+  }
+
+  /* ---------- Total strip ---------- */
+
+  .total-strip {
+    display: flex;
+    align-items: stretch;
+    gap: 0.9rem;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2.25rem;
+    flex-wrap: wrap;
+  }
+
+  .total-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.2rem;
+    min-width: 8.5rem;
+  }
+
+  .total-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: #A9B6B1;
+  }
+
+  .total-value {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #F4F1EC;
+  }
+
+  .total-plus, .total-equals {
+    align-self: center;
+    color: #6C7B75;
+    font-size: 1.3rem;
+    padding: 0 0.15rem;
+  }
+
+  .total-block.grand {
+    padding-left: 1.1rem;
+    border-left: 1px solid #3A423F;
+    margin-left: 0.15rem;
+  }
+
+  .grand-value {
+    font-size: 2.05rem;
+    color: #E8A183;
+  }
+
+  .total-eur {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.8rem;
+    color: #A9B6B1;
+  }
+
+  .fx-row {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-left: auto;
+    align-self: center;
+    font-size: 0.75rem;
+    color: #A9B6B1;
+  }
+
+  .fx-row input {
+    width: 4.2rem;
+    background: #232B28;
+    border: 1px solid #3A423F;
+    color: #F4F1EC;
+    border-radius: var(--radius);
+    padding: 0.25rem 0.4rem;
+    font-family: ui-monospace, monospace;
+    font-size: 0.8rem;
+  }
+
+  /* ---------- Panels ---------- */
+
+  .panels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.4rem;
+    align-items: start;
+  }
+
+  @media (max-width: 820px) {
+    .panels { grid-template-columns: 1fr; }
+  }
+
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 1.5rem 1.6rem 1.7rem;
+  }
+
+  .panel h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.3rem;
+  }
+
+  .unit-tag {
+    font-family: ui-monospace, monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--petrol);
+    background: var(--petrol-tint);
+    padding: 0.22rem 0.5rem;
+    border-radius: var(--radius);
+    font-weight: 500;
+  }
+
+  /* ---------- Inputs ---------- */
+
+  .field {
+    margin-bottom: 1.05rem;
+  }
+
+  .field-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.35rem;
+  }
+
+  .field label {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+
+  .field-value {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .field-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  input[type="range"] {
+    flex: 1;
+    accent-color: var(--petrol);
+    height: 1.1rem;
+  }
+
+  input[type="number"] {
+    width: 4.6rem;
+    font-family: ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    padding: 0.28rem 0.4rem;
+    font-size: 0.85rem;
+    color: var(--ink);
+    background: #fff;
+  }
+
+  input:focus-visible, select:focus-visible, button:focus-visible {
+    outline: 2px solid var(--petrol);
+    outline-offset: 1px;
+  }
+
+  .mode-toggle {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .mode-toggle label {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    padding: 0.45rem 0.5rem;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    cursor: pointer;
+    background: #fff;
+  }
+
+  .mode-toggle input { position: absolute; opacity: 0; pointer-events: none; }
+
+  .mode-toggle label:has(input:checked) {
+    border-color: var(--petrol);
+    background: var(--petrol-tint);
+    color: var(--petrol);
+    font-weight: 600;
+  }
+
+  .mode-compare {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-top: 0.7rem;
+  }
+
+  .mode-card {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 0.85rem 1rem 0.95rem;
+    background: #fff;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  .mode-card.active {
+    border-color: var(--petrol);
+    background: var(--petrol-tint);
+  }
+
+  .mode-card-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 0.4rem;
+  }
+
+  .mode-name {
+    font-family: Georgia, "Iowan Old Style", Palatino, serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .mode-price {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--petrol);
+  }
+
+  .mode-flag {
+    font-family: ui-monospace, monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--petrol);
+    opacity: 0;
+    font-weight: 600;
+  }
+
+  .mode-card.active .mode-flag { opacity: 1; }
+
+  .mode-desc {
+    font-size: 0.85rem;
+    color: var(--ink);
+    line-height: 1.5;
+    margin: 0 0 0.6rem;
+  }
+
+  .mode-points {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .mode-points li {
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    padding-left: 0;
+  }
+
+  .pt-label {
+    display: block;
+    font-family: ui-monospace, monospace;
+    font-size: 0.66rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 0.1rem;
+  }
+
+  .mode-bottom-line {
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    background: var(--rust-tint);
+    border-radius: var(--radius);
+    padding: 0.65rem 0.85rem;
+    margin: 0.8rem 0 0;
+  }
+
+  .mode-bottom-line strong { color: var(--rust); }
+
+  select {
+    width: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 0.85rem;
+    color: var(--ink);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    padding: 0.45rem 0.5rem;
+    background: #fff;
+  }
+
+  /* ---------- Ledger readout ---------- */
+
+  .ledger {
+    margin-top: 1.4rem;
+    padding-top: 1.1rem;
+    border-top: 1px dashed var(--line-strong);
+  }
+
+  .ledger-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+    padding: 0.28rem 0;
+  }
+
+  .ledger-row .lbl {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+
+  .ledger-row .leader {
+    flex: 1;
+    border-bottom: 1px dotted var(--line-strong);
+    transform: translateY(-0.3rem);
+  }
+
+  .ledger-row .val {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.86rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .ledger-row.headline .val {
+    font-size: 1.15rem;
+    color: var(--rust);
+  }
+
+  .tier-pill {
+    display: inline-block;
+    font-family: ui-monospace, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.02em;
+    background: var(--moss-tint);
+    color: var(--moss);
+    border-radius: var(--radius);
+    padding: 0.15rem 0.45rem;
+    margin-left: 0.4rem;
+  }
+
+  /* ---------- Model comparison ---------- */
+
+  .compare {
+    margin-top: 1.2rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow-x: auto;
+  }
+
+  table.compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    min-width: 480px;
+  }
+
+  .compare-table th, .compare-table td {
+    padding: 0.55rem 0.65rem;
+    text-align: right;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+
+  .compare-table th:first-child, .compare-table td:first-child {
+    text-align: left;
+    white-space: normal;
+  }
+
+  .compare-table thead th {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    font-weight: 600;
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .compare-table td.mono, .compare-table th.mono { font-family: ui-monospace, monospace; font-variant-numeric: tabular-nums; }
+
+  .compare-table tbody tr.active {
+    background: var(--petrol-tint);
+  }
+
+  .compare-table tbody tr.active td:first-child {
+    color: var(--petrol);
+    font-weight: 600;
+  }
+
+  .chip {
+    display: inline-block;
+    font-family: ui-monospace, monospace;
+    font-size: 0.68rem;
+    border-radius: var(--radius);
+    padding: 0.1rem 0.4rem;
+    font-weight: 600;
+  }
+
+  .chip.cheap { background: var(--moss-tint); color: var(--moss); }
+  .chip.mid { background: #EFE6D6; color: #8A6A2A; }
+  .chip.costly { background: var(--rust-tint); color: var(--rust); }
+
+  .model-note {
+    font-size: 0.76rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin: 0.6rem 0 0;
+  }
+
+  /* ---------- Footer ---------- */
+
+  .notes {
+    margin-top: 2.25rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .notes h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.7rem;
+  }
+
+  .notes ul {
+    margin: 0;
+    padding-left: 1.15rem;
+    color: var(--ink-soft);
+    font-size: 0.83rem;
+    line-height: 1.65;
+  }
+
+  .notes li { margin-bottom: 0.35rem; }
+  .notes li:last-child { margin-bottom: 0; }
+
+  /* ---------- Compliance status ---------- */
+
+  .compliance {
+    margin-top: 2rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .compliance h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .compliance-intro {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    max-width: 66ch;
+    margin: 0 0 1.4rem;
+  }
+
+  .compliance-group {
+    margin-bottom: 1.5rem;
+  }
+
+  .compliance-group:last-of-type {
+    margin-bottom: 0.9rem;
+  }
+
+  .compliance-group h4 {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--petrol);
+    font-weight: 600;
+    margin: 0 0 0.6rem;
+  }
+
+  .compliance-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .compliance-row:last-child { border-bottom: none; }
+
+  .compliance-row .chip {
+    flex: 0 0 auto;
+    min-width: 6.4rem;
+    text-align: center;
+    padding: 0.22rem 0.4rem;
+  }
+
+  .compliance-text {
+    font-size: 0.85rem;
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  .chip.status-done { background: var(--moss-tint); color: var(--moss); }
+  .chip.status-progress { background: #EFE6D6; color: #8A6A2A; }
+  .chip.status-open { background: var(--rust-tint); color: var(--rust); }
+
+  .compliance-footer-note {
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--ink-soft);
+    margin: 0.9rem 0 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <header class="masthead">
+    <p class="eyebrow">Cost model &middot; Google Cloud &middot; editable</p>
+    <h1>Transcription &amp; email-AI, priced out</h1>
+    <p class="dek">Chirp speech-to-text and Gemini email drafting, modelled from Google's published rates. Every number below is live — drag a slider or type a value and the totals recompute.</p>
+  </header>
+
+  <section class="total-strip">
+    <div class="total-block">
+      <span class="total-label">Transcription / mo</span>
+      <span class="total-value mono" id="outTotalTranscription">$0</span>
+    </div>
+    <div class="total-plus">+</div>
+    <div class="total-block">
+      <span class="total-label">Email-AI / mo</span>
+      <span class="total-value mono" id="outTotalEmail">$0</span>
+    </div>
+    <div class="total-equals">=</div>
+    <div class="total-block grand">
+      <span class="total-label">Monthly total</span>
+      <span class="total-value grand-value mono" id="outGrandTotal">$0</span>
+      <span class="total-eur mono" id="outGrandTotalEur">&asymp; &euro;0</span>
+    </div>
+    <div class="fx-row">
+      <label for="fxRate">&euro; per $</label>
+      <input type="number" id="fxRate" value="0.92" min="0.5" max="1.5" step="0.01" />
+    </div>
+  </section>
+
+  <section class="panels">
+
+    <!-- ============ TRANSCRIPTION PANEL ============ -->
+    <article class="panel">
+      <h2>Transcription <span class="unit-tag">Chirp &middot; per minute</span></h2>
+
+      <div class="field">
+        <div class="field-head">
+          <label for="therapists">Therapists</label>
+          <span class="field-value"><span id="valTherapists">25</span></span>
+        </div>
+        <div class="field-controls">
+          <input type="range" id="therapists" min="1" max="100" step="1" value="25" />
+          <input type="number" id="therapistsNum" min="1" max="500" step="1" value="25" />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-head">
+          <label for="sessionsPerDay">Sessions per therapist / day</label>
+          <span class="field-value"><span id="valSessionsPerDay">6</span></span>
+        </div>
+        <div class="field-controls">
+          <input type="range" id="sessionsPerDay" min="1" max="12" step="1" value="6" />
+          <input type="number" id="sessionsPerDayNum" min="1" max="20" step="1" value="6" />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-head">
+          <label for="minsPerSession">Minutes transcribed / session</label>
+          <span class="field-value"><span id="valMinsPerSession">45</span> min</span>
+        </div>
+        <div class="field-controls">
+          <input type="range" id="minsPerSession" min="15" max="90" step="5" value="45" />
+          <input type="number" id="minsPerSessionNum" min="1" max="180" step="1" value="45" />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-head">
+          <label for="workDaysT">Working days / month</label>
+          <span class="field-value"><span id="valWorkDaysT">20</span></span>
+        </div>
+        <div class="field-controls">
+          <input type="range" id="workDaysT" min="1" max="31" step="1" value="20" />
+          <input type="number" id="workDaysTNum" min="1" max="31" step="1" value="20" />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-head"><label>Mode</label></div>
+        <div class="mode-toggle">
+          <label><input type="radio" name="mode" value="live" checked /> Live (real-time)</label>
+          <label><input type="radio" name="mode" value="batch" /> Batch (after the fact)</label>
+        </div>
+
+        <div class="mode-compare">
+          <div class="mode-card" id="modeCardLive">
+            <div class="mode-card-head">
+              <span class="mode-name">Live <span class="mode-price mono">$0.016/min</span></span>
+              <span class="mode-flag" id="flagLive">selected</span>
+            </div>
+            <p class="mode-desc">The system listens and writes the transcript down while the therapist and client are still talking. It's complete the instant the session ends.</p>
+            <ul class="mode-points">
+              <li><span class="pt-label">Use it when</span>something needs to happen <em>during</em> the session — live safety-word flagging, live captions, or any tool that has to react to what's said in the moment.</li>
+              <li><span class="pt-label">Why it costs more</span>Google has to hold a continuous connection open and process audio as it arrives, which is priced as a premium "streaming" service.</li>
+              <li><span class="pt-label">Data footprint</span>no separate recording has to be made — audio is processed and discarded as it streams, so nothing extra is stored beforehand.</li>
+            </ul>
+          </div>
+
+          <div class="mode-card" id="modeCardBatch">
+            <div class="mode-card-head">
+              <span class="mode-name">Batch <span class="mode-price mono">≈$0.004/min<sup>*</sup></span></span>
+              <span class="mode-flag" id="flagBatch">selected</span>
+            </div>
+            <p class="mode-desc">The session is recorded first. Once it's over, that recording is sent off and transcribed afterward — the write-up isn't ready right away, it comes back later.</p>
+            <ul class="mode-points">
+              <li><span class="pt-label">Use it when</span>the transcript is only needed afterward — session notes, documentation, billing records — nobody needs the words the instant they're spoken.</li>
+              <li><span class="pt-label">Why it costs less</span>roughly a quarter of the live price, because Google processes it as a stored file on its own schedule rather than a live feed.</li>
+              <li><span class="pt-label">The trade-off</span>there's a delay before the transcript exists (minutes to longer, depending on length and processing load), and it can't support anything that needs to happen live.</li>
+              <li><span class="pt-label">Data footprint</span>this mode needs a recording of the session to exist, even briefly. Recording a session is a separate thing to get patient consent for, on top of transcribing it, and needs its own privacy sign-off — the lower price comes with more paperwork, not less.</li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="mode-bottom-line"><strong>In short:</strong> live costs more because you're paying for the transcript to exist the instant it's spoken. Batch costs less, but the trade is a delay before it's ready, plus an extra consent/privacy step for keeping a recording in the first place. <span class="mono">*</span> batch rate is an estimate — see notes below.</p>
+      </div>
+
+      <div class="ledger">
+        <div class="ledger-row">
+          <span class="lbl">Total minutes / month</span>
+          <span class="leader"></span>
+          <span class="val mono" id="outMinutes">0</span>
+        </div>
+        <div class="ledger-row">
+          <span class="lbl">Rate tier</span>
+          <span class="leader"></span>
+          <span class="val mono" id="outTier">&mdash;</span>
+        </div>
+        <div class="ledger-row">
+          <span class="lbl">Cost / session</span>
+          <span class="leader"></span>
+          <span class="val mono" id="outCostSession">$0</span>
+        </div>
+        <div class="ledger-row">
+          <span class="lbl">Cost / therapist / month</span>
+          <span class="leader"></span>
+          <span class="val mono" id="outCostTherapistMonth">$0</span>
+        </div>
+        <div class="ledger-row headline">
+          <span class="lbl">Total transcription / month</span>
+          <span class="leader"></span>
+          <span class="val mono" id="outCostMonthT">$0</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- ============ EMAIL PANEL ============ -->
+    <article class="panel">
+      <h2>Email drafting <span class="unit-tag">Gemini &middot; per token</span></h2>
+
+      <div class="field">
+        <div class="field-head">
+          <label for="emailsPerDay">Emails drafted / day</label>
+          <span class="field-value"><span id="valEmailsPerDay">25</span></span>
+        </div>
+        <div class="field-controls">
+          <input type="range" id="emailsPerDay" min="1" max="300" step="1" value="25" />
+          <input type="number" id="emailsPerDayNum" min="1" max="2000" step="1" value="25" />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-head">
+          <label for="inputTokens">Input tokens / email</label>
+          <span class="field-value"><span id="valInputTokens">16,000</span></span>
+        </div>
+        <div class="field-controls">
+          <input type="range" id="inputTokens" min="500" max="50000" step="500" value="16000" />
+          <input type="number" id="inputTokensNum" min="1" max="200000" step="100" value="16000" />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-head">
+          <label for="outputTokens">Output tokens / email</label>
+          <span class="field-value"><span id="valOutputTokens">1,000</span></span>
+        </div>
+        <div class="field-controls">
+          <input type="range" id="outputTokens" min="100" max="5000" step="100" value="1000" />
+          <input type="number" id="outputTokensNum" min="1" max="50000" step="50" value="1000" />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-head">
+          <label for="workDaysE">Working days / month</label>
+          <span class="field-value"><span id="valWorkDaysE">22</span></span>
+        </div>
+        <div class="field-controls">
+          <input type="range" id="workDaysE" min="1" max="31" step="1" value="22" />
+          <input type="number" id="workDaysENum" min="1" max="31" step="1" value="22" />
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="field-head"><label for="modelSelect">Model in use</label></div>
+        <select id="modelSelect">
+          <option value="flashlite">Gemini 2.5 Flash-Lite</option>
+          <option value="flash">Gemini 2.5 Flash</option>
+          <option value="pro" selected>Gemini 2.5 Pro (&le;200k context)</option>
+        </select>
+        <p class="model-note">Pro is what the account was originally configured with (NL residency, 30 Jun). Flash-Lite was confirmed to also qualify for europe-west4 residency on 6 Jul, but nobody has verified which model the running app actually calls — compare below.</p>
+      </div>
+
+      <div class="compare">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th class="mono">$/M in</th>
+              <th class="mono">$/M out</th>
+              <th class="mono">Cost/email</th>
+              <th class="mono">Cost/month</th>
+              <th>vs. cheapest</th>
+            </tr>
+          </thead>
+          <tbody id="compareBody"></tbody>
+        </table>
+      </div>
+
+      <div class="ledger">
+        <div class="ledger-row">
+          <span class="lbl">Cost / email <span id="selectedModelLabel"></span></span>
+          <span class="leader"></span>
+          <span class="val mono" id="outCostEmail">$0</span>
+        </div>
+        <div class="ledger-row">
+          <span class="lbl">Cost / day</span>
+          <span class="leader"></span>
+          <span class="val mono" id="outCostDayE">$0</span>
+        </div>
+        <div class="ledger-row headline">
+          <span class="lbl">Total email-AI / month</span>
+          <span class="leader"></span>
+          <span class="val mono" id="outCostMonthE">$0</span>
+        </div>
+      </div>
+    </article>
+
+  </section>
+
+  <footer class="notes">
+    <h3>Notes on these figures</h3>
+    <ul>
+      <li>Rates sourced from Google's official pricing pages, verified 7 Jul 2026. Both Chirp and the Gemini 2.5 series price identically regardless of region — europe-west4 (NL) costs the same as global, so residency is free here.</li>
+      <li>Transcription volume tiers ($0.016 &rarr; $0.010 &rarr; $0.008 &rarr; $0.004 per minute) are applied as graduated bands past 500k / 1M / 2M minutes a month, the standard model for usage-based cloud pricing &mdash; worth confirming against Google's actual billing behaviour if volume gets close to a threshold.</li>
+      <li>The batch/async rate (&#36;0.004/min) is carried over from the top volume tier as a placeholder &mdash; confirm against Google's actual asynchronous Speech-to-Text SKU before relying on it. (See the Live vs. Batch comparison above for what else differs between the two.)</li>
+      <li>Figures are model-inference cost only: orchestration (e.g. n8n), storage, logging and human-review time are not included.</li>
+      <li>The &euro; figure is a simple conversion at the rate entered above &mdash; edit it to the live rate for precision.</li>
+    </ul>
+  </footer>
+
+
+</div>
+
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+
+  const MODELS = {
+    flashlite: { label: "Gemini 2.5 Flash-Lite", in: 0.10, out: 0.40 },
+    flash:     { label: "Gemini 2.5 Flash",      in: 0.30, out: 2.50 },
+    pro:       { label: "Gemini 2.5 Pro (≤200k)", in: 1.25, out: 10.00 }
+  };
+
+  const TIERS = [
+    { upto: 500000,  rate: 0.016, name: "Tier 1 · $0.016/min" },
+    { upto: 1000000, rate: 0.010, name: "Tier 2 · $0.010/min" },
+    { upto: 2000000, rate: 0.008, name: "Tier 3 · $0.008/min" },
+    { upto: Infinity, rate: 0.004, name: "Tier 4 · $0.004/min" }
+  ];
+  const BATCH_RATE = 0.004;
+
+  function fmtUsd(n) {
+    if (n >= 1000) return "$" + n.toLocaleString("en-US", { maximumFractionDigits: 0 });
+    if (n >= 1) return "$" + n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return "$" + n.toLocaleString("en-US", { minimumFractionDigits: 4, maximumFractionDigits: 4 });
+  }
+  function fmtInt(n) { return Math.round(n).toLocaleString("en-US"); }
+
+  // ---- generic slider <-> number sync ----
+  function link(sliderId, numberId, valueSpanId, onChange, formatter) {
+    const slider = $(sliderId), number = $(numberId), span = valueSpanId ? $(valueSpanId) : null;
+    function set(v, fromSlider) {
+      v = Number(v);
+      slider.value = v;
+      number.value = v;
+      if (span) span.textContent = formatter ? formatter(v) : v;
+      onChange();
+    }
+    slider.addEventListener("input", () => set(slider.value, true));
+    number.addEventListener("input", () => { if (number.value !== "") set(number.value, false); });
+    set(slider.value, true);
+    return set;
+  }
+
+  function recalc() {
+    // ---------- Transcription ----------
+    const therapists = Number($("therapists").value);
+    const sessionsPerDay = Number($("sessionsPerDay").value);
+    const minsPerSession = Number($("minsPerSession").value);
+    const workDaysT = Number($("workDaysT").value);
+    const mode = document.querySelector('input[name="mode"]:checked').value;
+
+    const totalMinutes = therapists * sessionsPerDay * minsPerSession * workDaysT;
+
+    $("modeCardLive").classList.toggle("active", mode === "live");
+    $("modeCardBatch").classList.toggle("active", mode === "batch");
+    $("flagLive").textContent = mode === "live" ? "in use below" : "";
+    $("flagBatch").textContent = mode === "batch" ? "in use below" : "";
+
+    let costT = 0, tierLabel = "";
+    if (mode === "batch") {
+      costT = totalMinutes * BATCH_RATE;
+      tierLabel = "Batch · $0.004/min (unconfirmed)";
+    } else {
+      let remaining = totalMinutes, prevCap = 0, topTier = TIERS[0];
+      for (const t of TIERS) {
+        const band = t.upto - prevCap;
+        const used = Math.max(0, Math.min(remaining, band));
+        costT += used * t.rate;
+        if (used > 0) topTier = t;
+        remaining -= used;
+        prevCap = t.upto;
+        if (remaining <= 0) break;
+      }
+      tierLabel = topTier.name;
+    }
+
+    const effRate = totalMinutes > 0 ? costT / totalMinutes : (mode === "batch" ? BATCH_RATE : 0.016);
+    const costPerTherapistMonth = therapists > 0 ? (costT / therapists) : 0;
+
+    $("outMinutes").textContent = fmtInt(totalMinutes);
+    $("outTier").textContent = tierLabel;
+    $("outCostSession").textContent = fmtUsd(minsPerSession * effRate);
+    $("outCostTherapistMonth").textContent = fmtUsd(costPerTherapistMonth);
+    $("outCostMonthT").textContent = fmtUsd(costT);
+    $("outTotalTranscription").textContent = fmtUsd(costT);
+
+    // ---------- Email ----------
+    const emailsPerDay = Number($("emailsPerDay").value);
+    const inputTokens = Number($("inputTokens").value);
+    const outputTokens = Number($("outputTokens").value);
+    const workDaysE = Number($("workDaysE").value);
+    const selectedKey = $("modelSelect").value;
+
+    const results = {};
+    let cheapestKey = null;
+    for (const key in MODELS) {
+      const m = MODELS[key];
+      const costPerEmail = (inputTokens / 1e6) * m.in + (outputTokens / 1e6) * m.out;
+      const costPerMonth = costPerEmail * emailsPerDay * workDaysE;
+      results[key] = { ...m, costPerEmail, costPerMonth };
+      if (!cheapestKey || costPerEmail < results[cheapestKey].costPerEmail) cheapestKey = key;
+    }
+
+    const tbody = $("compareBody");
+    tbody.innerHTML = "";
+    for (const key in results) {
+      const r = results[key];
+      const mult = r.costPerEmail / results[cheapestKey].costPerEmail;
+      let chipClass = "cheap", chipText = "baseline";
+      if (mult > 1.01 && mult <= 4) { chipClass = "mid"; chipText = mult.toFixed(1) + "×"; }
+      else if (mult > 4) { chipClass = "costly"; chipText = mult.toFixed(1) + "×"; }
+
+      const tr = document.createElement("tr");
+      if (key === selectedKey) tr.className = "active";
+      tr.innerHTML =
+        "<td>" + r.label + "</td>" +
+        "<td class=\"mono\">$" + r.in.toFixed(2) + "</td>" +
+        "<td class=\"mono\">$" + r.out.toFixed(2) + "</td>" +
+        "<td class=\"mono\">" + fmtUsd(r.costPerEmail) + "</td>" +
+        "<td class=\"mono\">" + fmtUsd(r.costPerMonth) + "</td>" +
+        "<td><span class=\"chip " + chipClass + "\">" + chipText + "</span></td>";
+      tbody.appendChild(tr);
+    }
+
+    const sel = results[selectedKey];
+    $("selectedModelLabel").textContent = "(" + sel.label + ")";
+    $("outCostEmail").textContent = fmtUsd(sel.costPerEmail);
+    $("outCostDayE").textContent = fmtUsd(sel.costPerEmail * emailsPerDay);
+    $("outCostMonthE").textContent = fmtUsd(sel.costPerMonth);
+    $("outTotalEmail").textContent = fmtUsd(sel.costPerMonth);
+
+    // ---------- Grand total ----------
+    const grand = costT + sel.costPerMonth;
+    const fx = Number($("fxRate").value) || 0.92;
+    $("outGrandTotal").textContent = fmtUsd(grand);
+    $("outGrandTotalEur").textContent = "≈ €" + Math.round(grand * fx).toLocaleString("en-US");
+  }
+
+  // wire sliders/numbers
+  link("therapists", "therapistsNum", "valTherapists", recalc);
+  link("sessionsPerDay", "sessionsPerDayNum", "valSessionsPerDay", recalc);
+  link("minsPerSession", "minsPerSessionNum", "valMinsPerSession", recalc);
+  link("workDaysT", "workDaysTNum", "valWorkDaysT", recalc);
+  link("emailsPerDay", "emailsPerDayNum", "valEmailsPerDay", recalc);
+  link("inputTokens", "inputTokensNum", "valInputTokens", recalc, (v) => Number(v).toLocaleString("en-US"));
+  link("outputTokens", "outputTokensNum", "valOutputTokens", recalc, (v) => Number(v).toLocaleString("en-US"));
+  link("workDaysE", "workDaysENum", "valWorkDaysE", recalc);
+
+  document.querySelectorAll('input[name="mode"]').forEach((r) => r.addEventListener("change", recalc));
+  $("modelSelect").addEventListener("change", recalc);
+  $("fxRate").addEventListener("input", recalc);
+
+  recalc();
+})();
+</script>
+</body>
+</html>
