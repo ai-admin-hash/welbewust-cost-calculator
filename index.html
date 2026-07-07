@@ -840,6 +840,14 @@
       </label>
       <span class="total-value mono" id="outTotalStorage">$0</span>
     </div>
+    <div class="total-plus">+</div>
+    <div class="total-block" id="blockVoice">
+      <label class="total-toggle">
+        <input type="checkbox" id="includeVoice" checked />
+        <span class="total-label">Voice agent / mo</span>
+      </label>
+      <span class="total-value mono" id="outTotalVoice">$0</span>
+    </div>
     <div class="total-equals">=</div>
     <div class="total-block grand">
       <span class="total-label">Monthly total</span>
@@ -1134,6 +1142,144 @@
       </div>
     </article>
 
+    <article class="panel panel-wide">
+      <h2>Voice agent <span class="unit-tag">Telephony &middot; Chirp STT/TTS &middot; Gemini</span></h2>
+      <p class="panel-subnote">Reception-style phone calls — booking/rescheduling belafspraken, first-line "spoed" triage before human handoff — not open-ended conversation. Carrier + Chirp 2 (STT) + Gemini 2.5 Flash-Lite (LLM) + Chirp 3 HD (TTS). Cloud Run hosting for the orchestrator isn't priced below because it's effectively $0/month at this volume (inside the free tier) — see notes.</p>
+
+      <div class="storage-grid">
+        <div class="storage-inputs">
+          <div class="field">
+            <div class="field-head">
+              <label for="callsPerDay">Calls / day</label>
+              <span class="field-value"><span id="valCallsPerDay">15</span></span>
+            </div>
+            <div class="field-controls">
+              <input type="range" id="callsPerDay" min="1" max="150" step="1" value="15" />
+              <input type="number" id="callsPerDayNum" min="1" max="1000" step="1" value="15" />
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-head">
+              <label for="workDaysV">Working days / month</label>
+              <span class="field-value"><span id="valWorkDaysV">20</span></span>
+            </div>
+            <div class="field-controls">
+              <input type="range" id="workDaysV" min="1" max="31" step="1" value="20" />
+              <input type="number" id="workDaysVNum" min="1" max="31" step="1" value="20" />
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-head">
+              <label for="callerTalkMin">Caller talk time / call</label>
+              <span class="field-value"><span id="valCallerTalkMin">2.5</span> min</span>
+            </div>
+            <div class="field-controls">
+              <input type="range" id="callerTalkMin" min="0.5" max="10" step="0.5" value="2.5" />
+              <input type="number" id="callerTalkMinNum" min="0.1" max="30" step="0.1" value="2.5" />
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-head">
+              <label for="agentTalkMin">Agent talk time / call</label>
+              <span class="field-value"><span id="valAgentTalkMin">1.5</span> min</span>
+            </div>
+            <div class="field-controls">
+              <input type="range" id="agentTalkMin" min="0.5" max="10" step="0.5" value="1.5" />
+              <input type="number" id="agentTalkMinNum" min="0.1" max="30" step="0.1" value="1.5" />
+            </div>
+            <p class="field-note">Caller + agent talk time sets total connected-call duration, which is what telephony/streaming is billed on.</p>
+          </div>
+
+          <div class="field">
+            <div class="field-head">
+              <label for="vInputTokens">LLM input tokens / call</label>
+              <span class="field-value"><span id="valVInputTokens">3,000</span></span>
+            </div>
+            <div class="field-controls">
+              <input type="range" id="vInputTokens" min="500" max="20000" step="500" value="3000" />
+              <input type="number" id="vInputTokensNum" min="1" max="100000" step="100" value="3000" />
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-head">
+              <label for="vOutputTokens">LLM output tokens / call</label>
+              <span class="field-value"><span id="valVOutputTokens">400</span></span>
+            </div>
+            <div class="field-controls">
+              <input type="range" id="vOutputTokens" min="50" max="3000" step="50" value="400" />
+              <input type="number" id="vOutputTokensNum" min="1" max="20000" step="10" value="400" />
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-head"><label for="carrierSelect">Carrier</label></div>
+            <select id="carrierSelect">
+              <option value="telnyx" selected>Telnyx</option>
+              <option value="twilio">Twilio</option>
+            </select>
+          </div>
+
+          <div class="compare">
+            <table class="compare-table">
+              <thead>
+                <tr>
+                  <th>Carrier</th>
+                  <th class="mono">Inbound</th>
+                  <th class="mono">Streaming</th>
+                  <th class="mono">Combined $/min</th>
+                  <th class="mono">Cost/month</th>
+                  <th>vs. cheapest</th>
+                </tr>
+              </thead>
+              <tbody id="carrierCompareBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="ledger storage-ledger">
+          <div class="ledger-row">
+            <span class="lbl">Calls / month</span>
+            <span class="leader"></span>
+            <span class="val mono" id="outCallsPerMonth">0</span>
+          </div>
+          <div class="ledger-row">
+            <span class="lbl">Total call minutes / month</span>
+            <span class="leader"></span>
+            <span class="val mono" id="outCallMinutes">0</span>
+          </div>
+          <div class="ledger-row">
+            <span class="lbl">STT (Chirp 2, caller minutes)</span>
+            <span class="leader"></span>
+            <span class="val mono" id="outCostSTT">$0</span>
+          </div>
+          <div class="ledger-row">
+            <span class="lbl">TTS (Chirp 3 HD, agent minutes)<span class="tier-pill" id="outTtsFreeTierPill"></span></span>
+            <span class="leader"></span>
+            <span class="val mono" id="outCostTTS">$0</span>
+          </div>
+          <div class="ledger-row">
+            <span class="lbl">LLM (Gemini 2.5 Flash-Lite)</span>
+            <span class="leader"></span>
+            <span class="val mono" id="outCostLLM">$0</span>
+          </div>
+          <div class="ledger-row">
+            <span class="lbl">Telephony (<span id="carrierLabelInline"></span>)</span>
+            <span class="leader"></span>
+            <span class="val mono" id="outCostTelephony">$0</span>
+          </div>
+          <div class="ledger-row headline">
+            <span class="lbl">Total voice agent / month</span>
+            <span class="leader"></span>
+            <span class="val mono" id="outCostMonthV">$0</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
   </section>
 
   <section class="scenarios">
@@ -1155,6 +1301,7 @@
             <th class="mono">Transcription</th>
             <th class="mono">Email-AI</th>
             <th class="mono">Storage</th>
+            <th class="mono">Voice agent</th>
             <th class="mono">Total</th>
             <th></th>
           </tr>
@@ -1173,6 +1320,10 @@
       <li>Figures are model-inference and storage cost only: orchestration (e.g. n8n), logging and human-review time are not included.</li>
       <li>The transcript storage total assumes a steady state: once the practice has been running longer than the chosen retention period, old files age out roughly as fast as new ones arrive, so total stored data plateaus at (monthly volume &times; retention) rather than growing forever. In the first few months &mdash; before that many months have actually elapsed &mdash; the real bill will be lower than this figure.</li>
       <li>The 40 KB default transcript size is a rough estimate for a 45&ndash;60 minute conversation rendered as plain-text/markdown &mdash; measure an actual sample transcript and adjust the slider once one exists.</li>
+      <li>Voice agent scope is grounded in the practice's actual phone workflows (belafspraak scheduling, cancellations, first-line "spoed" triage before human handoff) rather than open-ended conversation &mdash; call volume itself isn't published anywhere, so treat calls/day as your own assumption to tune.</li>
+      <li>Telnyx undercuts Twilio on every telephony metric checked (inbound, outbound, and WebSocket media streaming) &mdash; it's the default carrier here. Number rental isn't counted since the practice would port its existing +31307984022 rather than rent a new one.</li>
+      <li>Chirp 3 HD (TTS) gets 1,000,000 free characters/month before the $30/1M-character rate applies &mdash; at low call volume this can fully absorb the bill, which is why the TTS line may show $0 with an "within free tier" tag.</li>
+      <li>Cloud Run hosting for the Pipecat orchestrator isn't in the total because it's effectively $0/month at this call volume (well inside the free tier) &mdash; but that only holds if the orchestrator's work happens synchronously within the request/WebSocket context. If it needs independent background threads (e.g. for turn-detection), it requires "always-on CPU" billing instead, which is materially more expensive and worth a design review before committing to Cloud Run at higher volume.</li>
       <li>The &euro; figure is a simple conversion at the rate entered above &mdash; edit it to the live rate for precision.</li>
     </ul>
   </footer>
@@ -1199,6 +1350,16 @@
   ];
   const BATCH_RATE = 0.003;
   const STORAGE_RATE_PER_GIB = 0.02; // Cloud Storage Standard, europe-west4, $/GiB-month
+
+  const STT_LIVE_RATE = 0.016; // Chirp 2, per minute, live/streaming
+  const TTS_RATE_PER_CHAR = 30 / 1000000; // Chirp 3 HD, $30 per 1M characters
+  const TTS_CHARS_PER_MIN = 800; // ~130-150 wpm Dutch speech, ~5-6 chars/word, midpoint estimate
+  const TTS_FREE_CHARS_PER_MONTH = 1000000; // Chirp 3 HD monthly free allowance
+  const VOICE_LLM = { in: 0.10, out: 0.40 }; // Gemini 2.5 Flash-Lite — fixed choice for the live turn path, not user-selectable here
+  const CARRIERS = {
+    telnyx: { label: "Telnyx", inbound: 0.002, streaming: 0.0035 },
+    twilio: { label: "Twilio", inbound: 0.01, streaming: 0.0044 }
+  };
 
   function fmtUsd(n) {
     if (n >= 1000) return "$" + n.toLocaleString("en-US", { maximumFractionDigits: 0 });
@@ -1338,23 +1499,90 @@
     $("outCostMonthS").textContent = fmtUsd(costS);
     $("outTotalStorage").textContent = fmtUsd(costS);
 
+    // ---------- Voice agent ----------
+    const callsPerDay = Number($("callsPerDay").value);
+    const workDaysV = Number($("workDaysV").value);
+    const callerTalkMin = Number($("callerTalkMin").value);
+    const agentTalkMin = Number($("agentTalkMin").value);
+    const vInputTokens = Number($("vInputTokens").value);
+    const vOutputTokens = Number($("vOutputTokens").value);
+    const carrierKey = $("carrierSelect").value;
+
+    const callsPerMonth = callsPerDay * workDaysV;
+    const callMinutesPerMonth = callsPerMonth * (callerTalkMin + agentTalkMin);
+    const callerMinutesPerMonth = callsPerMonth * callerTalkMin;
+    const agentMinutesPerMonth = callsPerMonth * agentTalkMin;
+
+    const costSTT = callerMinutesPerMonth * STT_LIVE_RATE;
+
+    const ttsCharsPerMonth = agentMinutesPerMonth * TTS_CHARS_PER_MIN;
+    const ttsBillableChars = Math.max(0, ttsCharsPerMonth - TTS_FREE_CHARS_PER_MONTH);
+    const costTTS = ttsBillableChars * TTS_RATE_PER_CHAR;
+
+    const costLLMperCall = (vInputTokens / 1e6) * VOICE_LLM.in + (vOutputTokens / 1e6) * VOICE_LLM.out;
+    const costLLM = costLLMperCall * callsPerMonth;
+
+    const carrierResults = {};
+    let cheapestCarrier = null;
+    for (const key in CARRIERS) {
+      const c = CARRIERS[key];
+      const combinedRate = c.inbound + c.streaming;
+      const costMonth = combinedRate * callMinutesPerMonth;
+      carrierResults[key] = { ...c, combinedRate, costMonth };
+      if (!cheapestCarrier || combinedRate < carrierResults[cheapestCarrier].combinedRate) cheapestCarrier = key;
+    }
+    const carrierTbody = $("carrierCompareBody");
+    carrierTbody.innerHTML = "";
+    for (const key in carrierResults) {
+      const c = carrierResults[key];
+      const mult = c.combinedRate / carrierResults[cheapestCarrier].combinedRate;
+      let chipClass = "cheap", chipText = "baseline";
+      if (mult > 1.01 && mult <= 4) { chipClass = "mid"; chipText = mult.toFixed(1) + "×"; }
+      else if (mult > 4) { chipClass = "costly"; chipText = mult.toFixed(1) + "×"; }
+      const tr = document.createElement("tr");
+      if (key === carrierKey) tr.className = "active";
+      tr.innerHTML =
+        "<td>" + c.label + "</td>" +
+        "<td class=\"mono\">$" + c.inbound.toFixed(4) + "</td>" +
+        "<td class=\"mono\">$" + c.streaming.toFixed(4) + "</td>" +
+        "<td class=\"mono\">$" + c.combinedRate.toFixed(4) + "</td>" +
+        "<td class=\"mono\">" + fmtUsd(c.costMonth) + "</td>" +
+        "<td><span class=\"chip " + chipClass + "\">" + chipText + "</span></td>";
+      carrierTbody.appendChild(tr);
+    }
+    const costTelephony = carrierResults[carrierKey].costMonth;
+    const costV = costSTT + costTTS + costLLM + costTelephony;
+
+    $("outCallsPerMonth").textContent = fmtInt(callsPerMonth);
+    $("outCallMinutes").textContent = fmtInt(callMinutesPerMonth);
+    $("outCostSTT").textContent = fmtUsd(costSTT);
+    $("outTtsFreeTierPill").textContent = ttsBillableChars === 0 ? "within free tier" : "over free tier";
+    $("outCostTTS").textContent = fmtUsd(costTTS);
+    $("outCostLLM").textContent = fmtUsd(costLLM);
+    $("carrierLabelInline").textContent = carrierResults[carrierKey].label;
+    $("outCostTelephony").textContent = fmtUsd(costTelephony);
+    $("outCostMonthV").textContent = fmtUsd(costV);
+    $("outTotalVoice").textContent = fmtUsd(costV);
+
     // ---------- Grand total (respects the include/exclude toggles) ----------
     const includeT = $("includeTranscription").checked;
     const includeE = $("includeEmail").checked;
     const includeS = $("includeStorage").checked;
+    const includeV = $("includeVoice").checked;
 
     $("blockTranscription").classList.toggle("excluded", !includeT);
     $("blockEmail").classList.toggle("excluded", !includeE);
     $("blockStorage").classList.toggle("excluded", !includeS);
+    $("blockVoice").classList.toggle("excluded", !includeV);
 
-    const grand = (includeT ? costT : 0) + (includeE ? sel.costPerMonth : 0) + (includeS ? costS : 0);
+    const grand = (includeT ? costT : 0) + (includeE ? sel.costPerMonth : 0) + (includeS ? costS : 0) + (includeV ? costV : 0);
     const fx = Number($("fxRate").value) || 0.87;
     $("outGrandTotal").textContent = fmtUsd(grand);
     $("outGrandTotalEur").textContent = "≈ €" + Math.round(grand * fx).toLocaleString("en-US");
 
     lastComputed = {
-      costT, emailCost: sel.costPerMonth, costS, grand,
-      includeT, includeE, includeS
+      costT, emailCost: sel.costPerMonth, costS, costV, grand,
+      includeT, includeE, includeS, includeV
     };
   }
 
@@ -1371,12 +1599,20 @@
   setters.fileSizeKb = link("fileSizeKb", "fileSizeKbNum", "valFileSizeKb", recalc);
   setters.storagePercent = link("storagePercent", "storagePercentNum", "valStoragePercent", recalc);
   setters.retentionMonths = link("retentionMonths", "retentionMonthsNum", "valRetentionMonths", recalc);
+  setters.callsPerDay = link("callsPerDay", "callsPerDayNum", "valCallsPerDay", recalc);
+  setters.workDaysV = link("workDaysV", "workDaysVNum", "valWorkDaysV", recalc);
+  setters.callerTalkMin = link("callerTalkMin", "callerTalkMinNum", "valCallerTalkMin", recalc);
+  setters.agentTalkMin = link("agentTalkMin", "agentTalkMinNum", "valAgentTalkMin", recalc);
+  setters.vInputTokens = link("vInputTokens", "vInputTokensNum", "valVInputTokens", recalc, (v) => Number(v).toLocaleString("en-US"));
+  setters.vOutputTokens = link("vOutputTokens", "vOutputTokensNum", "valVOutputTokens", recalc, (v) => Number(v).toLocaleString("en-US"));
 
   document.querySelectorAll('input[name="mode"]').forEach((r) => r.addEventListener("change", recalc));
   $("includeTranscription").addEventListener("change", recalc);
   $("includeEmail").addEventListener("change", recalc);
   $("includeStorage").addEventListener("change", recalc);
+  $("includeVoice").addEventListener("change", recalc);
   $("modelSelect").addEventListener("change", recalc);
+  $("carrierSelect").addEventListener("change", recalc);
   $("fxRate").addEventListener("input", recalc);
 
   // ---------- Scenarios (saved locally in this browser via localStorage) ----------
@@ -1405,10 +1641,18 @@
       fileSizeKb: Number($("fileSizeKb").value),
       storagePercent: Number($("storagePercent").value),
       retentionMonths: Number($("retentionMonths").value),
+      callsPerDay: Number($("callsPerDay").value),
+      workDaysV: Number($("workDaysV").value),
+      callerTalkMin: Number($("callerTalkMin").value),
+      agentTalkMin: Number($("agentTalkMin").value),
+      vInputTokens: Number($("vInputTokens").value),
+      vOutputTokens: Number($("vOutputTokens").value),
+      carrierSelect: $("carrierSelect").value,
       fxRate: Number($("fxRate").value),
       includeTranscription: $("includeTranscription").checked,
       includeEmail: $("includeEmail").checked,
-      includeStorage: $("includeStorage").checked
+      includeStorage: $("includeStorage").checked,
+      includeVoice: $("includeVoice").checked
     };
   }
 
@@ -1424,15 +1668,23 @@
     if (cfg.fileSizeKb !== undefined) setters.fileSizeKb(cfg.fileSizeKb);
     if (cfg.storagePercent !== undefined) setters.storagePercent(cfg.storagePercent);
     if (cfg.retentionMonths !== undefined) setters.retentionMonths(cfg.retentionMonths);
+    if (cfg.callsPerDay !== undefined) setters.callsPerDay(cfg.callsPerDay);
+    if (cfg.workDaysV !== undefined) setters.workDaysV(cfg.workDaysV);
+    if (cfg.callerTalkMin !== undefined) setters.callerTalkMin(cfg.callerTalkMin);
+    if (cfg.agentTalkMin !== undefined) setters.agentTalkMin(cfg.agentTalkMin);
+    if (cfg.vInputTokens !== undefined) setters.vInputTokens(cfg.vInputTokens);
+    if (cfg.vOutputTokens !== undefined) setters.vOutputTokens(cfg.vOutputTokens);
     if (cfg.mode) {
       const r = document.querySelector('input[name="mode"][value="' + cfg.mode + '"]');
       if (r) r.checked = true;
     }
     if (cfg.modelSelect) $("modelSelect").value = cfg.modelSelect;
+    if (cfg.carrierSelect) $("carrierSelect").value = cfg.carrierSelect;
     if (cfg.fxRate !== undefined) $("fxRate").value = cfg.fxRate;
     if (cfg.includeTranscription !== undefined) $("includeTranscription").checked = cfg.includeTranscription;
     if (cfg.includeEmail !== undefined) $("includeEmail").checked = cfg.includeEmail;
     if (cfg.includeStorage !== undefined) $("includeStorage").checked = cfg.includeStorage;
+    if (cfg.includeVoice !== undefined) $("includeVoice").checked = cfg.includeVoice;
     recalc();
   }
 
@@ -1458,6 +1710,7 @@
         "<td class=\"mono\">" + fmtUsd(s.costT) + "</td>" +
         "<td class=\"mono\">" + fmtUsd(s.emailCost) + "</td>" +
         "<td class=\"mono\">" + fmtUsd(s.costS) + "</td>" +
+        "<td class=\"mono\">" + fmtUsd(s.costV || 0) + "</td>" +
         "<td class=\"mono grand-cell\">" + fmtUsd(s.grand) + "</td>" +
         "<td></td>";
       const actionsCell = tr.lastElementChild;
@@ -1496,6 +1749,7 @@
       costT: lastComputed.costT,
       emailCost: lastComputed.emailCost,
       costS: lastComputed.costS,
+      costV: lastComputed.costV,
       grand: lastComputed.grand
     });
     persistScenarios(list);
