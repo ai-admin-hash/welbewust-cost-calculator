@@ -116,12 +116,35 @@
     color: #A9B6B1;
   }
 
+  .total-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    cursor: pointer;
+    width: fit-content;
+  }
+
+  .total-toggle input {
+    accent-color: #E8A183;
+    cursor: pointer;
+  }
+
   .total-value {
     font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
     font-variant-numeric: tabular-nums;
     font-size: 1.5rem;
     font-weight: 600;
     color: #F4F1EC;
+    transition: opacity 0.15s ease;
+  }
+
+  .total-block.excluded .total-value {
+    opacity: 0.35;
+    text-decoration: line-through;
+  }
+
+  .total-block.excluded .total-label {
+    opacity: 0.5;
   }
 
   .total-plus, .total-equals {
@@ -563,6 +586,126 @@
     margin: 0.6rem 0 0;
   }
 
+  /* ---------- Scenarios ---------- */
+
+  .scenarios {
+    margin-top: 2rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--line-strong);
+  }
+
+  .scenarios h3 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+
+  .scenarios-intro {
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    max-width: 68ch;
+    margin: 0 0 1.1rem;
+  }
+
+  .scenario-save-row {
+    display: flex;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+    max-width: 32rem;
+  }
+
+  .scenario-save-row input[type="text"] {
+    flex: 1;
+    font-size: 0.85rem;
+    color: var(--ink);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    padding: 0.45rem 0.6rem;
+    background: #fff;
+  }
+
+  button {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #fff;
+    background: var(--petrol);
+    border: none;
+    border-radius: var(--radius);
+    padding: 0.5rem 0.9rem;
+    cursor: pointer;
+  }
+
+  button:hover { background: #163a39; }
+
+  button.secondary {
+    background: transparent;
+    color: var(--ink-soft);
+    border: 1px solid var(--line-strong);
+    padding: 0.3rem 0.6rem;
+    font-weight: 500;
+  }
+
+  button.secondary:hover { border-color: var(--petrol); color: var(--petrol); background: var(--petrol-tint); }
+
+  .scenarios-empty {
+    font-size: 0.83rem;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  .scenario-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+
+  table.scenario-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+    min-width: 560px;
+  }
+
+  .scenario-table th, .scenario-table td {
+    padding: 0.55rem 0.7rem;
+    text-align: right;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+
+  .scenario-table th:first-child, .scenario-table td:first-child {
+    text-align: left;
+    white-space: normal;
+    font-weight: 600;
+  }
+
+  .scenario-table thead th {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    font-weight: 600;
+    border-bottom: 1px solid var(--line-strong);
+  }
+
+  .scenario-table td.mono, .scenario-table th.mono {
+    font-family: ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .scenario-table td.grand-cell {
+    font-weight: 700;
+    color: var(--rust);
+  }
+
+  .scenario-row-actions {
+    display: flex;
+    gap: 0.4rem;
+    justify-content: flex-end;
+  }
+
   /* ---------- Footer ---------- */
 
   .notes {
@@ -674,18 +817,27 @@
   </header>
 
   <section class="total-strip">
-    <div class="total-block">
-      <span class="total-label">Transcription / mo</span>
+    <div class="total-block" id="blockTranscription">
+      <label class="total-toggle">
+        <input type="checkbox" id="includeTranscription" checked />
+        <span class="total-label">Transcription / mo</span>
+      </label>
       <span class="total-value mono" id="outTotalTranscription">$0</span>
     </div>
     <div class="total-plus">+</div>
-    <div class="total-block">
-      <span class="total-label">Email-AI / mo</span>
+    <div class="total-block" id="blockEmail">
+      <label class="total-toggle">
+        <input type="checkbox" id="includeEmail" checked />
+        <span class="total-label">Email-AI / mo</span>
+      </label>
       <span class="total-value mono" id="outTotalEmail">$0</span>
     </div>
     <div class="total-plus">+</div>
-    <div class="total-block">
-      <span class="total-label">Transcript storage / mo</span>
+    <div class="total-block" id="blockStorage">
+      <label class="total-toggle">
+        <input type="checkbox" id="includeStorage" checked />
+        <span class="total-label">Transcript storage / mo</span>
+      </label>
       <span class="total-value mono" id="outTotalStorage">$0</span>
     </div>
     <div class="total-equals">=</div>
@@ -696,7 +848,7 @@
     </div>
     <div class="fx-row">
       <label for="fxRate">&euro; per $</label>
-      <input type="number" id="fxRate" value="0.92" min="0.5" max="1.5" step="0.01" />
+      <input type="number" id="fxRate" value="0.87" min="0.5" max="1.5" step="0.01" title="Verified 7 Jul 2026 (EUR/USD ≈ 1.143 per Xe/ECB) — edit to the live rate any time" />
     </div>
   </section>
 
@@ -773,7 +925,7 @@
 
           <div class="mode-card" id="modeCardBatch">
             <div class="mode-card-head">
-              <span class="mode-name">Dynamic Batch <span class="mode-price mono">$0.004/min</span></span>
+              <span class="mode-name">Dynamic Batch <span class="mode-price mono">$0.003/min</span></span>
               <span class="mode-flag" id="flagBatch">selected</span>
             </div>
             <p class="mode-desc">The session is recorded, then submitted to Google's discounted "Dynamic Batch" queue — a specific, named pricing mode, not just "the non-live option." The discount is a deliberate trade: Google can take up to 24 hours to return it, in exchange for the lower price.</p>
@@ -984,12 +1136,40 @@
 
   </section>
 
+  <section class="scenarios">
+    <h3>Saved scenarios</h3>
+    <p class="scenarios-intro">Save the current settings under a name to compare different assumptions side by side — e.g. "25 therapists, live" vs. "25 therapists, Dynamic Batch." Saved in this browser only, not shared between devices.</p>
+
+    <div class="scenario-save-row">
+      <input type="text" id="scenarioName" placeholder="Name this scenario…" maxlength="60" />
+      <button type="button" id="saveScenarioBtn">Save current as…</button>
+    </div>
+
+    <p class="scenarios-empty" id="scenariosEmpty">No scenarios saved yet — set up the calculator above the way you want, then save it.</p>
+
+    <div class="scenario-table-wrap" id="scenarioTableWrap" style="display:none;">
+      <table class="scenario-table">
+        <thead>
+          <tr>
+            <th>Scenario</th>
+            <th class="mono">Transcription</th>
+            <th class="mono">Email-AI</th>
+            <th class="mono">Storage</th>
+            <th class="mono">Total</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="scenarioTbody"></tbody>
+      </table>
+    </div>
+  </section>
+
   <footer class="notes">
     <h3>Notes on these figures</h3>
     <ul>
       <li>Rates sourced from Google's official pricing pages, verified 7 Jul 2026. Both Chirp and the Gemini 2.5 series price identically regardless of region — europe-west4 (NL) costs the same as global, so residency is free here.</li>
       <li>Transcription volume tiers ($0.016 &rarr; $0.010 &rarr; $0.008 &rarr; $0.004 per minute) are applied as graduated bands past 500k / 1M / 2M minutes a month, the standard model for usage-based cloud pricing &mdash; worth confirming against Google's actual billing behaviour if volume gets close to a threshold.</li>
-      <li>The &#36;0.004/min Dynamic Batch rate is confirmed against Google's Speech-to-Text V2 launch announcement, not a placeholder &mdash; but it only applies when the request explicitly opts into Google's <code>DYNAMIC_BATCHING</code> processing strategy, which caps latency at up to 24 hours. There is no cheaper tier for "batch, but fast": sending short audio chunks to the batch endpoint without that flag bills at the same $0.016/min as live, and Google's own docs say batch recognition isn't designed for clips under 60 seconds in the first place &mdash; so chunking audio to emulate live transcription would not save any money.</li>
+      <li>The &#36;0.003/min Dynamic Batch rate is confirmed directly against the live Speech-to-Text pricing page (SKU 7700-6778-EF8E), not a placeholder &mdash; but it only applies when the request explicitly opts into Google's <code>DYNAMIC_BATCHING</code> processing strategy, which caps latency at up to 24 hours. There is no cheaper tier for "batch, but fast": sending short audio chunks to the batch endpoint without that flag bills at the same $0.016/min as live, and Google's own docs say batch recognition isn't designed for clips under 60 seconds in the first place &mdash; so chunking audio to emulate live transcription would not save any money.</li>
       <li>Figures are model-inference and storage cost only: orchestration (e.g. n8n), logging and human-review time are not included.</li>
       <li>The transcript storage total assumes a steady state: once the practice has been running longer than the chosen retention period, old files age out roughly as fast as new ones arrive, so total stored data plateaus at (monthly volume &times; retention) rather than growing forever. In the first few months &mdash; before that many months have actually elapsed &mdash; the real bill will be lower than this figure.</li>
       <li>The 40 KB default transcript size is a rough estimate for a 45&ndash;60 minute conversation rendered as plain-text/markdown &mdash; measure an actual sample transcript and adjust the slider once one exists.</li>
@@ -1003,6 +1183,7 @@
 <script>
 (function () {
   const $ = (id) => document.getElementById(id);
+  let lastComputed = {};
 
   const MODELS = {
     flashlite: { label: "Gemini 2.5 Flash-Lite", in: 0.10, out: 0.40 },
@@ -1016,7 +1197,7 @@
     { upto: 2000000, rate: 0.008, name: "Tier 3 · $0.008/min" },
     { upto: Infinity, rate: 0.004, name: "Tier 4 · $0.004/min" }
   ];
-  const BATCH_RATE = 0.004;
+  const BATCH_RATE = 0.003;
   const STORAGE_RATE_PER_GIB = 0.02; // Cloud Storage Standard, europe-west4, $/GiB-month
 
   function fmtUsd(n) {
@@ -1157,31 +1338,173 @@
     $("outCostMonthS").textContent = fmtUsd(costS);
     $("outTotalStorage").textContent = fmtUsd(costS);
 
-    // ---------- Grand total ----------
-    const grand = costT + sel.costPerMonth + costS;
-    const fx = Number($("fxRate").value) || 0.92;
+    // ---------- Grand total (respects the include/exclude toggles) ----------
+    const includeT = $("includeTranscription").checked;
+    const includeE = $("includeEmail").checked;
+    const includeS = $("includeStorage").checked;
+
+    $("blockTranscription").classList.toggle("excluded", !includeT);
+    $("blockEmail").classList.toggle("excluded", !includeE);
+    $("blockStorage").classList.toggle("excluded", !includeS);
+
+    const grand = (includeT ? costT : 0) + (includeE ? sel.costPerMonth : 0) + (includeS ? costS : 0);
+    const fx = Number($("fxRate").value) || 0.87;
     $("outGrandTotal").textContent = fmtUsd(grand);
     $("outGrandTotalEur").textContent = "≈ €" + Math.round(grand * fx).toLocaleString("en-US");
+
+    lastComputed = {
+      costT, emailCost: sel.costPerMonth, costS, grand,
+      includeT, includeE, includeS
+    };
   }
 
-  // wire sliders/numbers
-  link("therapists", "therapistsNum", "valTherapists", recalc);
-  link("sessionsPerDay", "sessionsPerDayNum", "valSessionsPerDay", recalc);
-  link("minsPerSession", "minsPerSessionNum", "valMinsPerSession", recalc);
-  link("workDaysT", "workDaysTNum", "valWorkDaysT", recalc);
-  link("emailsPerDay", "emailsPerDayNum", "valEmailsPerDay", recalc);
-  link("inputTokens", "inputTokensNum", "valInputTokens", recalc, (v) => Number(v).toLocaleString("en-US"));
-  link("outputTokens", "outputTokensNum", "valOutputTokens", recalc, (v) => Number(v).toLocaleString("en-US"));
-  link("workDaysE", "workDaysENum", "valWorkDaysE", recalc);
-  link("fileSizeKb", "fileSizeKbNum", "valFileSizeKb", recalc);
-  link("storagePercent", "storagePercentNum", "valStoragePercent", recalc);
-  link("retentionMonths", "retentionMonthsNum", "valRetentionMonths", recalc);
+  // wire sliders/numbers (captured so scenarios can programmatically restore them)
+  const setters = {};
+  setters.therapists = link("therapists", "therapistsNum", "valTherapists", recalc);
+  setters.sessionsPerDay = link("sessionsPerDay", "sessionsPerDayNum", "valSessionsPerDay", recalc);
+  setters.minsPerSession = link("minsPerSession", "minsPerSessionNum", "valMinsPerSession", recalc);
+  setters.workDaysT = link("workDaysT", "workDaysTNum", "valWorkDaysT", recalc);
+  setters.emailsPerDay = link("emailsPerDay", "emailsPerDayNum", "valEmailsPerDay", recalc);
+  setters.inputTokens = link("inputTokens", "inputTokensNum", "valInputTokens", recalc, (v) => Number(v).toLocaleString("en-US"));
+  setters.outputTokens = link("outputTokens", "outputTokensNum", "valOutputTokens", recalc, (v) => Number(v).toLocaleString("en-US"));
+  setters.workDaysE = link("workDaysE", "workDaysENum", "valWorkDaysE", recalc);
+  setters.fileSizeKb = link("fileSizeKb", "fileSizeKbNum", "valFileSizeKb", recalc);
+  setters.storagePercent = link("storagePercent", "storagePercentNum", "valStoragePercent", recalc);
+  setters.retentionMonths = link("retentionMonths", "retentionMonthsNum", "valRetentionMonths", recalc);
 
   document.querySelectorAll('input[name="mode"]').forEach((r) => r.addEventListener("change", recalc));
+  $("includeTranscription").addEventListener("change", recalc);
+  $("includeEmail").addEventListener("change", recalc);
+  $("includeStorage").addEventListener("change", recalc);
   $("modelSelect").addEventListener("change", recalc);
   $("fxRate").addEventListener("input", recalc);
 
+  // ---------- Scenarios (saved locally in this browser via localStorage) ----------
+  const SCENARIOS_KEY = "wb-cost-calc-scenarios";
+
+  function loadScenarios() {
+    try { return JSON.parse(localStorage.getItem(SCENARIOS_KEY)) || []; }
+    catch (e) { return []; }
+  }
+  function persistScenarios(list) {
+    localStorage.setItem(SCENARIOS_KEY, JSON.stringify(list));
+  }
+
+  function captureCurrentInputs() {
+    return {
+      therapists: Number($("therapists").value),
+      sessionsPerDay: Number($("sessionsPerDay").value),
+      minsPerSession: Number($("minsPerSession").value),
+      workDaysT: Number($("workDaysT").value),
+      mode: document.querySelector('input[name="mode"]:checked').value,
+      emailsPerDay: Number($("emailsPerDay").value),
+      inputTokens: Number($("inputTokens").value),
+      outputTokens: Number($("outputTokens").value),
+      workDaysE: Number($("workDaysE").value),
+      modelSelect: $("modelSelect").value,
+      fileSizeKb: Number($("fileSizeKb").value),
+      storagePercent: Number($("storagePercent").value),
+      retentionMonths: Number($("retentionMonths").value),
+      fxRate: Number($("fxRate").value),
+      includeTranscription: $("includeTranscription").checked,
+      includeEmail: $("includeEmail").checked,
+      includeStorage: $("includeStorage").checked
+    };
+  }
+
+  function applyInputs(cfg) {
+    if (cfg.therapists !== undefined) setters.therapists(cfg.therapists);
+    if (cfg.sessionsPerDay !== undefined) setters.sessionsPerDay(cfg.sessionsPerDay);
+    if (cfg.minsPerSession !== undefined) setters.minsPerSession(cfg.minsPerSession);
+    if (cfg.workDaysT !== undefined) setters.workDaysT(cfg.workDaysT);
+    if (cfg.emailsPerDay !== undefined) setters.emailsPerDay(cfg.emailsPerDay);
+    if (cfg.inputTokens !== undefined) setters.inputTokens(cfg.inputTokens);
+    if (cfg.outputTokens !== undefined) setters.outputTokens(cfg.outputTokens);
+    if (cfg.workDaysE !== undefined) setters.workDaysE(cfg.workDaysE);
+    if (cfg.fileSizeKb !== undefined) setters.fileSizeKb(cfg.fileSizeKb);
+    if (cfg.storagePercent !== undefined) setters.storagePercent(cfg.storagePercent);
+    if (cfg.retentionMonths !== undefined) setters.retentionMonths(cfg.retentionMonths);
+    if (cfg.mode) {
+      const r = document.querySelector('input[name="mode"][value="' + cfg.mode + '"]');
+      if (r) r.checked = true;
+    }
+    if (cfg.modelSelect) $("modelSelect").value = cfg.modelSelect;
+    if (cfg.fxRate !== undefined) $("fxRate").value = cfg.fxRate;
+    if (cfg.includeTranscription !== undefined) $("includeTranscription").checked = cfg.includeTranscription;
+    if (cfg.includeEmail !== undefined) $("includeEmail").checked = cfg.includeEmail;
+    if (cfg.includeStorage !== undefined) $("includeStorage").checked = cfg.includeStorage;
+    recalc();
+  }
+
+  function renderScenarios() {
+    const list = loadScenarios();
+    const wrap = $("scenarioTableWrap");
+    const empty = $("scenariosEmpty");
+    const tbody = $("scenarioTbody");
+    tbody.innerHTML = "";
+
+    if (list.length === 0) {
+      wrap.style.display = "none";
+      empty.style.display = "block";
+      return;
+    }
+    empty.style.display = "none";
+    wrap.style.display = "block";
+
+    list.forEach((s, i) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML =
+        "<td>" + s.name.replace(/</g, "&lt;") + "</td>" +
+        "<td class=\"mono\">" + fmtUsd(s.costT) + "</td>" +
+        "<td class=\"mono\">" + fmtUsd(s.emailCost) + "</td>" +
+        "<td class=\"mono\">" + fmtUsd(s.costS) + "</td>" +
+        "<td class=\"mono grand-cell\">" + fmtUsd(s.grand) + "</td>" +
+        "<td></td>";
+      const actionsCell = tr.lastElementChild;
+      actionsCell.className = "scenario-row-actions";
+
+      const loadBtn = document.createElement("button");
+      loadBtn.type = "button"; loadBtn.className = "secondary"; loadBtn.textContent = "Load";
+      loadBtn.addEventListener("click", () => applyInputs(list[i].inputs));
+
+      const delBtn = document.createElement("button");
+      delBtn.type = "button"; delBtn.className = "secondary"; delBtn.textContent = "Delete";
+      delBtn.addEventListener("click", () => {
+        if (!confirm("Delete scenario \"" + list[i].name + "\"?")) return;
+        const updated = loadScenarios();
+        updated.splice(i, 1);
+        persistScenarios(updated);
+        renderScenarios();
+      });
+
+      actionsCell.appendChild(loadBtn);
+      actionsCell.appendChild(delBtn);
+      tbody.appendChild(tr);
+    });
+  }
+
+  $("saveScenarioBtn").addEventListener("click", () => {
+    const nameField = $("scenarioName");
+    const name = nameField.value.trim();
+    if (!name) { nameField.focus(); return; }
+    recalc(); // ensure lastComputed is fresh
+    const list = loadScenarios();
+    list.push({
+      name,
+      savedAt: new Date().toISOString(),
+      inputs: captureCurrentInputs(),
+      costT: lastComputed.costT,
+      emailCost: lastComputed.emailCost,
+      costS: lastComputed.costS,
+      grand: lastComputed.grand
+    });
+    persistScenarios(list);
+    nameField.value = "";
+    renderScenarios();
+  });
+
   recalc();
+  renderScenarios();
 })();
 </script>
 </body>
