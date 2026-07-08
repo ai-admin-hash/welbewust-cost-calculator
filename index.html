@@ -1246,6 +1246,7 @@
               <tbody id="carrierCompareBody"></tbody>
             </table>
           </div>
+          <p class="mode-bottom-line"><strong>Neither carrier is sign-up-and-go for real patient calls.</strong> Twilio's EU voice region is opt-in, not default &mdash; patient audio processes in the US unless the Voice Region is explicitly set to IE1 (Dublin), and its HIPAA BAA needs an Enterprise/Security-tier upgrade plus a sales cycle. Telnyx's EU media-pinning ("AnchorSite") is currently a marketing claim, not a contract term &mdash; get it confirmed in writing for the specific Voice API/SIP product before relying on it, and its HIPAA position is a "conduit exception" argument rather than a formal BAA (push for one in writing, since the practice wants HIPAA). Telnyx also had a real supply-chain incident on its Python SDK in March 2026 (credential-stealing malware) &mdash; log it as a vendor-risk item in the DPIA regardless of which carrier is chosen. Both hold ISO 27001 + SOC 2; neither holds NEN 7510 (expected, not a disqualifier).</p>
         </div>
 
         <div class="ledger storage-ledger">
