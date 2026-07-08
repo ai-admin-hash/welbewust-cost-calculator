@@ -848,6 +848,14 @@
       </label>
       <span class="total-value mono" id="outTotalVoice">$0</span>
     </div>
+    <div class="total-plus">+</div>
+    <div class="total-block" id="blockDocs">
+      <label class="total-toggle">
+        <input type="checkbox" id="includeDocs" checked />
+        <span class="total-label">Doc processing / mo</span>
+      </label>
+      <span class="total-value mono" id="outTotalDocs">$0</span>
+    </div>
     <div class="total-equals">=</div>
     <div class="total-block grand">
       <span class="total-label">Monthly total</span>
@@ -1280,6 +1288,112 @@
       </div>
     </article>
 
+    <article class="panel panel-wide">
+      <h2>Document processing <span class="unit-tag">Gemini &middot; image &amp; PDF input</span></h2>
+      <p class="panel-subnote">Reading scanned documents &mdash; referral letters, screening forms &mdash; with Gemini's vision input. Image and PDF-page tokens bill at the same rate as text, no separate multimodal surcharge. A PDF page costs exactly what one small image costs, so a multi-page PDF's cost is simply page count &times; that number.</p>
+
+      <div class="storage-grid">
+        <div class="storage-inputs">
+          <div class="field">
+            <div class="field-head">
+              <label for="docsPerDay">Documents / day</label>
+              <span class="field-value"><span id="valDocsPerDay">12</span></span>
+            </div>
+            <div class="field-controls">
+              <input type="range" id="docsPerDay" min="1" max="150" step="1" value="12" />
+              <input type="number" id="docsPerDayNum" min="1" max="1000" step="1" value="12" />
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-head">
+              <label for="workDaysD">Working days / month</label>
+              <span class="field-value"><span id="valWorkDaysD">20</span></span>
+            </div>
+            <div class="field-controls">
+              <input type="range" id="workDaysD" min="1" max="31" step="1" value="20" />
+              <input type="number" id="workDaysDNum" min="1" max="31" step="1" value="20" />
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-head">
+              <label for="pagesPerPdf">Pages per PDF</label>
+              <span class="field-value"><span id="valPagesPerPdf">4</span></span>
+            </div>
+            <div class="field-controls">
+              <input type="range" id="pagesPerPdf" min="1" max="50" step="1" value="4" />
+              <input type="number" id="pagesPerPdfNum" min="1" max="1000" step="1" value="4" />
+            </div>
+            <p class="field-note">Used for the PDF row below &mdash; the single-image row is always 1 page.</p>
+          </div>
+
+          <div class="field">
+            <div class="field-head">
+              <label for="docOutputTokens">Output tokens / document</label>
+              <span class="field-value"><span id="valDocOutputTokens">300</span></span>
+            </div>
+            <div class="field-controls">
+              <input type="range" id="docOutputTokens" min="50" max="3000" step="50" value="300" />
+              <input type="number" id="docOutputTokensNum" min="1" max="20000" step="10" value="300" />
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-head"><label for="docModelSelect">Model</label></div>
+            <select id="docModelSelect">
+              <option value="flashlite" selected>Gemini 2.5 Flash-Lite</option>
+              <option value="flash">Gemini 2.5 Flash</option>
+              <option value="pro">Gemini 2.5 Pro (&le;200k context)</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <div class="field-head"><label>What's actually processed</label></div>
+            <div class="mode-toggle">
+              <label><input type="radio" name="docType" value="image" checked /> Single image</label>
+              <label><input type="radio" name="docType" value="pdf" /> Multi-page PDF</label>
+            </div>
+          </div>
+
+          <div class="compare">
+            <table class="compare-table">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th class="mono">Pages</th>
+                  <th class="mono">Input tokens</th>
+                  <th class="mono">Cost/doc</th>
+                  <th class="mono">Cost/month</th>
+                  <th>vs. 1 page</th>
+                </tr>
+              </thead>
+              <tbody id="docCompareBody"></tbody>
+            </table>
+          </div>
+          <p class="field-note">The "vs. 1 page" factor is the actual cost multiple, not the raw page count &mdash; only the page/image tokens scale with pages; the output tokens (the extracted answer) stay fixed either way, so a 4-page PDF costs less than a literal 4&times; a single image.</p>
+        </div>
+
+        <div class="ledger storage-ledger">
+          <div class="ledger-row">
+            <span class="lbl">Documents / month</span>
+            <span class="leader"></span>
+            <span class="val mono" id="outDocsPerMonth">0</span>
+          </div>
+          <div class="ledger-row">
+            <span class="lbl">Cost / document (<span id="docTypeLabelInline"></span>)</span>
+            <span class="leader"></span>
+            <span class="val mono" id="outCostPerDoc">$0</span>
+          </div>
+          <div class="ledger-row headline">
+            <span class="lbl">Total document processing / month</span>
+            <span class="leader"></span>
+            <span class="val mono" id="outCostMonthD">$0</span>
+          </div>
+        </div>
+      </div>
+    </article>
+
   </section>
 
   <section class="scenarios">
@@ -1302,6 +1416,7 @@
             <th class="mono">Email-AI</th>
             <th class="mono">Storage</th>
             <th class="mono">Voice agent</th>
+            <th class="mono">Doc processing</th>
             <th class="mono">Total</th>
             <th></th>
           </tr>
@@ -1324,6 +1439,7 @@
       <li>Telnyx undercuts Twilio on every telephony metric checked (inbound, outbound, and WebSocket media streaming) &mdash; it's the default carrier here. Number rental isn't counted since the practice would port its existing +31307984022 rather than rent a new one.</li>
       <li>Chirp 3 HD (TTS) gets 1,000,000 free characters/month before the $30/1M-character rate applies &mdash; at low call volume this can fully absorb the bill, which is why the TTS line may show $0 with an "within free tier" tag.</li>
       <li>Cloud Run hosting for the Pipecat orchestrator isn't in the total because it's effectively $0/month at this call volume (well inside the free tier) &mdash; but that only holds if the orchestrator's work happens synchronously within the request/WebSocket context. If it needs independent background threads (e.g. for turn-detection), it requires "always-on CPU" billing instead, which is materially more expensive and worth a design review before committing to Cloud Run at higher volume.</li>
+      <li>Document processing assumes Google's documented spec: a flat 258 tokens for a small image or one PDF page, regardless of resolution, at the same rate as text input (no multimodal surcharge). <strong>One live caveat:</strong> an open, unresolved Google issue reports Vertex AI (what this account runs on) sometimes returning up to 7&times; more tokens than that spec for the same image compared to the separate Gemini Developer API &mdash; confirmed for standalone images, not yet confirmed either way for PDF pages specifically. Worth testing against a real sample document with the CountTokens API before finalizing a budget on this line.</li>
       <li>The &euro; figure is a simple conversion at the rate entered above &mdash; edit it to the live rate for precision.</li>
     </ul>
   </footer>
@@ -1356,6 +1472,7 @@
   const TTS_CHARS_PER_MIN = 800; // ~130-150 wpm Dutch speech, ~5-6 chars/word, midpoint estimate
   const TTS_FREE_CHARS_PER_MONTH = 1000000; // Chirp 3 HD monthly free allowance
   const VOICE_LLM = { in: 0.10, out: 0.40 }; // Gemini 2.5 Flash-Lite — fixed choice for the live turn path, not user-selectable here
+  const TOKENS_PER_PAGE = 258; // Gemini: flat per small image OR per PDF page, per Google's documented spec
   const CARRIERS = {
     telnyx: { label: "Telnyx", inbound: 0.002, streaming: 0.0035 },
     twilio: { label: "Twilio", inbound: 0.01, streaming: 0.0044 }
@@ -1569,25 +1686,75 @@
     $("outCostMonthV").textContent = fmtUsd(costV);
     $("outTotalVoice").textContent = fmtUsd(costV);
 
+    // ---------- Document processing (image / PDF) ----------
+    const docsPerDay = Number($("docsPerDay").value);
+    const workDaysD = Number($("workDaysD").value);
+    const pagesPerPdf = Number($("pagesPerPdf").value);
+    const docOutputTokens = Number($("docOutputTokens").value);
+    const docModelKey = $("docModelSelect").value;
+    const docType = document.querySelector('input[name="docType"]:checked').value;
+    const docModel = MODELS[docModelKey];
+
+    const docsPerMonth = docsPerDay * workDaysD;
+
+    function docCost(pages) {
+      const inputTokens = pages * TOKENS_PER_PAGE;
+      const costPerDoc = (inputTokens / 1e6) * docModel.in + (docOutputTokens / 1e6) * docModel.out;
+      return { pages, inputTokens, costPerDoc, costPerMonth: costPerDoc * docsPerMonth };
+    }
+    const docRows = { image: docCost(1), pdf: docCost(pagesPerPdf) };
+
+    const docTbody = $("docCompareBody");
+    docTbody.innerHTML = "";
+    const docLabels = { image: "Single image", pdf: "Multi-page PDF" };
+    for (const key in docRows) {
+      const r = docRows[key];
+      // Cost multiple, not page count — fixed output tokens dilute the raw
+      // page ratio, so a 4-page PDF is NOT automatically a 4x cost.
+      const mult = r.costPerDoc / docRows.image.costPerDoc;
+      let chipClass = "cheap", chipText = "baseline";
+      if (mult > 1.01 && mult <= 4) { chipClass = "mid"; chipText = mult.toFixed(1) + "×"; }
+      else if (mult > 4) { chipClass = "costly"; chipText = mult.toFixed(1) + "×"; }
+      const tr = document.createElement("tr");
+      if (key === docType) tr.className = "active";
+      tr.innerHTML =
+        "<td>" + docLabels[key] + "</td>" +
+        "<td class=\"mono\">" + r.pages + "</td>" +
+        "<td class=\"mono\">" + fmtInt(r.inputTokens) + "</td>" +
+        "<td class=\"mono\">" + fmtUsd(r.costPerDoc) + "</td>" +
+        "<td class=\"mono\">" + fmtUsd(r.costPerMonth) + "</td>" +
+        "<td><span class=\"chip " + chipClass + "\">" + chipText + "</span></td>";
+      docTbody.appendChild(tr);
+    }
+    const costD = docRows[docType].costPerMonth;
+
+    $("outDocsPerMonth").textContent = fmtInt(docsPerMonth);
+    $("docTypeLabelInline").textContent = docLabels[docType];
+    $("outCostPerDoc").textContent = fmtUsd(docRows[docType].costPerDoc);
+    $("outCostMonthD").textContent = fmtUsd(costD);
+    $("outTotalDocs").textContent = fmtUsd(costD);
+
     // ---------- Grand total (respects the include/exclude toggles) ----------
     const includeT = $("includeTranscription").checked;
     const includeE = $("includeEmail").checked;
     const includeS = $("includeStorage").checked;
     const includeV = $("includeVoice").checked;
+    const includeD = $("includeDocs").checked;
 
     $("blockTranscription").classList.toggle("excluded", !includeT);
     $("blockEmail").classList.toggle("excluded", !includeE);
     $("blockStorage").classList.toggle("excluded", !includeS);
     $("blockVoice").classList.toggle("excluded", !includeV);
+    $("blockDocs").classList.toggle("excluded", !includeD);
 
-    const grand = (includeT ? costT : 0) + (includeE ? sel.costPerMonth : 0) + (includeS ? costS : 0) + (includeV ? costV : 0);
+    const grand = (includeT ? costT : 0) + (includeE ? sel.costPerMonth : 0) + (includeS ? costS : 0) + (includeV ? costV : 0) + (includeD ? costD : 0);
     const fx = toNum($("fxRate").value) || 0.87;
     $("outGrandTotal").textContent = fmtUsd(grand);
     $("outGrandTotalEur").textContent = "≈ €" + Math.round(grand * fx).toLocaleString("en-US");
 
     lastComputed = {
-      costT, emailCost: sel.costPerMonth, costS, costV, grand,
-      includeT, includeE, includeS, includeV
+      costT, emailCost: sel.costPerMonth, costS, costV, costD, grand,
+      includeT, includeE, includeS, includeV, includeD
     };
   }
 
@@ -1610,14 +1777,21 @@
   setters.agentTalkMin = link("agentTalkMin", "agentTalkMinNum", "valAgentTalkMin", recalc);
   setters.vInputTokens = link("vInputTokens", "vInputTokensNum", "valVInputTokens", recalc, (v) => Number(v).toLocaleString("en-US"));
   setters.vOutputTokens = link("vOutputTokens", "vOutputTokensNum", "valVOutputTokens", recalc, (v) => Number(v).toLocaleString("en-US"));
+  setters.docsPerDay = link("docsPerDay", "docsPerDayNum", "valDocsPerDay", recalc);
+  setters.workDaysD = link("workDaysD", "workDaysDNum", "valWorkDaysD", recalc);
+  setters.pagesPerPdf = link("pagesPerPdf", "pagesPerPdfNum", "valPagesPerPdf", recalc);
+  setters.docOutputTokens = link("docOutputTokens", "docOutputTokensNum", "valDocOutputTokens", recalc);
 
   document.querySelectorAll('input[name="mode"]').forEach((r) => r.addEventListener("change", recalc));
+  document.querySelectorAll('input[name="docType"]').forEach((r) => r.addEventListener("change", recalc));
   $("includeTranscription").addEventListener("change", recalc);
   $("includeEmail").addEventListener("change", recalc);
   $("includeStorage").addEventListener("change", recalc);
   $("includeVoice").addEventListener("change", recalc);
+  $("includeDocs").addEventListener("change", recalc);
   $("modelSelect").addEventListener("change", recalc);
   $("carrierSelect").addEventListener("change", recalc);
+  $("docModelSelect").addEventListener("change", recalc);
   $("fxRate").addEventListener("input", recalc);
 
   // ---------- Scenarios (saved locally in this browser via localStorage) ----------
@@ -1653,11 +1827,18 @@
       vInputTokens: Number($("vInputTokens").value),
       vOutputTokens: Number($("vOutputTokens").value),
       carrierSelect: $("carrierSelect").value,
+      docsPerDay: Number($("docsPerDay").value),
+      workDaysD: Number($("workDaysD").value),
+      pagesPerPdf: Number($("pagesPerPdf").value),
+      docOutputTokens: Number($("docOutputTokens").value),
+      docModelSelect: $("docModelSelect").value,
+      docType: document.querySelector('input[name="docType"]:checked').value,
       fxRate: toNum($("fxRate").value),
       includeTranscription: $("includeTranscription").checked,
       includeEmail: $("includeEmail").checked,
       includeStorage: $("includeStorage").checked,
-      includeVoice: $("includeVoice").checked
+      includeVoice: $("includeVoice").checked,
+      includeDocs: $("includeDocs").checked
     };
   }
 
@@ -1683,13 +1864,23 @@
       const r = document.querySelector('input[name="mode"][value="' + cfg.mode + '"]');
       if (r) r.checked = true;
     }
+    if (cfg.docsPerDay !== undefined) setters.docsPerDay(cfg.docsPerDay);
+    if (cfg.workDaysD !== undefined) setters.workDaysD(cfg.workDaysD);
+    if (cfg.pagesPerPdf !== undefined) setters.pagesPerPdf(cfg.pagesPerPdf);
+    if (cfg.docOutputTokens !== undefined) setters.docOutputTokens(cfg.docOutputTokens);
+    if (cfg.docType) {
+      const r = document.querySelector('input[name="docType"][value="' + cfg.docType + '"]');
+      if (r) r.checked = true;
+    }
     if (cfg.modelSelect) $("modelSelect").value = cfg.modelSelect;
     if (cfg.carrierSelect) $("carrierSelect").value = cfg.carrierSelect;
+    if (cfg.docModelSelect) $("docModelSelect").value = cfg.docModelSelect;
     if (cfg.fxRate !== undefined) $("fxRate").value = cfg.fxRate;
     if (cfg.includeTranscription !== undefined) $("includeTranscription").checked = cfg.includeTranscription;
     if (cfg.includeEmail !== undefined) $("includeEmail").checked = cfg.includeEmail;
     if (cfg.includeStorage !== undefined) $("includeStorage").checked = cfg.includeStorage;
     if (cfg.includeVoice !== undefined) $("includeVoice").checked = cfg.includeVoice;
+    if (cfg.includeDocs !== undefined) $("includeDocs").checked = cfg.includeDocs;
     recalc();
   }
 
@@ -1716,6 +1907,7 @@
         "<td class=\"mono\">" + fmtUsd(s.emailCost) + "</td>" +
         "<td class=\"mono\">" + fmtUsd(s.costS) + "</td>" +
         "<td class=\"mono\">" + fmtUsd(s.costV || 0) + "</td>" +
+        "<td class=\"mono\">" + fmtUsd(s.costD || 0) + "</td>" +
         "<td class=\"mono grand-cell\">" + fmtUsd(s.grand) + "</td>" +
         "<td></td>";
       const actionsCell = tr.lastElementChild;
@@ -1755,6 +1947,7 @@
       emailCost: lastComputed.emailCost,
       costS: lastComputed.costS,
       costV: lastComputed.costV,
+      costD: lastComputed.costD,
       grand: lastComputed.grand
     });
     persistScenarios(list);
