@@ -856,7 +856,7 @@
     </div>
     <div class="fx-row">
       <label for="fxRate">&euro; per $</label>
-      <input type="number" id="fxRate" value="0.87" min="0.5" max="1.5" step="0.01" title="Verified 7 Jul 2026 (EUR/USD ≈ 1.143 per Xe/ECB) — edit to the live rate any time" />
+      <input type="text" inputmode="decimal" id="fxRate" value="0.87" title="Verified 7 Jul 2026 (EUR/USD ≈ 1.143 per Xe/ECB) — edit to the live rate any time" />
     </div>
   </section>
 
@@ -1177,7 +1177,7 @@
             </div>
             <div class="field-controls">
               <input type="range" id="callerTalkMin" min="0.5" max="10" step="0.5" value="2.5" />
-              <input type="number" id="callerTalkMinNum" min="0.1" max="30" step="0.1" value="2.5" />
+              <input type="text" inputmode="decimal" id="callerTalkMinNum" value="2.5" />
             </div>
           </div>
 
@@ -1188,7 +1188,7 @@
             </div>
             <div class="field-controls">
               <input type="range" id="agentTalkMin" min="0.5" max="10" step="0.5" value="1.5" />
-              <input type="number" id="agentTalkMinNum" min="0.1" max="30" step="0.1" value="1.5" />
+              <input type="text" inputmode="decimal" id="agentTalkMinNum" value="1.5" />
             </div>
             <p class="field-note">Caller + agent talk time sets total connected-call duration, which is what telephony/streaming is billed on.</p>
           </div>
@@ -1368,11 +1368,16 @@
   }
   function fmtInt(n) { return Math.round(n).toLocaleString("en-US"); }
 
+  // Some browsers render fractional-step number inputs using the OS locale's
+  // decimal separator (e.g. "2,5" in nl-NL) even though the underlying value
+  // is period-based — accept either when parsing so typed input never breaks.
+  function toNum(v) { return Number(String(v).trim().replace(",", ".")); }
+
   // ---- generic slider <-> number sync ----
   function link(sliderId, numberId, valueSpanId, onChange, formatter) {
     const slider = $(sliderId), number = $(numberId), span = valueSpanId ? $(valueSpanId) : null;
     function set(v, fromSlider) {
-      v = Number(v);
+      v = toNum(v);
       slider.value = v;
       number.value = v;
       if (span) span.textContent = formatter ? formatter(v) : v;
@@ -1576,7 +1581,7 @@
     $("blockVoice").classList.toggle("excluded", !includeV);
 
     const grand = (includeT ? costT : 0) + (includeE ? sel.costPerMonth : 0) + (includeS ? costS : 0) + (includeV ? costV : 0);
-    const fx = Number($("fxRate").value) || 0.87;
+    const fx = toNum($("fxRate").value) || 0.87;
     $("outGrandTotal").textContent = fmtUsd(grand);
     $("outGrandTotalEur").textContent = "≈ €" + Math.round(grand * fx).toLocaleString("en-US");
 
@@ -1648,7 +1653,7 @@
       vInputTokens: Number($("vInputTokens").value),
       vOutputTokens: Number($("vOutputTokens").value),
       carrierSelect: $("carrierSelect").value,
-      fxRate: Number($("fxRate").value),
+      fxRate: toNum($("fxRate").value),
       includeTranscription: $("includeTranscription").checked,
       includeEmail: $("includeEmail").checked,
       includeStorage: $("includeStorage").checked,
