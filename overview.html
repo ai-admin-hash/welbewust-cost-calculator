@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overview — WelBewust × Aweris planning</title>
+<link rel="stylesheet" href="aweris.css">
+<style>
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--aw-paper);color:var(--aw-ink);font-family:var(--aw-font-body);line-height:1.6;-webkit-font-smoothing:antialiased}
+
+  .ov-hero{padding:clamp(48px,8vw,88px) 0 clamp(32px,5vw,52px)}
+  .ov-hero h1{font-family:var(--aw-font-display);font-weight:600;font-size:clamp(2.4rem,6vw,4rem);line-height:1.04;letter-spacing:.005em;margin:16px 0 20px;max-width:16ch;text-wrap:balance}
+  .ov-hero h1 em{font-style:italic;color:var(--aw-orange)}
+  .ov-lead{font-size:clamp(1.05rem,2.2vw,1.2rem);color:var(--aw-ink-soft);max-width:60ch;margin:0}
+  .ov-lead b{color:var(--aw-ink);font-weight:600}
+
+  .ov-sec-head{display:flex;align-items:baseline;gap:14px;margin:8px 0 22px}
+  .ov-sec-head h2{font-family:var(--aw-font-display);font-weight:600;font-size:clamp(1.5rem,3.2vw,2rem);margin:0;letter-spacing:.005em}
+  .ov-sec-head .rule{flex:1;height:1px;background:var(--aw-line)}
+
+  .ov-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+  .ov-card{display:flex;flex-direction:column;background:var(--aw-card);border:1px solid var(--aw-line);border-radius:var(--aw-radius);padding:26px 26px 22px;text-decoration:none;color:inherit;box-shadow:var(--aw-shadow);transition:transform .18s var(--aw-ease),box-shadow .18s var(--aw-ease),border-color .18s var(--aw-ease)}
+  .ov-card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(59,64,88,.13);border-color:var(--aw-line-strong)}
+  .ov-card .num{font-family:var(--aw-font-mono);font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;color:var(--aw-orange);font-weight:500}
+  .ov-card h3{font-family:var(--aw-font-display);font-weight:600;font-size:1.4rem;margin:12px 0 10px;line-height:1.15}
+  .ov-card p{margin:0 0 20px;color:var(--aw-ink-soft);font-size:.96rem;flex:1}
+  .ov-card .foot{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .ov-card .aud{font-family:var(--aw-font-mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--aw-muted);background:#F3EDE1;padding:4px 9px;border-radius:var(--aw-radius-pill)}
+  .ov-card .open{font-weight:600;font-size:.9rem;color:var(--aw-orange);white-space:nowrap}
+  .ov-card:hover .open{text-decoration:underline}
+
+  .ov-about{margin-top:clamp(44px,7vw,72px);display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(24px,4vw,48px);align-items:start}
+  .ov-about .prose p{color:var(--aw-ink-soft);margin:0 0 14px;max-width:54ch}
+  .ov-about .prose p b{color:var(--aw-ink);font-weight:600}
+  .ov-facts{background:var(--aw-blue-dark);color:#EDEFF5;border-radius:var(--aw-radius);padding:26px 28px}
+  .ov-facts .aw-eyebrow{color:var(--aw-gold)}
+  .ov-facts ul{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:13px}
+  .ov-facts li{display:flex;gap:11px;font-size:.92rem;line-height:1.45;color:#D7DBE6}
+  .ov-facts li b{color:#fff;font-weight:600}
+  .ov-facts .k{color:var(--aw-orange-light);font-family:var(--aw-font-mono);flex:0 0 auto}
+
+  .ov-note{margin-top:26px;font-size:.85rem;color:var(--aw-muted);font-style:italic}
+
+  @media (max-width:720px){ .ov-about{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<nav class="aw-nav">
+  <a class="aw-brand" href="overview.html"><span class="aw-wordmark">Aweris</span><small>WelBewust · planning</small></a>
+  <div class="aw-nav-links">
+    <a href="overview.html" aria-current="page">Overview</a>
+    <a href="index.html">Cost calculator</a>
+    <a href="assistenten.html">Digital assistants</a>
+    <a href="compliance.html">NEN 7510 plan</a>
+  </div>
+</nav>
+
+<main class="aw-container">
+
+  <header class="ov-hero">
+    <p class="aw-eyebrow">WelBewust × Aweris · planning workspace</p>
+    <h1>The place we <em>think through</em> the move.</h1>
+    <p class="ov-lead">A small set of living documents for taking WelBewust's practice onto the Aweris platform — <b>what it costs</b>, <b>what the digital assistants do</b>, and <b>how we stay NEN&nbsp;7510-compliant</b>. Editable in the browser, no logins, nothing hidden.</p>
+  </header>
+
+  <section>
+    <div class="ov-sec-head">
+      <h2>Three documents</h2>
+      <span class="rule"></span>
+    </div>
+    <div class="ov-cards">
+
+      <a class="ov-card" href="index.html">
+        <span class="num">01 · Numbers</span>
+        <h3>Cost calculator</h3>
+        <p>What the Google Cloud AI pipeline actually costs — Chirp transcription (live vs. batch) and Gemini email drafting, every figure editable and recomputing live.</p>
+        <span class="foot"><span class="aud">For Massy</span><span class="open">Open →</span></span>
+      </a>
+
+      <a class="ov-card" href="assistenten.html">
+        <span class="num">02 · In plain language</span>
+        <h3>Digital-assistants guide</h3>
+        <p>What already runs, what's coming, and what each assistant saves — written for Anna &amp; Massy, in Dutch and English, no jargon.</p>
+        <span class="foot"><span class="aud">For Anna &amp; Massy</span><span class="open">Open →</span></span>
+      </a>
+
+      <a class="ov-card" href="compliance.html">
+        <span class="num">03 · Compliance</span>
+        <h3>NEN 7510 plan</h3>
+        <p>The all-Google-Cloud move and, honestly, what it does — and doesn't — do for NEN&nbsp;7510. Includes the four build decisions, now resolved.</p>
+        <span class="foot"><span class="aud">For the board</span><span class="open">Open →</span></span>
+      </a>
+
+    </div>
+  </section>
+
+  <section class="ov-about">
+    <div class="prose">
+      <div class="ov-sec-head"><h2>What this is</h2></div>
+      <p>This is a <b>planning workspace</b>, not the product. The Aweris platform itself lives at <b>aweris.nl</b>; these pages are where we work out the decisions behind moving WelBewust onto it.</p>
+      <p>Every page is a single, self-contained file — <b>no build step, no accounts, no tracking</b>. Open one in a browser and it just runs. Numbers are editable in place so anyone can pressure-test an assumption without asking a developer.</p>
+      <p>Treat everything here as a <b>working document</b>: a shared, honest draft — not legal or financial advice.</p>
+      <p class="ov-note">Maintained by Javad · figures sourced from Google Cloud's published pricing, verified July 2026.</p>
+    </div>
+
+    <aside class="ov-facts">
+      <p class="aw-eyebrow">At a glance</p>
+      <ul>
+        <li><span class="k">→</span><span>Platform: <b>Aweris</b>, hosted at aweris.nl — <b>"Human in control."</b></span></li>
+        <li><span class="k">→</span><span>Target infra: <b>all Google Cloud, Netherlands</b> (europe-west4)</span></li>
+        <li><span class="k">→</span><span>AI: <b>Gemini</b> (EU) — transcription via <b>Chirp</b> (NL)</span></li>
+        <li><span class="k">→</span><span>Compliance goal: <b>NEN 7510</b> — foundation on the move, certificate via an ISMS</span></li>
+        <li><span class="k">→</span><span>Build decisions: <b>4 of 4 resolved</b></span></li>
+      </ul>
+    </aside>
+  </section>
+
+  <footer class="aw-footer">
+    <span>WelBewust · Aweris planning workspace</span>
+    <span>Self-contained · no build · GitHub Pages</span>
+  </footer>
+
+</main>
+
+</body>
+</html>

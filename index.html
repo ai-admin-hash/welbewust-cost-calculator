@@ -31,7 +31,7 @@
     margin: 0;
     background: var(--paper);
     color: var(--ink);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -42,7 +42,7 @@
   }
 
   h1, h2, h3 {
-    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", serif;
+    font-family: "Fraunces", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
     color: var(--ink);
     text-wrap: balance;
     margin: 0;
@@ -125,7 +125,7 @@
   }
 
   .total-toggle input {
-    accent-color: #E8A183;
+    accent-color: #F06B3F;
     cursor: pointer;
   }
 
@@ -162,7 +162,7 @@
 
   .grand-value {
     font-size: 2.05rem;
-    color: #E8A183;
+    color: #F06B3F;
   }
 
   .total-eur {
@@ -383,7 +383,7 @@
   }
 
   .mode-name {
-    font-family: Georgia, "Iowan Old Style", Palatino, serif;
+    font-family: "Fraunces", "Iowan Old Style", Palatino, serif;
     font-size: 1rem;
     font-weight: 600;
     color: var(--ink);
@@ -457,7 +457,7 @@
 
   select {
     width: 100%;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
     font-size: 0.85rem;
     color: var(--ink);
     border: 1px solid var(--line-strong);
@@ -626,7 +626,7 @@
   }
 
   button {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
     font-size: 0.82rem;
     font-weight: 600;
     color: #fff;
@@ -637,7 +637,7 @@
     cursor: pointer;
   }
 
-  button:hover { background: #163a39; }
+  button:hover { background: #2C3146; }
 
   button.secondary {
     background: transparent;
@@ -805,8 +805,19 @@
     margin: 0.9rem 0 0;
   }
 </style>
+<link rel="stylesheet" href="aweris.css">
 </head>
 <body>
+
+<nav class="aw-nav">
+  <a class="aw-brand" href="overview.html"><span class="aw-wordmark">Aweris</span><small>WelBewust &middot; planning</small></a>
+  <div class="aw-nav-links">
+    <a href="overview.html">Overview</a>
+    <a href="index.html" aria-current="page">Cost calculator</a>
+    <a href="assistenten.html">Digital assistants</a>
+    <a href="compliance.html">NEN 7510 plan</a>
+  </div>
+</nav>
 
 <div class="page">
 
