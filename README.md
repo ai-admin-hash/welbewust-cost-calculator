@@ -12,6 +12,7 @@ All pages share one design system (`aweris.css`) built from the live Aweris bran
 | [`index.html`](index.html) | **Cost calculator** — Chirp transcription + Gemini email/voice/doc costs, every figure editable and live | Massy |
 | [`assistenten.html`](assistenten.html) | **Digital-assistants guide** — what runs, what's coming, what it saves (NL/EN) | Anna & Massy |
 | [`compliance.html`](compliance.html) | **NEN 7510 plan** — the all-Google-Cloud move and what it does (and doesn't) do for compliance | The board |
+| [`modules.html`](modules.html) | **Module library** — how the 304-module library is used in care, who pays (never the patient), how results are handled, and the revenue model | Massy |
 
 ## Design system
 

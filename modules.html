@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Module library — WelBewust × Aweris</title>
+<link rel="stylesheet" href="aweris.css">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--aw-paper);color:var(--aw-ink);font-family:var(--aw-font-body);line-height:1.62;-webkit-font-smoothing:antialiased}
+  .doc{max-width:1000px;margin:0 auto;padding:44px clamp(18px,4vw,40px) 40px}
+  .mono-dim{font-family:var(--aw-font-mono);font-size:.82em;color:var(--aw-muted);letter-spacing:.01em}
+  em{font-style:italic}
+
+  .mast{border-bottom:1px solid var(--aw-line);padding-bottom:32px;margin-bottom:40px}
+  .mast h1{font-family:var(--aw-font-display);font-weight:600;font-size:clamp(2rem,4.8vw,3rem);line-height:1.06;letter-spacing:.005em;text-wrap:balance;margin:16px 0 20px;max-width:22ch}
+  .mast h1 em{font-style:italic;color:var(--aw-orange)}
+  .dek{font-size:1.12rem;line-height:1.6;max-width:66ch;color:var(--aw-ink-soft);margin:0 0 22px}
+  .dek b{color:var(--aw-ink);font-weight:600}
+  .backlink{font-size:.9rem;margin:0;display:flex;gap:14px;flex-wrap:wrap;align-items:baseline}
+  .backlink a{color:var(--aw-orange-dark);text-decoration:none;font-weight:600;border-bottom:1px solid #e6c3b3;padding-bottom:1px}
+  .backlink a:hover{border-bottom-color:var(--aw-orange-dark)}
+
+  .panel{background:var(--aw-blue-dark);border-radius:var(--aw-radius);padding:30px 32px;margin-bottom:48px;color:#EDEFF5}
+  .panel-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+  .panel-label{font-family:var(--aw-font-mono);text-transform:uppercase;letter-spacing:.13em;font-size:.7rem;color:var(--aw-gold);margin:0 0 16px}
+  .libstats{display:grid;grid-template-columns:1fr 1fr;gap:14px 22px;margin:0}
+  .libstat b{display:block;font-family:var(--aw-font-mono);font-size:1.5rem;font-weight:600;color:#fff;font-variant-numeric:tabular-nums}
+  .libstat span{font-size:.82rem;color:#AEB5C7;line-height:1.35;display:block}
+  .panel-foot{margin:18px 0 0;font-size:.85rem;color:#AEB5C7;border-top:1px solid #3B4058;padding-top:14px}
+  .panel-foot b{color:#EDEFF5}
+  .verdict{border-left:1px solid #3B4058;padding-left:34px}
+  .verdict-big{font-family:var(--aw-font-display);font-size:1.55rem;line-height:1.24;margin:0 0 16px;font-weight:600}
+  .verdict-big .hl{color:var(--aw-orange-light);font-style:italic}
+  .verdict-sub{font-size:.92rem;line-height:1.55;color:#AEB5C7;margin:0}
+  .verdict-sub b{color:#fff}
+
+  .block{margin-bottom:48px}
+  .kicker{font-family:var(--aw-font-mono);text-transform:uppercase;letter-spacing:.13em;font-size:.7rem;color:var(--aw-orange);margin:0 0 10px}
+  h2{font-family:var(--aw-font-display);font-weight:600;font-size:clamp(1.4rem,3vw,1.85rem);line-height:1.15;margin:0 0 20px;text-wrap:balance}
+  .lead{font-size:1.06rem;color:var(--aw-ink-soft);max-width:64ch;margin:0 0 24px}
+  .lead em{color:var(--aw-ink);font-style:normal;font-weight:600}
+
+  .table-wrap{overflow-x:auto;border:1px solid var(--aw-line);border-radius:var(--aw-radius);background:var(--aw-card)}
+  table{border-collapse:collapse;width:100%;min-width:640px;font-size:.9rem}
+  thead th{text-align:left;font-family:var(--aw-font-mono);text-transform:uppercase;letter-spacing:.07em;font-size:.68rem;color:var(--aw-muted);font-weight:400;padding:14px 18px;border-bottom:1px solid var(--aw-line);background:#F6F0E5}
+  tbody td{padding:13px 18px;border-bottom:1px solid #F0E9DC;vertical-align:top;line-height:1.45}
+  tbody tr:last-child td{border-bottom:none}
+  td:first-child{font-weight:600;color:var(--aw-ink)}
+  td:last-child{color:var(--aw-ink-soft)}
+  .yes{font-family:var(--aw-font-mono);font-size:.78rem;font-weight:600;color:var(--aw-green);white-space:nowrap}
+  .no{font-family:var(--aw-font-mono);font-size:.78rem;font-weight:600;color:var(--aw-orange-dark);white-space:nowrap}
+  .grey{font-family:var(--aw-font-mono);font-size:.78rem;font-weight:600;color:var(--aw-gold-ink);white-space:nowrap}
+  .foot-note{font-size:.82rem;color:var(--aw-muted);margin:14px 2px 0;max-width:72ch}
+
+  .callout{background:var(--aw-card);border:1px solid var(--aw-line);border-radius:var(--aw-radius);padding:24px 26px;margin-top:20px}
+  .callout p{margin:0;font-size:.98rem;line-height:1.58;color:var(--aw-ink-soft);max-width:72ch}
+  .callout p b{color:var(--aw-ink);font-weight:600}
+  .callout p + p{margin-top:14px}
+  .quote{border-left:3px solid var(--aw-gold);padding:10px 16px;background:#F8F2E6;border-radius:0 var(--aw-radius-sm) var(--aw-radius-sm) 0;font-style:italic;color:var(--aw-ink-soft);font-size:.9rem;margin:14px 0 0}
+
+  .flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:8px}
+  .flow-step{background:var(--aw-card);border:1px solid var(--aw-line);border-radius:var(--aw-radius);padding:16px 16px 14px;position:relative}
+  .flow-step .n{font-family:var(--aw-font-mono);font-size:.68rem;letter-spacing:.1em;color:var(--aw-orange);text-transform:uppercase;display:block;margin-bottom:6px}
+  .flow-step b{display:block;font-size:.95rem;margin-bottom:4px;color:var(--aw-ink)}
+  .flow-step span{font-size:.8rem;color:var(--aw-ink-soft);line-height:1.4}
+
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;margin-top:6px}
+  .half{background:var(--aw-card);border:1px solid var(--aw-line);border-radius:var(--aw-radius);padding:24px 26px;border-top:3px solid var(--aw-line)}
+  .half.free{border-top-color:var(--aw-green)}
+  .half.paid{border-top-color:var(--aw-orange)}
+  .half-head{margin:0 0 6px;font-family:var(--aw-font-mono);text-transform:uppercase;letter-spacing:.1em;font-size:.68rem}
+  .half.free .half-head{color:var(--aw-green)}
+  .half.paid .half-head{color:var(--aw-orange-dark)}
+  .half h3{font-family:var(--aw-font-display);font-size:1.15rem;font-weight:600;margin:0 0 14px}
+  .half ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:11px}
+  .half li{font-size:.9rem;line-height:1.45;padding-left:16px;position:relative;color:var(--aw-ink-soft)}
+  .half li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:2px}
+  .half.free li::before{background:var(--aw-green)}
+  .half.paid li::before{background:var(--aw-orange)}
+  .half li b{color:var(--aw-ink);font-weight:600}
+  .half .note{font-size:.8rem;color:var(--aw-muted);font-style:italic;margin:16px 0 0;padding-top:12px;border-top:1px solid #F0E9DC}
+
+  .money-note{background:#FBF3EC;border:1px solid #EAD3C2;border-radius:var(--aw-radius);padding:18px 22px;margin-top:20px;font-size:.92rem;color:#7A3418;line-height:1.55}
+  .money-note b{color:var(--aw-orange-dark)}
+
+  .gates{margin:0;padding-left:0;list-style:none;counter-reset:g;display:flex;flex-direction:column;gap:13px}
+  .gates li{position:relative;padding-left:38px;font-size:.95rem;line-height:1.5;color:var(--aw-ink-soft);counter-increment:g}
+  .gates li::before{content:counter(g);position:absolute;left:0;top:1px;width:24px;height:24px;border:1px solid var(--aw-line-strong);border-radius:50%;font-family:var(--aw-font-mono);font-size:.72rem;display:flex;align-items:center;justify-content:center;color:var(--aw-muted);background:var(--aw-card)}
+  .gates li b{color:var(--aw-ink);font-weight:600}
+
+  .bottomline{background:var(--aw-blue-dark);border-radius:var(--aw-radius);padding:32px 34px;margin-bottom:8px}
+  .bottomline .kicker{color:var(--aw-gold)}
+  .bottomline p:not(.kicker){font-family:var(--aw-font-display);font-size:1.25rem;line-height:1.5;color:#EDEFF5;margin:0;max-width:66ch}
+  .bottomline b{color:#fff;font-weight:600}
+
+  @media (max-width:720px){
+    .panel-grid,.split{grid-template-columns:1fr;gap:24px}
+    .verdict{border-left:none;border-top:1px solid #3B4058;padding-left:0;padding-top:24px}
+  }
+</style>
+</head>
+<body>
+
+<nav class="aw-nav">
+  <a class="aw-brand" href="overview.html"><span class="aw-wordmark">Aweris</span><small>WelBewust &middot; planning</small></a>
+  <div class="aw-nav-links">
+    <a href="overview.html">Overview</a>
+    <a href="index.html">Cost calculator</a>
+    <a href="assistenten.html">Digital assistants</a>
+    <a href="modules.html" aria-current="page">Modules</a>
+    <a href="compliance.html">NEN 7510 plan</a>
+  </div>
+</nav>
+
+<article class="doc">
+
+  <header class="mast">
+    <p class="kicker">The module library &middot; use &amp; monetization</p>
+    <h1>304 therapy modules. Who uses them, who pays — <em>and who never does.</em></h1>
+    <p class="dek">We built a full digital therapy library into the Aweris platform: exercises, psychoeducation, questionnaires and diaries, in Dutch and English, with published research behind them. This page answers Massy's three questions honestly: <b>can we charge patients for them</b> (mostly: no — and that's fine), <b>how they're used between our psychologists and patients</b>, and <b>how they make money anyway</b>.</p>
+    <p class="backlink">
+      <a href="compliance.html">↗ NEN 7510 plan</a>
+      <a href="index.html">↗ Cost calculator</a>
+      <span class="mono-dim">rules verified against NZa, Zorginstituut &amp; insurer policy — July 2026</span>
+    </p>
+  </header>
+
+  <!-- ============ TRUTH PANEL ============ -->
+  <section class="panel">
+    <div class="panel-grid">
+      <div>
+        <p class="panel-label">What we have</p>
+        <div class="libstats">
+          <div class="libstat"><b>149</b><span>exercises — CBT, ACT, DBT, compassion, mindfulness, trauma, sleep</span></div>
+          <div class="libstat"><b>68</b><span>psychoeducation — one per condition, depression to ADHD</span></div>
+          <div class="libstat"><b>58</b><span>questionnaires — PHQ-9, GAD-7, SQ-48 &amp; more, auto-scored</span></div>
+          <div class="libstat"><b>29</b><span>diaries — mood, sleep, worry, craving, gratitude…</span></div>
+        </div>
+        <p class="panel-foot"><b>304 unique modules</b>, Dutch + English, cited to published research (PubMed / NICE / WHO). <b>~80% is our own authored content</b> — ours to sell.</p>
+      </div>
+      <div class="verdict">
+        <p class="panel-label">The honest headline</p>
+        <p class="verdict-big">Patients in treatment <span class="hl">never pay.</span> Everyone else can.</p>
+        <p class="verdict-sub">Dutch law is unambiguous: anything a therapist assigns is part of insured care, already paid inside the consult the insurer reimburses. The money is in <b>selling the platform to other practices, insurers and the public</b> — exactly how Therapieland built its business.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CAN WE CHARGE THE PATIENT ============ -->
+  <section class="block">
+    <p class="kicker">Question 1 — verified against NZa, Zorginstituut, LVVP &amp; VGZ policy</p>
+    <h2>Can we charge our patients for modules?</h2>
+    <p class="lead">The rule is simple once you see it: the line is not digital-vs-paper, it is <em>insured care vs everything else</em>. Whatever the therapist assigns or monitors is insured care — already funded through the consult tariff. There is no separate e-health price, and none is allowed.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Situation</th><th>Charge the patient?</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Module assigned by the psychologist</td><td class="no">NO — prohibited</td><td>Part of insured treatment, paid inside the consult. The regulator (NZa) explicitly bans any extra fee on top of insured care — even a "voluntary" one.</td></tr>
+          <tr><td>Questionnaire / ROM used in treatment</td><td class="no">NO — prohibited</td><td>Diagnostic and monitoring work is treatment. Same rule.</td></tr>
+          <tr><td>Extra module a patient picks themselves <em>during</em> treatment</td><td class="grey">GREY — treat as no</td><td>If it relates to what we're treating, it counts as care. Only sellable if truly separate wellness content — needs legal + insurer sign-off first. Default: don't.</td></tr>
+          <tr><td>Self-help bought <em>after</em> treatment ends (or by non-patients)</td><td class="yes">YES</td><td>No active treatment to attach to. Normal consumer product: 21% VAT, clear pricing, standard consumer rules.</td></tr>
+          <tr><td>Subscription while in active treatment</td><td class="no">NO — avoid</td><td>A recurring charge on someone we're treating reads as paying extra for insured care. Highest-risk model; not worth it.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout">
+      <p><b>What the patient does pay:</b> only their normal insurance deductible (eigen risico). Mental healthcare has <b>no legal patient contribution</b> — and our insurer contracts enforce this. VGZ's 2026 purchasing policy states it as a hard contract condition:</p>
+      <p class="quote">"De zorgaanbieder hanteert alleen een eigen bijdrage &hellip; voor zorg waar de verzekerde vrijwillig gebruik van kan maken, en niet voor verzekerde zorg ten laste van de Zorgverzekeringswet."</p>
+      <p><b>Why this is good news, not bad:</b> it means the modules' value inside our own practice shows up as <b>efficiency and quality</b> (blended care within the same consult tariffs, replacing the Embloom subscription we pay today) — while the <em>revenue</em> comes from everyone outside our treatment room.</p>
+    </div>
+  </section>
+
+  <!-- ============ HOW THEY'RE USED ============ -->
+  <section class="block">
+    <p class="kicker">Question 2 — between psychologist and patient</p>
+    <h2>How the modules work in the app</h2>
+    <p class="lead">The loop is built and live in Aweris: the psychologist assigns, the patient works at home, the system scores, the psychologist reviews. Modules meet the patient at every phase of their journey:</p>
+
+    <div class="flow">
+      <div class="flow-step"><span class="n">Screening</span><b>Psychoeducation</b><span>"What is panic?" — sent right after the screening verdict, so waiting time becomes preparation time.</span></div>
+      <div class="flow-step"><span class="n">Before intake</span><b>Questionnaires</b><span>SQ-48 baseline (already automated) + intake forms — scored before the first conversation.</span></div>
+      <div class="flow-step"><span class="n">In treatment</span><b>Exercises</b><span>The psychologist assigns CBT/ACT/DBT exercises matching the treatment plan; patient completes them between sessions.</span></div>
+      <div class="flow-step"><span class="n">Between sessions</span><b>Diaries</b><span>Mood, sleep, worry check-ins — small, repeated, trend-charted.</span></div>
+      <div class="flow-step"><span class="n">Closing</span><b>Relapse prevention + CQi</b><span>A closing module and the patient-experience questionnaire we must report anyway.</span></div>
+    </div>
+
+    <div class="callout">
+      <p><b>For the psychologist</b> this is assign-and-review, not extra admin: pick from the library (filtered by therapy model), see completed work with scores and risk alerts on the patient profile, and string modules into ready-made <b>programs</b> ("Depression — CBT, 8 weeks") that unlock step by step. <b>For the patient</b> it's one calm place: their assigned modules, their own progress, in their language.</p>
+    </div>
+  </section>
+
+  <!-- ============ RESULTS ============ -->
+  <section class="block">
+    <p class="kicker">Question 3 — the part that decides trust</p>
+    <h2>How we handle the results</h2>
+    <p class="lead">Results are the most valuable <em>and</em> most sensitive part. The rule: <em>a result belongs to the patient's care, never behind a paywall</em> — and it must be handled as clinical data. Two different worlds, deliberately kept apart:</p>
+
+    <div class="split">
+      <div class="half free">
+        <p class="half-head">Inside treatment — clinical data</p>
+        <h3>Scored, guarded, logged</h3>
+        <ul>
+          <li>Questionnaires are <b>auto-scored with clinical thresholds</b> (e.g. PHQ-9 severity bands, SQ-48 subscale profiles) and trend-charted over time.</li>
+          <li><b>Risk answers raise an immediate alert</b> to the treating psychologist (e.g. the PHQ-9 suicide item) — a human responds, never software alone.</li>
+          <li>Results live <b>in the patient's record</b>, visible to patient and treating clinician; every access is <b>logged</b> (the NEN 7513 requirement in our compliance plan).</li>
+          <li>The patient can always see and export <b>their own results as a PDF</b> — free, always.</li>
+          <li>Aggregates feed the reporting we already owe: <b>CQi and SQ-48 exports</b> for insurers and national benchmarks — anonymised, never individual.</li>
+        </ul>
+        <p class="note">Rule of thumb: the moment a result flows to a therapist, it's clinical care — free to the patient, protected, logged.</p>
+      </div>
+      <div class="half paid">
+        <p class="half-head">Outside treatment — consumer product</p>
+        <h3>Private by design</h3>
+        <ul>
+          <li>The public self-help workbook stores answers <b>only on the user's own device</b> — no account, no server, nothing sent to us.</li>
+          <li>It computes <b>no scores and no diagnoses</b> — reflections, not verdicts. That's deliberate: it keeps the product light and outside medical-device rules.</li>
+          <li>The user can <b>export or print their own summary</b> and choose to bring it to a therapist — their choice, their data.</li>
+          <li>If we later sell a richer results view, it must stay <b>non-clinical</b> (no severity labels, no alerts) — or be built as a certified medical device. We choose non-clinical.</li>
+        </ul>
+        <p class="note">This airtight privacy story — nothing leaves your device — is itself a selling point no big competitor offers.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW WE MAKE MONEY ============ -->
+  <section class="block">
+    <p class="kicker">Question 4 — the business</p>
+    <h2>How the modules make money</h2>
+    <p class="lead">The customer is never our patient — it's <em>everyone who benefits from patients using the modules</em>. Ranked by realism:</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Customer</th><th>What they buy</th><th>Price point</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>1 &middot; Other GGZ practices</td><td>Aweris licence per practitioner: library + assign/review + scoring panel</td><td class="yes">€25–35 / practitioner / mo</td><td>The engine. Benchmark: Therapieland charges €35,75. WelBewust = reference customer #1.</td></tr>
+          <tr><td>2 &middot; Small GGZ institutions</td><td>Same, multi-team + exports + processor agreement</td><td class="yes">volume tier ~€20–25</td><td>After first pilots.</td></tr>
+          <tr><td>3 &middot; GP practices (POH-GGZ)</td><td>Psychoeducation + self-help + screening for mild complaints</td><td class="yes">€15–25 / POH / mo</td><td>Large underserved segment.</td></tr>
+          <tr><td>4 &middot; Consumers (never active patients)</td><td>Self-help workbook programs</td><td class="yes">€19–39 one-off</td><td>Funnel + side income; 21% VAT, consumer rules.</td></tr>
+          <tr><td>5 &middot; Health insurers</td><td>(a) Subsidised member programs; (b) the NZa "facultatieve prestatie" — insurer pays our platform costs</td><td class="grey">negotiated</td><td>Real precedent exists (Super Brains, VR-therapy). Needs an insurer co-signature — VGZ first.</td></tr>
+          <tr><td>6 &middot; Other e-health platforms</td><td>Licensing the content library itself (NL+EN, evidence-cited)</td><td class="grey">per-module / rev-share</td><td>Opportunistic.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="foot-note">Realistic ramp: 5 pilot practices ≈ €1.500/mo → 30 practices ≈ €9.000/mo, plus consumer sales. Inside WelBewust itself the win is dropping our current questionnaire-platform subscription (€8.000–18.000/yr) and the efficiency already counted in Massy's savings model.</p>
+
+    <div class="money-note"><b>One number worth remembering:</b> our NEN 7510 / Google Cloud compliance track (see the NEN page) is not overhead for this plan — <b>it is the entry ticket</b>. Practices and institutions only buy e-health from certified suppliers. Therapieland is certified; with the plan we already have, so are we.</div>
+  </section>
+
+  <!-- ============ GATES ============ -->
+  <section class="block">
+    <p class="kicker">Before we can sell</p>
+    <h2>Five gates, all known and manageable</h2>
+    <ol class="gates">
+      <li><b>Instrument licences.</b> Our 149 exercises and 68 psychoeducation modules are own content — free to sell. But ~9 questionnaires carry licences that block commercial resale (4DSQ, SQ-48, HoNOS, the APA measures, and a few more). Plan: quarantine those from any paid product ("bring your own licence") and ship the ~26 verified-free instruments. Two licence e-mails (4DSQ, SQ-48) could unlock the most valuable ones.</li>
+      <li><b>Clinical review &amp; publish.</b> Only 16 of 577 module files are published today — the rest wait for clinical sign-off (Anna + behandelaren, the in-app review flow exists). Zero code, pure review work.</li>
+      <li><b>Multi-practice build.</b> Aweris is single-clinic today. Selling to practice #2 needs tenant separation, onboarding and billing — roughly 3–6 weeks of build.</li>
+      <li><b>Processor agreements.</b> Selling to practices makes us their data processor — we need a standard verwerkersovereenkomst (template work, once).</li>
+      <li><b>Insurer confirmations.</b> Before any paid feature touches insured patients: written confirmation from each contracted insurer, per their own purchasing policies.</li>
+    </ol>
+  </section>
+
+  <!-- ============ BOTTOM LINE ============ -->
+  <section class="bottomline">
+    <p class="kicker">Bottom line</p>
+    <p>The library is real: <b>304 evidence-cited modules, 80% our own content, in a working platform.</b> We cannot — and don't need to — charge our own patients: inside WelBewust the modules pay for themselves in efficiency and replaced subscriptions. The business is outside: <b>licence the platform to other practices at €25–35 per practitioner</b>, sell self-help to the public, and let insurers fund the rest through the routes that already exist. Patients get it free, protected and scored; <b>everyone else pays.</b></p>
+  </section>
+
+  <footer class="aw-footer">
+    <span>WelBewust &middot; Aweris planning workspace</span>
+    <span>Charging rules verified against NZa, Zorginstituut, LVVP &amp; VGZ 2026 policy &middot; July 2026</span>
+  </footer>
+
+</article>
+
+</body>
+</html>
