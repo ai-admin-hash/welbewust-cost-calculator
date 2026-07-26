@@ -144,17 +144,17 @@
   <section class="block">
     <p class="kicker">The build</p>
     <h2>Box-by-box: what to build, buy, or integrate</h2>
-    <p class="lead">The rest of the diagram — the EPD-of-record core and the integration gateway. <em>Green = have · amber = partial · orange = missing.</em> Approach and risk decide the order.</p>
+    <p class="lead">The rest of the diagram — the EPD-of-record core and the integration gateway. <em>Green = have · amber = partial · orange = missing;</em> effort is rough dev-weeks for a small team. Approach, risk and effort decide the order.</p>
 
     <h3 class="sub">Unified data core</h3>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Box</th><th>Now</th><th>Approach</th><th>Risk</th><th>Phase</th></tr></thead>
+        <thead><tr><th>Box</th><th>Now</th><th>Approach</th><th>Risk</th><th>Phase</th><th>Effort / cost</th></tr></thead>
         <tbody>
-          <tr><td>Client dossier <span class="mono-dim">incl. NAW / BSN</span></td><td><span class="pill partial">Partial</span></td><td class="approach"><b>build</b></td><td class="risk-hi">high</td><td class="ph">2</td></tr>
-          <tr><td>Agenda &amp; locking</td><td><span class="pill missing">Missing</span></td><td class="approach"><b>build</b></td><td class="risk-md">med</td><td class="ph">2</td></tr>
-          <tr><td>ZPM &amp; validation</td><td><span class="pill missing">Missing</span></td><td class="approach"><b>build</b></td><td class="risk-hi">high</td><td class="ph">3</td></tr>
-          <tr><td>Claims &amp; invoices</td><td><span class="pill missing">Missing</span></td><td class="approach"><b>integrate</b> · GZ-entry</td><td class="risk-hi">highest</td><td class="ph">3</td></tr>
+          <tr><td>Client dossier <span class="mono-dim">incl. NAW / BSN</span></td><td><span class="pill partial">Partial</span></td><td class="approach"><b>build</b></td><td class="risk-hi">high</td><td class="ph">2</td><td class="mono-dim">~8 wks<br>+ DPIA update</td></tr>
+          <tr><td>Agenda &amp; locking</td><td><span class="pill missing">Missing</span></td><td class="approach"><b>build</b></td><td class="risk-md">med</td><td class="ph">2</td><td class="mono-dim">~5 wks</td></tr>
+          <tr><td>ZPM &amp; validation</td><td><span class="pill missing">Missing</span></td><td class="approach"><b>build</b></td><td class="risk-hi">high</td><td class="ph">3</td><td class="mono-dim">~8 wks<br>+ yearly upkeep</td></tr>
+          <tr><td>Claims &amp; invoices</td><td><span class="pill missing">Missing</span></td><td class="approach"><b>integrate</b> · GZ-entry</td><td class="risk-hi">highest</td><td class="ph">3</td><td class="mono-dim">~4–6 wks<br>GZ-entry €0</td></tr>
         </tbody>
       </table>
     </div>
@@ -162,18 +162,19 @@
     <h3 class="sub">Integration gateway <span class="mono-dim">mostly connect, not build</span></h3>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Box</th><th>Now</th><th>Approach</th><th>Risk</th><th>Phase</th></tr></thead>
+        <thead><tr><th>Box</th><th>Now</th><th>Approach</th><th>Risk</th><th>Phase</th><th>Effort / cost</th></tr></thead>
         <tbody>
-          <tr><td>WeFact <span class="mono-dim">invoices, REST API</span></td><td><span class="pill missing">Missing</span></td><td class="approach"><b>integrate</b></td><td class="risk-lo">low</td><td class="ph">1</td></tr>
-          <tr><td>Video <span class="mono-dim">Jitsi self-hosted</span></td><td><span class="pill missing">Missing</span></td><td class="approach"><b>build</b> · self-host</td><td class="risk-lo">low–med</td><td class="ph">1</td></tr>
-          <tr><td>ZorgDomein <span class="mono-dim">referrals, FHIR</span></td><td><span class="pill partial">Email today</span></td><td class="approach"><b>integrate</b></td><td class="risk-md">med</td><td class="ph">2</td></tr>
-          <tr><td>SBV-Z <span class="mono-dim">BSN check</span></td><td><span class="pill missing">Missing</span></td><td class="approach"><b>integrate</b> · needs UZI</td><td class="risk-hi">high</td><td class="ph">2–3</td></tr>
-          <tr><td>VECOZO <span class="mono-dim">COV + claims</span></td><td><span class="pill missing">Missing</span></td><td class="approach"><b>integrate</b> · cert + AGB + GDS</td><td class="risk-hi">high</td><td class="ph">3</td></tr>
-          <tr><td>Vektis <span class="mono-dim">AGB / UZOVI registries</span></td><td><span class="pill missing">Missing</span></td><td class="approach"><b>integrate</b></td><td class="risk-md">med</td><td class="ph">3</td></tr>
+          <tr><td>WeFact <span class="mono-dim">invoices, REST API</span></td><td><span class="pill missing">Missing</span></td><td class="approach"><b>integrate</b></td><td class="risk-lo">low</td><td class="ph">1</td><td class="mono-dim">~1–2 wks<br>WeFact sub</td></tr>
+          <tr><td>Video <span class="mono-dim">Jitsi self-hosted</span></td><td><span class="pill missing">Missing</span></td><td class="approach"><b>build</b> · self-host</td><td class="risk-lo">low–med</td><td class="ph">1</td><td class="mono-dim">~1–2 wks<br>~€30/mo VM</td></tr>
+          <tr><td>ZorgDomein <span class="mono-dim">referrals, FHIR</span></td><td><span class="pill partial">Email today</span></td><td class="approach"><b>integrate</b></td><td class="risk-md">med</td><td class="ph">2</td><td class="mono-dim">~3–5 wks<br>+ connection deal</td></tr>
+          <tr><td>SBV-Z <span class="mono-dim">BSN check</span></td><td><span class="pill missing">Missing</span></td><td class="approach"><b>integrate</b> · needs UZI</td><td class="risk-hi">high</td><td class="ph">2–3</td><td class="mono-dim">~2–3 wks<br>+ UZI cert (wait)</td></tr>
+          <tr><td>VECOZO <span class="mono-dim">COV + claims</span></td><td><span class="pill missing">Missing</span></td><td class="approach"><b>integrate</b> · cert + AGB + GDS</td><td class="risk-hi">high</td><td class="ph">3</td><td class="mono-dim">~8–12 wks<br>≈0 via GZ-entry</td></tr>
+          <tr><td>Vektis <span class="mono-dim">AGB / UZOVI registries</span></td><td><span class="pill missing">Missing</span></td><td class="approach"><b>integrate</b></td><td class="risk-md">med</td><td class="ph">3</td><td class="mono-dim">~2–3 wks</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="mono-dim" style="margin-top:10px">Also: <b>Therapist workspace</b> (dossier/agenda/ZPM UI) — build, tracks the data-core boxes above, Phase 2–3. <b>Admin workspace</b> — build a unified UI over the existing n8n automations, low risk, Phase 1.</p>
+    <p class="mono-dim" style="margin-top:10px">Also: <b>Therapist workspace</b> (dossier/agenda/ZPM UI, ~4–6 wks, tracks the data-core boxes, Phase 2–3) · <b>Admin workspace</b> (unified UI over the existing n8n flows, ~2–3 wks, low risk, Phase 1).</p>
+    <p class="mono-dim" style="margin-top:8px;line-height:1.5;max-width:74ch">Effort = order-of-magnitude dev-weeks for a 1–2 developer team, <b>excluding external onboarding</b> — a VECOZO certificate + AGB-code, a ZorgDomein connection agreement and a UZI/SBV-Z authorization run on the vendors' clock (weeks–months) and need real quotes. Building the VECOZO/GDS claims engine yourself is ~8–12 wks + permanent upkeep; integrating GZ-entry collapses that box to near-zero — which is why it's the recommended path.</p>
   </section>
 
   <!-- ============ PHASES ============ -->
@@ -187,18 +188,18 @@
         <p class="items">Patient portal · ROM &amp; screening · 304 modules · messages &amp; tasks · documents &amp; audit · Zivver · n8n + AI.</p>
       </div>
       <div class="phase p1">
-        <div class="phase-head"><h3>Phase 1 — Low-risk wins</h3><span class="phase-when">Weeks–months · near-zero regulatory risk</span></div>
+        <div class="phase-head"><h3>Phase 1 — Low-risk wins</h3><span class="phase-when">≈ 4–7 dev-weeks · near-zero regulatory risk</span></div>
         <p>Real value with no records/billing exposure — safe to ship while you sell Phase 0.</p>
         <p class="items">WeFact finance automations (no-show, dunning) · Video (self-hosted Jitsi) · unified Admin workspace over the existing n8n flows.</p>
       </div>
       <div class="phase p2">
-        <div class="phase-head"><h3>Phase 2 — The record decision</h3><span class="phase-when">Months · you commit to being the system of record</span></div>
+        <div class="phase-head"><h3>Phase 2 — The record decision</h3><span class="phase-when">≈ 4–6 months · the point of no return</span></div>
         <p>Where Aweris becomes an EHR, not a companion. This is the point of no return.</p>
         <p class="items">Client dossier with NAW/BSN (+ SBV-Z) · Agenda &amp; locking · ZorgDomein referrals.</p>
         <p class="risknote">Reverses the deliberate no-BSN design and takes on WGBO 20-year retention + full NEN 7513 authorization tiers. Do this only once the product bet is decided.</p>
       </div>
       <div class="phase p3">
-        <div class="phase-head"><h3>Phase 3 — The billing core</h3><span class="phase-when">The hard 20% · build last / integrate</span></div>
+        <div class="phase-head"><h3>Phase 3 — The billing core</h3><span class="phase-when">≈ 4–6 mo — or ~6–8 wks via GZ-entry · build last</span></div>
         <p>The declaratie engine — highest risk, permanent compliance ownership.</p>
         <p class="items">ZPM &amp; validation · Claims (integrate GZ-entry) · VECOZO + Vektis.</p>
         <p class="risknote">Owns the yearly ZPM rule churn; a missed release means practices don't get paid. Only worth crossing once revenue funds it — and even then, integrate the claims engine rather than build it.</p>
