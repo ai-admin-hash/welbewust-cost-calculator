@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aweris — pilot for your GGZ practice</title>
+<link rel="stylesheet" href="aweris.css">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--aw-paper);color:var(--aw-ink);font-family:var(--aw-font-body);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .sheet{max-width:920px;margin:0 auto;padding:40px clamp(18px,4vw,44px) 48px}
+
+  .top{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap;border-bottom:1px solid var(--aw-line);padding-bottom:16px;margin-bottom:26px}
+  .top .brand{display:flex;align-items:baseline;gap:10px}
+  .top .wordmark{font-family:var(--aw-font-display);font-weight:600;font-size:1.5rem;color:var(--aw-orange);line-height:1}
+  .top .wordmark::after{content:"■";font-size:.42em;color:var(--aw-yellow-dark);margin-left:2px;vertical-align:super}
+  .top small{font-family:var(--aw-font-mono);font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;color:var(--aw-muted)}
+  .top .eyebrow{font-family:var(--aw-font-mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--aw-orange)}
+
+  h1{font-family:var(--aw-font-display);font-weight:600;font-size:clamp(1.7rem,4vw,2.4rem);line-height:1.08;letter-spacing:.005em;margin:0 0 12px;max-width:20ch;text-wrap:balance}
+  h1 em{font-style:italic;color:var(--aw-orange)}
+  .lead{font-size:1.08rem;color:var(--aw-ink-soft);max-width:62ch;margin:0 0 26px}
+  .lead b{color:var(--aw-ink);font-weight:600}
+
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
+  .feat{background:var(--aw-card);border:1px solid var(--aw-line);border-radius:var(--aw-radius);padding:16px 18px}
+  .feat h3{font-family:var(--aw-font-display);font-size:1.02rem;font-weight:600;margin:0 0 6px}
+  .feat p{margin:0;font-size:.85rem;color:var(--aw-ink-soft);line-height:1.45}
+  .feat .k{font-family:var(--aw-font-mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--aw-orange);display:block;margin-bottom:6px}
+
+  .proof{background:var(--aw-blue-dark);color:#EDEFF5;border-radius:var(--aw-radius);padding:20px 24px;margin-bottom:24px;display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center}
+  .proof .nums{display:flex;gap:26px;flex-wrap:wrap}
+  .proof .num b{display:block;font-family:var(--aw-font-mono);font-size:1.35rem;color:#fff;font-weight:600;line-height:1.1}
+  .proof .num span{font-size:.72rem;color:#AEB5C7}
+  .proof .who{font-size:.9rem;color:#D7DBE6;line-height:1.45}
+  .proof .who b{color:#fff}
+
+  .offer{border:2px solid var(--aw-orange);border-radius:var(--aw-radius);padding:22px 24px;margin-bottom:24px;background:#FDF6F1}
+  .offer .tag{font-family:var(--aw-font-mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--aw-orange-dark);margin:0 0 8px}
+  .offer .price{font-family:var(--aw-font-display);font-size:1.9rem;font-weight:600;color:var(--aw-ink);margin:0 0 4px}
+  .offer .price span{font-size:1rem;color:var(--aw-muted);font-weight:400}
+  .offer .vs{font-size:.85rem;color:var(--aw-muted);margin:0 0 14px}
+  .offer ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 20px}
+  .offer li{font-size:.9rem;color:var(--aw-ink-soft);padding-left:18px;position:relative}
+  .offer li::before{content:"✓";position:absolute;left:0;color:var(--aw-green);font-weight:700}
+  .offer li b{color:var(--aw-ink);font-weight:600}
+
+  .reassure{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:26px}
+  .re{border-left:2px solid var(--aw-green);padding:2px 0 2px 14px}
+  .re b{display:block;font-size:.9rem;color:var(--aw-ink);margin-bottom:2px}
+  .re p{margin:0;font-size:.82rem;color:var(--aw-ink-soft);line-height:1.45}
+
+  .cta{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;border-top:1px solid var(--aw-line);padding-top:20px}
+  .cta .ask{font-family:var(--aw-font-display);font-size:1.15rem;font-weight:600;color:var(--aw-ink);max-width:34ch}
+  .cta .btn{background:var(--aw-orange);color:#fff;font-weight:600;font-size:.95rem;padding:12px 22px;border-radius:var(--aw-radius-pill);text-decoration:none;white-space:nowrap}
+  .cta .contact{font-family:var(--aw-font-mono);font-size:.78rem;color:var(--aw-muted)}
+
+  .fineprint{font-size:.72rem;color:var(--aw-muted);margin-top:22px;line-height:1.5}
+
+  @media (max-width:720px){ .grid3,.reassure,.offer ul{grid-template-columns:1fr} .proof{grid-template-columns:1fr} }
+  @media print{ body{background:#fff} .sheet{padding:0} }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="top">
+    <div class="brand"><span class="wordmark">Aweris</span><small>for GGZ practices</small></div>
+    <span class="eyebrow">Founding-partner pilot · 2026</span>
+  </div>
+
+  <h1>One platform for your whole <em>client journey</em> — on top of your existing system.</h1>
+  <p class="lead">Aweris brings screening, ROM, e-health modules and client follow-up together in one place — <b>built by a GGZ practice, for GGZ practices</b>. No switching your EHR, no migration: Aweris runs on top and takes over the repetitive admin and measurement work.</p>
+
+  <div class="grid3">
+    <div class="feat">
+      <span class="k">Content</span>
+      <h3>304 modules + ROM</h3>
+      <p>Exercises, psychoeducation and diaries (CBT/ACT/DBT), backed by research. Questionnaires (SQ-48, CQi, PHQ-9, GAD-7…) are scored automatically, with an alert on e.g. the suicide item.</p>
+    </div>
+    <div class="feat">
+      <span class="k">Overview</span>
+      <h3>Clinician panel</h3>
+      <p>Results over time, your whole caseload at a glance, and who needs attention. Plus the CQi/SQ-48 export you already owe your insurer and Akwa.</p>
+    </div>
+    <div class="feat">
+      <span class="k">Less work</span>
+      <h3>Automated back-office</h3>
+      <p>Sending, reminding and processing screenings; treatment agreements; draft emails. The repetitive work runs itself — your team keeps time for clients.</p>
+    </div>
+  </div>
+
+  <div class="proof">
+    <div class="nums">
+      <div class="num"><b>± €3,000</b><span>/mo saved at WelBewust</span></div>
+      <div class="num"><b>304</b><span>modules, NL + EN</span></div>
+      <div class="num"><b>Live</b><span>in daily use</span></div>
+    </div>
+    <p class="who">Aweris runs today in our own practice (<b>WelBewust Psycholoog</b>) — not a demo, but a system clients and clinicians use every day. You'd be our first external partner.</p>
+  </div>
+
+  <div class="offer">
+    <p class="tag">The founding-partner offer</p>
+    <p class="price">€25 <span>per clinician / month</span></p>
+    <p class="vs">For comparison: Therapieland charges €35.75 per clinician/mo — for the module library alone.</p>
+    <ul>
+      <li><b>First month free</b>, no setup fee</li>
+      <li><b>Cancel monthly</b> — no annual contract</li>
+      <li>Founder price <b>fixed for 12 months</b></li>
+      <li>You help shape the <b>roadmap</b></li>
+      <li>Onboarding + support included</li>
+      <li>Limited to the <b>first 5 practices</b></li>
+    </ul>
+  </div>
+
+  <div class="reassure">
+    <div class="re">
+      <b>Clients never pay</b>
+      <p>The modules are part of the insured treatment and run within the consultations (ZPM) — legally watertight, NZa-compliant. Aweris is a practice tool, not a client subscription.</p>
+    </div>
+    <div class="re">
+      <b>On top of your EHR</b>
+      <p>Careweb, Incura, whatever you use stays your record and billing system. Aweris replaces nothing — it complements. Live tomorrow, no migration.</p>
+    </div>
+    <div class="re">
+      <b>Privacy-first</b>
+      <p>Built to the NEN 7510 standard, with access logging and data minimisation. Client answers encrypted; the self-help space even keeps answers on-device only.</p>
+    </div>
+  </div>
+
+  <div class="cta">
+    <span class="ask">Fancy a 30-minute demo with your own cases?</span>
+    <div style="text-align:right">
+      <a class="btn" href="mailto:ai-admin@welbewustpsycholoog.nl?subject=Aweris%20pilot%20demo">Book a demo →</a>
+      <div class="contact" style="margin-top:8px">ai-admin@welbewustpsycholoog.nl · aweris.nl</div>
+    </div>
+  </div>
+
+  <p class="fineprint">Aweris is a growing platform; as a founding partner you get early access and influence over its development. Prices excl. VAT. NEN 7510 certification in preparation (the platform is built to the standard). This pilot covers the e-health / ROM / workflow layer — billing and records stay with your existing EHR.</p>
+
+</div>
+</body>
+</html>

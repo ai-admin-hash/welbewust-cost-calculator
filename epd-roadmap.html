@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aweris → EPD — phased roadmap</title>
+<link rel="stylesheet" href="aweris.css">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--aw-paper);color:var(--aw-ink);font-family:var(--aw-font-body);line-height:1.62;-webkit-font-smoothing:antialiased}
+  .doc{max-width:1000px;margin:0 auto;padding:44px clamp(18px,4vw,40px) 40px}
+  .mono-dim{font-family:var(--aw-font-mono);font-size:.82em;color:var(--aw-muted);letter-spacing:.01em}
+  em{font-style:italic}
+
+  .mast{border-bottom:1px solid var(--aw-line);padding-bottom:32px;margin-bottom:40px}
+  .mast h1{font-family:var(--aw-font-display);font-weight:600;font-size:clamp(2rem,4.8vw,3rem);line-height:1.06;letter-spacing:.005em;text-wrap:balance;margin:16px 0 20px;max-width:20ch}
+  .mast h1 em{font-style:italic;color:var(--aw-orange)}
+  .dek{font-size:1.12rem;line-height:1.6;max-width:66ch;color:var(--aw-ink-soft);margin:0 0 22px}
+  .dek b{color:var(--aw-ink);font-weight:600}
+  .backlink{font-size:.9rem;margin:0;display:flex;gap:14px;flex-wrap:wrap;align-items:baseline}
+  .backlink a{color:var(--aw-orange-dark);text-decoration:none;font-weight:600;border-bottom:1px solid #e6c3b3;padding-bottom:1px}
+  .backlink a:hover{border-bottom-color:var(--aw-orange-dark)}
+
+  .panel{background:var(--aw-blue-dark);border-radius:var(--aw-radius);padding:30px 32px;margin-bottom:48px;color:#EDEFF5}
+  .panel-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px}
+  .panel-label{font-family:var(--aw-font-mono);text-transform:uppercase;letter-spacing:.13em;font-size:.7rem;color:var(--aw-gold);margin:0 0 14px}
+  .panel p{margin:0;font-size:.95rem;line-height:1.55;color:#D7DBE6}
+  .panel p b{color:#fff;font-weight:600}
+  .panel .rule-line{color:var(--aw-orange-light);font-style:italic}
+  .verdict{border-left:1px solid #3B4058;padding-left:34px}
+  .verdict-big{font-family:var(--aw-font-display);font-size:1.5rem;line-height:1.24;margin:0 0 14px;font-weight:600}
+  .verdict-big .hl{color:var(--aw-orange-light);font-style:italic}
+
+  .block{margin-bottom:46px}
+  .kicker{font-family:var(--aw-font-mono);text-transform:uppercase;letter-spacing:.13em;font-size:.7rem;color:var(--aw-orange);margin:0 0 10px}
+  h2{font-family:var(--aw-font-display);font-weight:600;font-size:clamp(1.4rem,3vw,1.85rem);line-height:1.15;margin:0 0 18px;text-wrap:balance}
+  h3.sub{font-family:var(--aw-font-mono);text-transform:uppercase;letter-spacing:.1em;font-size:.72rem;color:var(--aw-muted);margin:26px 0 10px;font-weight:400}
+  .lead{font-size:1.04rem;color:var(--aw-ink-soft);max-width:66ch;margin:0 0 22px}
+  .lead em{color:var(--aw-ink);font-style:normal;font-weight:600}
+
+  .table-wrap{overflow-x:auto;border:1px solid var(--aw-line);border-radius:var(--aw-radius);background:var(--aw-card);margin-bottom:8px}
+  table{border-collapse:collapse;width:100%;min-width:660px;font-size:.88rem}
+  thead th{text-align:left;font-family:var(--aw-font-mono);text-transform:uppercase;letter-spacing:.06em;font-size:.66rem;color:var(--aw-muted);font-weight:400;padding:12px 16px;border-bottom:1px solid var(--aw-line);background:#F6F0E5}
+  tbody td{padding:11px 16px;border-bottom:1px solid #F0E9DC;vertical-align:top;line-height:1.4}
+  tbody tr:last-child td{border-bottom:none}
+  td:first-child{font-weight:600;color:var(--aw-ink)}
+  .pill{font-family:var(--aw-font-mono);font-size:.66rem;font-weight:600;padding:2px 8px;border-radius:var(--aw-radius-pill);white-space:nowrap;letter-spacing:.02em}
+  .have{background:var(--aw-green-soft);color:var(--aw-green)}
+  .partial{background:#F5EBD8;color:var(--aw-gold-ink)}
+  .missing{background:#FBE7DE;color:var(--aw-orange-dark)}
+  .approach{font-family:var(--aw-font-mono);font-size:.72rem;color:var(--aw-ink-soft);white-space:nowrap}
+  .approach b{color:var(--aw-ink)}
+  .risk-lo{color:var(--aw-green);font-weight:600;font-size:.8rem}
+  .risk-md{color:var(--aw-gold-ink);font-weight:600;font-size:.8rem}
+  .risk-hi{color:var(--aw-orange-dark);font-weight:600;font-size:.8rem}
+  .ph{font-family:var(--aw-font-mono);font-size:.78rem;font-weight:600;color:var(--aw-blue)}
+
+  .phases{display:flex;flex-direction:column;gap:16px}
+  .phase{background:var(--aw-card);border:1px solid var(--aw-line);border-radius:var(--aw-radius);padding:22px 24px;border-left:4px solid var(--aw-line)}
+  .phase.p0{border-left-color:var(--aw-green)}
+  .phase.p1{border-left-color:#8FB89E}
+  .phase.p2{border-left-color:var(--aw-gold)}
+  .phase.p3{border-left-color:var(--aw-orange)}
+  .phase-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+  .phase-head h3{font-family:var(--aw-font-display);font-size:1.2rem;font-weight:600;margin:0}
+  .phase-when{font-family:var(--aw-font-mono);font-size:.72rem;color:var(--aw-muted);text-transform:uppercase;letter-spacing:.08em}
+  .phase p{margin:0 0 10px;font-size:.92rem;color:var(--aw-ink-soft);line-height:1.5}
+  .phase .items{font-size:.85rem;color:var(--aw-ink);font-weight:500}
+  .phase .risknote{font-size:.8rem;color:var(--aw-muted);font-style:italic;margin:8px 0 0}
+
+  .callout{background:#FBF3EC;border:1px solid #EAD3C2;border-radius:var(--aw-radius);padding:24px 26px}
+  .callout .kicker{color:var(--aw-orange-dark)}
+  .callout p{margin:0;font-size:1rem;line-height:1.58;color:#7A3418;max-width:72ch}
+  .callout p b{color:var(--aw-orange-dark)}
+  .callout p + p{margin-top:12px}
+
+  .bottomline{background:var(--aw-blue-dark);border-radius:var(--aw-radius);padding:32px 34px;margin-bottom:8px}
+  .bottomline .kicker{color:var(--aw-gold)}
+  .bottomline p:not(.kicker){font-family:var(--aw-font-display);font-size:1.22rem;line-height:1.5;color:#EDEFF5;margin:0;max-width:68ch}
+  .bottomline b{color:#fff;font-weight:600}
+
+  @media (max-width:720px){ .panel-grid{grid-template-columns:1fr;gap:24px} .verdict{border-left:none;border-top:1px solid #3B4058;padding-left:0;padding-top:24px} }
+</style>
+</head>
+<body>
+
+<nav class="aw-nav">
+  <a class="aw-brand" href="overview.html"><span class="aw-wordmark">Aweris</span><small>WelBewust &middot; planning</small></a>
+  <div class="aw-nav-links">
+    <a href="overview.html">Overview</a>
+    <a href="index.html">Cost calculator</a>
+    <a href="assistenten.html">Digital assistants</a>
+    <a href="modules.html">Modules</a>
+    <a href="compliance.html">NEN 7510 plan</a>
+    <a href="epd-roadmap.html" aria-current="page">EPD roadmap</a>
+  </div>
+</nav>
+
+<article class="doc">
+
+  <header class="mast">
+    <p class="kicker">Aweris → EPD · phased roadmap</p>
+    <h1>From e-health layer to a full EPD — <em>honestly phased.</em></h1>
+    <p class="dek">The architecture diagram is the destination: Aweris doing dossier, agenda, ZPM, claims and BSN — a full EPD that eventually <b>replaces CareWeb</b>. This page turns that picture into a plan: every box scored <b>build / buy / integrate</b>, by risk, in the order that keeps you sellable and solvent the whole way. Scored against NZa, VECOZO, Vektis and the current codebase.</p>
+    <p class="backlink"><a href="modules.html">↗ Module library</a> <a href="compliance.html">↗ NEN 7510 plan</a> <span class="mono-dim">the near-term €6.244 lives on those pages, not this one</span></p>
+  </header>
+
+  <!-- ============ TRUTH PANEL ============ -->
+  <section class="panel">
+    <div class="panel-grid">
+      <div>
+        <p class="panel-label">The one rule</p>
+        <p><b>Build the billing core last — and integrate it, don't build it.</b> Claims, VECOZO and yearly ZPM validation are the hardest, riskiest 20% (a 2025 rule change nearly broke claim payments practice-wide). <span class="rule-line">Outsource that 20%</span> (GZ-entry is free + VECOZO-certified); build only what's actually your product — the dossier, the e-health, the workflow, the panel.</p>
+      </div>
+      <div class="verdict">
+        <p class="panel-label">What this really is</p>
+        <p class="verdict-big">A <span class="hl">product bet</span>, not this year's cost-cut.</p>
+        <p>Finishing the diagram turns Aweris from a €30/seat e-health add-on into a <b>€43–67/seat full EPD — a CareWeb competitor.</b> That's the prize. But it's <b>12–18 months</b> of regulated build, and you own compliance forever. Fund it from e-health revenue.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHERE YOU ALREADY ARE ============ -->
+  <section class="block">
+    <p class="kicker">The starting point</p>
+    <h2>Most of the top of the diagram is already live</h2>
+    <p class="lead">The whole patient-facing and workflow layer exists and runs today. <em>This is the product you sell now</em> — the EPD build is everything below it.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Layer / box</th><th>Now</th><th>Approach</th><th>Risk</th><th>Phase</th></tr></thead>
+        <tbody>
+          <tr><td>Patient portal <span class="mono-dim">e-health, messages</span></td><td><span class="pill have">Have</span></td><td class="approach">built</td><td class="risk-lo">—</td><td class="ph">Live</td></tr>
+          <tr><td>Messages &amp; tasks</td><td><span class="pill have">Have</span></td><td class="approach">built</td><td class="risk-lo">—</td><td class="ph">Live</td></tr>
+          <tr><td>Documents &amp; audit <span class="mono-dim">NEN 7513 log, retention</span></td><td><span class="pill have">Have</span></td><td class="approach">built</td><td class="risk-lo">low</td><td class="ph">Live</td></tr>
+          <tr><td>ROM / screening / 304 modules</td><td><span class="pill have">Have</span></td><td class="approach">built</td><td class="risk-lo">low</td><td class="ph">Live</td></tr>
+          <tr><td>Zivver / Secudoc <span class="mono-dim">secure mail</span></td><td><span class="pill have">Have</span></td><td class="approach"><b>integrate</b></td><td class="risk-lo">low</td><td class="ph">Live</td></tr>
+          <tr><td>n8n estate + AI drafting <span class="mono-dim">sidecars</span></td><td><span class="pill have">Have</span></td><td class="approach">built</td><td class="risk-lo">low</td><td class="ph">Live</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ THE SCORECARD ============ -->
+  <section class="block">
+    <p class="kicker">The build</p>
+    <h2>Box-by-box: what to build, buy, or integrate</h2>
+    <p class="lead">The rest of the diagram — the EPD-of-record core and the integration gateway. <em>Green = have · amber = partial · orange = missing.</em> Approach and risk decide the order.</p>
+
+    <h3 class="sub">Unified data core</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Box</th><th>Now</th><th>Approach</th><th>Risk</th><th>Phase</th></tr></thead>
+        <tbody>
+          <tr><td>Client dossier <span class="mono-dim">incl. NAW / BSN</span></td><td><span class="pill partial">Partial</span></td><td class="approach"><b>build</b></td><td class="risk-hi">high</td><td class="ph">2</td></tr>
+          <tr><td>Agenda &amp; locking</td><td><span class="pill missing">Missing</span></td><td class="approach"><b>build</b></td><td class="risk-md">med</td><td class="ph">2</td></tr>
+          <tr><td>ZPM &amp; validation</td><td><span class="pill missing">Missing</span></td><td class="approach"><b>build</b></td><td class="risk-hi">high</td><td class="ph">3</td></tr>
+          <tr><td>Claims &amp; invoices</td><td><span class="pill missing">Missing</span></td><td class="approach"><b>integrate</b> · GZ-entry</td><td class="risk-hi">highest</td><td class="ph">3</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="sub">Integration gateway <span class="mono-dim">mostly connect, not build</span></h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Box</th><th>Now</th><th>Approach</th><th>Risk</th><th>Phase</th></tr></thead>
+        <tbody>
+          <tr><td>WeFact <span class="mono-dim">invoices, REST API</span></td><td><span class="pill missing">Missing</span></td><td class="approach"><b>integrate</b></td><td class="risk-lo">low</td><td class="ph">1</td></tr>
+          <tr><td>Video <span class="mono-dim">Jitsi self-hosted</span></td><td><span class="pill missing">Missing</span></td><td class="approach"><b>build</b> · self-host</td><td class="risk-lo">low–med</td><td class="ph">1</td></tr>
+          <tr><td>ZorgDomein <span class="mono-dim">referrals, FHIR</span></td><td><span class="pill partial">Email today</span></td><td class="approach"><b>integrate</b></td><td class="risk-md">med</td><td class="ph">2</td></tr>
+          <tr><td>SBV-Z <span class="mono-dim">BSN check</span></td><td><span class="pill missing">Missing</span></td><td class="approach"><b>integrate</b> · needs UZI</td><td class="risk-hi">high</td><td class="ph">2–3</td></tr>
+          <tr><td>VECOZO <span class="mono-dim">COV + claims</span></td><td><span class="pill missing">Missing</span></td><td class="approach"><b>integrate</b> · cert + AGB + GDS</td><td class="risk-hi">high</td><td class="ph">3</td></tr>
+          <tr><td>Vektis <span class="mono-dim">AGB / UZOVI registries</span></td><td><span class="pill missing">Missing</span></td><td class="approach"><b>integrate</b></td><td class="risk-md">med</td><td class="ph">3</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mono-dim" style="margin-top:10px">Also: <b>Therapist workspace</b> (dossier/agenda/ZPM UI) — build, tracks the data-core boxes above, Phase 2–3. <b>Admin workspace</b> — build a unified UI over the existing n8n automations, low risk, Phase 1.</p>
+  </section>
+
+  <!-- ============ PHASES ============ -->
+  <section class="block">
+    <p class="kicker">The sequence</p>
+    <h2>Four phases — sellable and solvent at every step</h2>
+    <div class="phases">
+      <div class="phase p0">
+        <div class="phase-head"><h3>Phase 0 — Have it</h3><span class="phase-when">Now · the sellable product</span></div>
+        <p>The e-health layer that's already live and can be licensed to other practices today.</p>
+        <p class="items">Patient portal · ROM &amp; screening · 304 modules · messages &amp; tasks · documents &amp; audit · Zivver · n8n + AI.</p>
+      </div>
+      <div class="phase p1">
+        <div class="phase-head"><h3>Phase 1 — Low-risk wins</h3><span class="phase-when">Weeks–months · near-zero regulatory risk</span></div>
+        <p>Real value with no records/billing exposure — safe to ship while you sell Phase 0.</p>
+        <p class="items">WeFact finance automations (no-show, dunning) · Video (self-hosted Jitsi) · unified Admin workspace over the existing n8n flows.</p>
+      </div>
+      <div class="phase p2">
+        <div class="phase-head"><h3>Phase 2 — The record decision</h3><span class="phase-when">Months · you commit to being the system of record</span></div>
+        <p>Where Aweris becomes an EHR, not a companion. This is the point of no return.</p>
+        <p class="items">Client dossier with NAW/BSN (+ SBV-Z) · Agenda &amp; locking · ZorgDomein referrals.</p>
+        <p class="risknote">Reverses the deliberate no-BSN design and takes on WGBO 20-year retention + full NEN 7513 authorization tiers. Do this only once the product bet is decided.</p>
+      </div>
+      <div class="phase p3">
+        <div class="phase-head"><h3>Phase 3 — The billing core</h3><span class="phase-when">The hard 20% · build last / integrate</span></div>
+        <p>The declaratie engine — highest risk, permanent compliance ownership.</p>
+        <p class="items">ZPM &amp; validation · Claims (integrate GZ-entry) · VECOZO + Vektis.</p>
+        <p class="risknote">Owns the yearly ZPM rule churn; a missed release means practices don't get paid. Only worth crossing once revenue funds it — and even then, integrate the claims engine rather than build it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BUILD VS BUY ============ -->
+  <section class="block">
+    <p class="kicker">The build-vs-buy rule</p>
+    <div class="callout">
+      <p><b>Don't build the declaratie engine.</b> Integrate <b>GZ-entry</b> (free, VECOZO-certified) for claims, <b>WeFact</b> for invoicing, <b>Jitsi</b> for video, <b>Zivver</b> for secure mail. Build only what is genuinely <em>your product</em>: the dossier, the e-health, the workflow, the clinician panel.</p>
+      <p>The 20% that is hardest — VECOZO claims + the yearly ZPM compliance chase — is exactly the 20% to let someone else own. It's a cost centre with legal risk, not a differentiator.</p>
+    </div>
+  </section>
+
+  <!-- ============ BOTTOM LINE ============ -->
+  <section class="bottomline">
+    <p class="kicker">Bottom line</p>
+    <p>The picture is right — and reachable — but it's a <b>12–18-month product bet to become a CareWeb competitor</b>, not a cost-cut. So: <b>sell the Phase-0 e-health layer now</b>, ship the <b>Phase-1 low-risk wins</b>, and only cross into Phases 2–3 when revenue and a real product decision justify committing to insurer billing and 20-year records. The near-term <b>€6.244 doesn't wait for any of this</b> — it comes from selling what's already live.</p>
+  </section>
+
+  <footer class="aw-footer">
+    <span>WelBewust &middot; Aweris planning workspace</span>
+    <span>Scored against NZa, VECOZO, Vektis &amp; the current codebase &middot; July 2026</span>
+  </footer>
+
+</article>
+
+</body>
+</html>
