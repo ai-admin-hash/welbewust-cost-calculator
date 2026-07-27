@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Aweris → EPD — phased roadmap</title>
+<title>Aweris → EPD — gefaseerde routekaart</title>
 <link rel="stylesheet" href="aweris.css">
 <style>
   *{box-sizing:border-box}
@@ -87,55 +87,55 @@
 <nav class="aw-nav">
   <a class="aw-brand" href="overview.html"><span class="aw-wordmark">Aweris</span><small>WelBewust &middot; planning</small></a>
   <div class="aw-nav-links">
-    <a href="overview.html">Overview</a>
-    <a href="index.html">Cost calculator</a>
-    <a href="assistenten.html">Digital assistants</a>
+    <a href="overview.html">Overzicht</a>
+    <a href="index.html">Kostencalculator</a>
+    <a href="assistenten.html">Digitale assistenten</a>
     <a href="modules.html">Modules</a>
-    <a href="compliance.html">NEN 7510 plan</a>
-    <a href="epd-roadmap.html" aria-current="page">EPD roadmap</a>
-    <a href="proposals.html">Proposals</a>
+    <a href="compliance.html">NEN 7510-plan</a>
+    <a href="epd-roadmap.html" aria-current="page">EPD-roadmap</a>
+    <a href="proposals.html">Voorstellen</a>
   </div>
 </nav>
 
 <article class="doc">
 
   <header class="mast">
-    <p class="kicker">Aweris → EPD · phased roadmap</p>
-    <h1>From e-health layer to a full EPD — <em>honestly phased.</em></h1>
-    <p class="dek">The architecture diagram is the destination: Aweris doing dossier, agenda, ZPM, claims and BSN — a full EPD that eventually <b>replaces CareWeb</b>. This page turns that picture into a plan: every box scored <b>build / buy / integrate</b>, by risk, in the order that keeps you sellable and solvent the whole way. Scored against NZa, VECOZO, Vektis and the current codebase.</p>
-    <p class="backlink"><a href="modules.html">↗ Module library</a> <a href="compliance.html">↗ NEN 7510 plan</a> <span class="mono-dim">the near-term €6.244 lives on those pages, not this one</span></p>
+    <p class="kicker">Aweris → EPD · gefaseerde routekaart</p>
+    <h1>Van e-health-laag naar volledig EPD — <em>eerlijk gefaseerd.</em></h1>
+    <p class="dek">Het architectuurdiagram is de bestemming: Aweris die dossier, agenda, ZPM, declaraties en BSN doet — een volledig EPD dat uiteindelijk <b>CareWeb vervangt</b>. Deze pagina zet dat diagram om in een plan: elk onderdeel gescoord op <b>bouwen / kopen / integreren</b>, naar risico, in de volgorde die je de hele weg verkoopbaar en solvabel houdt. Getoetst aan NZa, VECOZO, Vektis en de huidige codebase.</p>
+    <p class="backlink"><a href="modules.html">↗ Modulebibliotheek</a> <a href="compliance.html">↗ NEN 7510-plan</a> <span class="mono-dim">de €6.244 op korte termijn staat op die pagina's, niet op deze pagina</span></p>
   </header>
 
   <!-- ============ TRUTH PANEL ============ -->
   <section class="panel">
     <div class="panel-grid">
       <div>
-        <p class="panel-label">The one rule</p>
-        <p><b>Build the billing core last — and integrate it, don't build it.</b> Claims, VECOZO and yearly ZPM validation are the hardest, riskiest 20% (a 2025 rule change nearly broke claim payments practice-wide). <span class="rule-line">Outsource that 20%</span> (GZ-entry is free + VECOZO-certified); build only what's actually your product — the dossier, the e-health, the workflow, the panel.</p>
+        <p class="panel-label">De enige regel</p>
+        <p><b>Bouw de facturatiekern als laatste — en integreer hem, bouw hem niet zelf.</b> Declaraties, VECOZO en de jaarlijkse ZPM-validatie zijn de lastigste, risicovolste 20% (een regelwijziging in 2025 zette declaratiebetalingen praktijkbreed bijna op losse schroeven). <span class="rule-line">Besteed die 20% uit</span> (GZ-entry is gratis + VECOZO-gecertificeerd); bouw alleen wat werkelijk je product is — het dossier, de e-health, de workflow, het paneel.</p>
       </div>
       <div class="verdict">
-        <p class="panel-label">What this really is</p>
-        <p class="verdict-big">A <span class="hl">product bet</span>, not this year's cost-cut.</p>
-        <p>Finishing the diagram turns Aweris from a €30/seat e-health add-on into a <b>€43–67/seat full EPD — a CareWeb competitor.</b> That's the prize. But it's <b>12–18 months</b> of regulated build, and you own compliance forever. Fund it from e-health revenue.</p>
+        <p class="panel-label">Wat dit werkelijk is</p>
+        <p class="verdict-big">Een <span class="hl">strategische inzet</span>, geen kostenbesparing van dit jaar.</p>
+        <p>Het diagram afmaken maakt van Aweris een €30/behandelaar e-health-toevoeging tot een <b>€43–67/behandelaar volledig EPD — een concurrent van CareWeb.</b> Dat is de prijs. Maar het is <b>12–18 maanden</b> gereguleerde bouw, en je draagt de compliance voor altijd. Financier het uit e-health-inkomsten.</p>
       </div>
     </div>
   </section>
 
   <!-- ============ WHERE YOU ALREADY ARE ============ -->
   <section class="block">
-    <p class="kicker">The starting point</p>
-    <h2>Most of the top of the diagram is already live</h2>
-    <p class="lead">The whole patient-facing and workflow layer exists and runs today. <em>This is the product you sell now</em> — the EPD build is everything below it.</p>
+    <p class="kicker">Het uitgangspunt</p>
+    <h2>Het grootste deel van de bovenkant van het diagram is al live</h2>
+    <p class="lead">De hele patiëntgerichte laag en workflowlaag bestaat en draait vandaag al. <em>Dit is het product dat je nu verkoopt</em> — de EPD-bouw is alles daaronder.</p>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Layer / box</th><th>Now</th><th>Approach</th><th>Risk</th><th>Phase</th></tr></thead>
+        <thead><tr><th>Laag / onderdeel</th><th>Nu</th><th>Aanpak</th><th>Risico</th><th>Fase</th></tr></thead>
         <tbody>
-          <tr><td>Patient portal <span class="mono-dim">e-health, messages</span></td><td><span class="pill have">Have</span></td><td class="approach">built</td><td class="risk-lo">—</td><td class="ph">Live</td></tr>
-          <tr><td>Messages &amp; tasks</td><td><span class="pill have">Have</span></td><td class="approach">built</td><td class="risk-lo">—</td><td class="ph">Live</td></tr>
-          <tr><td>Documents &amp; audit <span class="mono-dim">NEN 7513 log, retention</span></td><td><span class="pill have">Have</span></td><td class="approach">built</td><td class="risk-lo">low</td><td class="ph">Live</td></tr>
-          <tr><td>ROM / screening / 304 modules</td><td><span class="pill have">Have</span></td><td class="approach">built</td><td class="risk-lo">low</td><td class="ph">Live</td></tr>
-          <tr><td>Zivver / Secudoc <span class="mono-dim">secure mail</span></td><td><span class="pill have">Have</span></td><td class="approach"><b>integrate</b></td><td class="risk-lo">low</td><td class="ph">Live</td></tr>
-          <tr><td>n8n estate + AI drafting <span class="mono-dim">sidecars</span></td><td><span class="pill have">Have</span></td><td class="approach">built</td><td class="risk-lo">low</td><td class="ph">Live</td></tr>
+          <tr><td>Patiëntenportaal <span class="mono-dim">e-health, berichten</span></td><td><span class="pill have">Aanwezig</span></td><td class="approach">gebouwd</td><td class="risk-lo">—</td><td class="ph">Live</td></tr>
+          <tr><td>Berichten &amp; taken</td><td><span class="pill have">Aanwezig</span></td><td class="approach">gebouwd</td><td class="risk-lo">—</td><td class="ph">Live</td></tr>
+          <tr><td>Documenten &amp; audit <span class="mono-dim">NEN 7513-log, bewaartermijn</span></td><td><span class="pill have">Aanwezig</span></td><td class="approach">gebouwd</td><td class="risk-lo">laag</td><td class="ph">Live</td></tr>
+          <tr><td>ROM / screening / 304 modules</td><td><span class="pill have">Aanwezig</span></td><td class="approach">gebouwd</td><td class="risk-lo">laag</td><td class="ph">Live</td></tr>
+          <tr><td>Zivver / Secudoc <span class="mono-dim">beveiligde mail</span></td><td><span class="pill have">Aanwezig</span></td><td class="approach"><b>integreren</b></td><td class="risk-lo">laag</td><td class="ph">Live</td></tr>
+          <tr><td>n8n-landschap + AI-conceptteksten <span class="mono-dim">sidecars</span></td><td><span class="pill have">Aanwezig</span></td><td class="approach">gebouwd</td><td class="risk-lo">laag</td><td class="ph">Live</td></tr>
         </tbody>
       </table>
     </div>
@@ -143,89 +143,89 @@
 
   <!-- ============ THE SCORECARD ============ -->
   <section class="block">
-    <p class="kicker">The build</p>
-    <h2>Box-by-box: what to build, buy, or integrate</h2>
-    <p class="lead">The rest of the diagram — the EPD-of-record core and the integration gateway. <em>Green = have · amber = partial · orange = missing;</em> effort is rough dev-weeks for a small team. Approach, risk and effort decide the order.</p>
+    <p class="kicker">De bouw</p>
+    <h2>Onderdeel voor onderdeel: wat je bouwt, koopt of integreert</h2>
+    <p class="lead">De rest van het diagram — de kern van het officiële EPD en de integratiepoort. <em>Groen = aanwezig · amber = deels · oranje = ontbreekt;</em> inspanning is een ruwe schatting in dev-weken voor een klein team. Aanpak, risico en inspanning bepalen de volgorde.</p>
 
-    <h3 class="sub">Unified data core</h3>
+    <h3 class="sub">Uniforme datakern</h3>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Box</th><th>Now</th><th>Approach</th><th>Risk</th><th>Phase</th><th>Effort / cost</th></tr></thead>
+        <thead><tr><th>Onderdeel</th><th>Nu</th><th>Aanpak</th><th>Risico</th><th>Fase</th><th>Inspanning / kosten</th></tr></thead>
         <tbody>
-          <tr><td>Client dossier <span class="mono-dim">incl. NAW / BSN</span></td><td><span class="pill partial">Partial</span></td><td class="approach"><b>build</b></td><td class="risk-hi">high</td><td class="ph">2</td><td class="mono-dim">~8 wks<br>+ DPIA update</td></tr>
-          <tr><td>Agenda &amp; locking</td><td><span class="pill missing">Missing</span></td><td class="approach"><b>build</b></td><td class="risk-md">med</td><td class="ph">2</td><td class="mono-dim">~5 wks</td></tr>
-          <tr><td>ZPM &amp; validation</td><td><span class="pill missing">Missing</span></td><td class="approach"><b>build</b></td><td class="risk-hi">high</td><td class="ph">3</td><td class="mono-dim">~8 wks<br>+ yearly upkeep</td></tr>
-          <tr><td>Claims &amp; invoices</td><td><span class="pill missing">Missing</span></td><td class="approach"><b>integrate</b> · GZ-entry</td><td class="risk-hi">highest</td><td class="ph">3</td><td class="mono-dim">~4–6 wks<br>GZ-entry €0</td></tr>
+          <tr><td>Cliëntdossier <span class="mono-dim">incl. NAW / BSN</span></td><td><span class="pill partial">Deels</span></td><td class="approach"><b>bouwen</b></td><td class="risk-hi">hoog</td><td class="ph">2</td><td class="mono-dim">~8 wkn<br>+ DPIA-update</td></tr>
+          <tr><td>Agenda &amp; vergrendeling</td><td><span class="pill missing">Ontbreekt</span></td><td class="approach"><b>bouwen</b></td><td class="risk-md">gemiddeld</td><td class="ph">2</td><td class="mono-dim">~5 wkn</td></tr>
+          <tr><td>ZPM &amp; validatie</td><td><span class="pill missing">Ontbreekt</span></td><td class="approach"><b>bouwen</b></td><td class="risk-hi">hoog</td><td class="ph">3</td><td class="mono-dim">~8 wkn<br>+ jaarlijks onderhoud</td></tr>
+          <tr><td>Declaraties &amp; facturen</td><td><span class="pill missing">Ontbreekt</span></td><td class="approach"><b>integreren</b> · GZ-entry</td><td class="risk-hi">hoogst</td><td class="ph">3</td><td class="mono-dim">~4–6 wkn<br>GZ-entry €0</td></tr>
         </tbody>
       </table>
     </div>
 
-    <h3 class="sub">Integration gateway <span class="mono-dim">mostly connect, not build</span></h3>
+    <h3 class="sub">Integratiepoort <span class="mono-dim">vooral aansluiten, niet bouwen</span></h3>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>Box</th><th>Now</th><th>Approach</th><th>Risk</th><th>Phase</th><th>Effort / cost</th></tr></thead>
+        <thead><tr><th>Onderdeel</th><th>Nu</th><th>Aanpak</th><th>Risico</th><th>Fase</th><th>Inspanning / kosten</th></tr></thead>
         <tbody>
-          <tr><td>WeFact <span class="mono-dim">invoices, REST API</span></td><td><span class="pill missing">Missing</span></td><td class="approach"><b>integrate</b></td><td class="risk-lo">low</td><td class="ph">1</td><td class="mono-dim">~1–2 wks<br>WeFact sub</td></tr>
-          <tr><td>Video <span class="mono-dim">Jitsi self-hosted</span></td><td><span class="pill missing">Missing</span></td><td class="approach"><b>build</b> · self-host</td><td class="risk-lo">low–med</td><td class="ph">1</td><td class="mono-dim">~1–2 wks<br>~€30/mo VM</td></tr>
-          <tr><td>ZorgDomein <span class="mono-dim">referrals, FHIR</span></td><td><span class="pill partial">Email today</span></td><td class="approach"><b>integrate</b></td><td class="risk-md">med</td><td class="ph">2</td><td class="mono-dim">~3–5 wks<br>+ connection deal</td></tr>
-          <tr><td>SBV-Z <span class="mono-dim">BSN check</span></td><td><span class="pill missing">Missing</span></td><td class="approach"><b>integrate</b> · needs UZI</td><td class="risk-hi">high</td><td class="ph">2–3</td><td class="mono-dim">~2–3 wks<br>+ UZI cert (wait)</td></tr>
-          <tr><td>VECOZO <span class="mono-dim">COV + claims</span></td><td><span class="pill missing">Missing</span></td><td class="approach"><b>integrate</b> · cert + AGB + GDS</td><td class="risk-hi">high</td><td class="ph">3</td><td class="mono-dim">~8–12 wks<br>≈0 via GZ-entry</td></tr>
-          <tr><td>Vektis <span class="mono-dim">AGB / UZOVI registries</span></td><td><span class="pill missing">Missing</span></td><td class="approach"><b>integrate</b></td><td class="risk-md">med</td><td class="ph">3</td><td class="mono-dim">~2–3 wks</td></tr>
+          <tr><td>WeFact <span class="mono-dim">facturen, REST-API</span></td><td><span class="pill missing">Ontbreekt</span></td><td class="approach"><b>integreren</b></td><td class="risk-lo">laag</td><td class="ph">1</td><td class="mono-dim">~1–2 wkn<br>WeFact-abonnement</td></tr>
+          <tr><td>Video <span class="mono-dim">Jitsi self-hosted</span></td><td><span class="pill missing">Ontbreekt</span></td><td class="approach"><b>bouwen</b> · self-host</td><td class="risk-lo">laag–gemiddeld</td><td class="ph">1</td><td class="mono-dim">~1–2 wkn<br>~€30/mnd VM</td></tr>
+          <tr><td>ZorgDomein <span class="mono-dim">verwijzingen, FHIR</span></td><td><span class="pill partial">Nu via e-mail</span></td><td class="approach"><b>integreren</b></td><td class="risk-md">gemiddeld</td><td class="ph">2</td><td class="mono-dim">~3–5 wkn<br>+ aansluitovereenkomst</td></tr>
+          <tr><td>SBV-Z <span class="mono-dim">BSN-controle</span></td><td><span class="pill missing">Ontbreekt</span></td><td class="approach"><b>integreren</b> · vereist UZI</td><td class="risk-hi">hoog</td><td class="ph">2–3</td><td class="mono-dim">~2–3 wkn<br>+ UZI-certificaat (wachttijd)</td></tr>
+          <tr><td>VECOZO <span class="mono-dim">COV + declaraties</span></td><td><span class="pill missing">Ontbreekt</span></td><td class="approach"><b>integreren</b> · cert + AGB + GDS</td><td class="risk-hi">hoog</td><td class="ph">3</td><td class="mono-dim">~8–12 wkn<br>≈0 via GZ-entry</td></tr>
+          <tr><td>Vektis <span class="mono-dim">AGB / UZOVI-registers</span></td><td><span class="pill missing">Ontbreekt</span></td><td class="approach"><b>integreren</b></td><td class="risk-md">gemiddeld</td><td class="ph">3</td><td class="mono-dim">~2–3 wkn</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="mono-dim" style="margin-top:10px">Also: <b>Therapist workspace</b> (dossier/agenda/ZPM UI, ~4–6 wks, tracks the data-core boxes, Phase 2–3) · <b>Admin workspace</b> (unified UI over the existing n8n flows, ~2–3 wks, low risk, Phase 1).</p>
-    <p class="mono-dim" style="margin-top:8px;line-height:1.5;max-width:74ch">Effort = order-of-magnitude dev-weeks for a 1–2 developer team, <b>excluding external onboarding</b> — a VECOZO certificate + AGB-code, a ZorgDomein connection agreement and a UZI/SBV-Z authorization run on the vendors' clock (weeks–months) and need real quotes. Building the VECOZO/GDS claims engine yourself is ~8–12 wks + permanent upkeep; integrating GZ-entry collapses that box to near-zero — which is why it's the recommended path.</p>
+    <p class="mono-dim" style="margin-top:10px">Ook: <b>Behandelaaromgeving</b> (dossier/agenda/ZPM-UI, ~4–6 wkn, volgt de onderdelen van de datakern, Fase 2–3) · <b>Beheeromgeving</b> (uniforme UI over de bestaande n8n-flows, ~2–3 wkn, laag risico, Fase 1).</p>
+    <p class="mono-dim" style="margin-top:8px;line-height:1.5;max-width:74ch">Inspanning = orde-van-grootte dev-weken voor een team van 1–2 developers, <b>exclusief externe onboarding</b> — een VECOZO-certificaat + AGB-code, een ZorgDomein-aansluitovereenkomst en een UZI/SBV-Z-autorisatie lopen op de klok van de leveranciers (weken–maanden) en vereisen echte offertes. De VECOZO/GDS-declaratie-engine zelf bouwen is ~8–12 wkn + permanent onderhoud; GZ-entry integreren brengt dat onderdeel terug tot vrijwel nul — daarom is dat het aanbevolen pad.</p>
   </section>
 
   <!-- ============ PHASES ============ -->
   <section class="block">
-    <p class="kicker">The sequence</p>
-    <h2>Four phases — sellable and solvent at every step</h2>
+    <p class="kicker">De volgorde</p>
+    <h2>Vier fases — verkoopbaar en solvabel bij elke stap</h2>
     <div class="phases">
       <div class="phase p0">
-        <div class="phase-head"><h3>Phase 0 — Have it</h3><span class="phase-when">Now · the sellable product</span></div>
-        <p>The e-health layer that's already live and can be licensed to other practices today.</p>
-        <p class="items">Patient portal · ROM &amp; screening · 304 modules · messages &amp; tasks · documents &amp; audit · Zivver · n8n + AI.</p>
+        <div class="phase-head"><h3>Fase 0 — Al aanwezig</h3><span class="phase-when">Nu · het verkoopbare product</span></div>
+        <p>De e-health-laag die al live staat en vandaag al aan andere praktijken gelicentieerd kan worden.</p>
+        <p class="items">Patiëntenportaal · ROM &amp; screening · 304 modules · berichten &amp; taken · documenten &amp; audit · Zivver · n8n + AI.</p>
       </div>
       <div class="phase p1">
-        <div class="phase-head"><h3>Phase 1 — Low-risk wins</h3><span class="phase-when">≈ 4–7 dev-weeks · near-zero regulatory risk</span></div>
-        <p>Real value with no records/billing exposure — safe to ship while you sell Phase 0.</p>
-        <p class="items">WeFact finance automations (no-show, dunning) · Video (self-hosted Jitsi) · unified Admin workspace over the existing n8n flows.</p>
+        <div class="phase-head"><h3>Fase 1 — Laagrisico-successen</h3><span class="phase-when">≈ 4–7 dev-weken · vrijwel geen regulatoir risico</span></div>
+        <p>Echte waarde zonder blootstelling aan dossiervoering/facturatie — veilig te lanceren terwijl je Fase 0 verkoopt.</p>
+        <p class="items">WeFact-financiële automatiseringen (no-show, aanmaningen) · video (self-hosted Jitsi) · uniforme beheeromgeving over de bestaande n8n-flows.</p>
       </div>
       <div class="phase p2">
-        <div class="phase-head"><h3>Phase 2 — The record decision</h3><span class="phase-when">≈ 4–6 months · the point of no return</span></div>
-        <p>Where Aweris becomes an EHR, not a companion. This is the point of no return.</p>
-        <p class="items">Client dossier with NAW/BSN (+ SBV-Z) · Agenda &amp; locking · ZorgDomein referrals.</p>
-        <p class="risknote">Reverses the deliberate no-BSN design and takes on WGBO 20-year retention + full NEN 7513 authorization tiers. Do this only once the product bet is decided.</p>
+        <div class="phase-head"><h3>Fase 2 — De dossierbeslissing</h3><span class="phase-when">≈ 4–6 maanden · het punt van geen terugkeer</span></div>
+        <p>Hier wordt Aweris een EPD in plaats van een aanvullend hulpmiddel. Dit is het punt van geen terugkeer.</p>
+        <p class="items">Cliëntdossier met NAW/BSN (+ SBV-Z) · agenda &amp; vergrendeling · ZorgDomein-verwijzingen.</p>
+        <p class="risknote">Draait het bewuste ontwerp zonder BSN terug en brengt de WGBO-bewaartermijn van 20 jaar + volledige NEN 7513-autorisatieniveaus met zich mee. Doe dit pas als de strategische inzet is besloten.</p>
       </div>
       <div class="phase p3">
-        <div class="phase-head"><h3>Phase 3 — The billing core</h3><span class="phase-when">≈ 4–6 mo — or ~6–8 wks via GZ-entry · build last</span></div>
-        <p>The declaratie engine — highest risk, permanent compliance ownership.</p>
-        <p class="items">ZPM &amp; validation · Claims (integrate GZ-entry) · VECOZO + Vektis.</p>
-        <p class="risknote">Owns the yearly ZPM rule churn; a missed release means practices don't get paid. Only worth crossing once revenue funds it — and even then, integrate the claims engine rather than build it.</p>
+        <div class="phase-head"><h3>Fase 3 — De facturatiekern</h3><span class="phase-when">≈ 4–6 mnd — of ~6–8 wkn via GZ-entry · bouw als laatste</span></div>
+        <p>De declaratie-engine — hoogste risico, permanente verantwoordelijkheid voor compliance.</p>
+        <p class="items">ZPM &amp; validatie · declaraties (integreer GZ-entry) · VECOZO + Vektis.</p>
+        <p class="risknote">Draagt de jaarlijks terugkerende ZPM-regelwijzigingen; een gemiste release betekent dat praktijken niet worden uitbetaald. Pas de moeite waard zodra de omzet het financiert — en zelfs dan: integreer de declaratie-engine in plaats van hem zelf te bouwen.</p>
       </div>
     </div>
   </section>
 
   <!-- ============ BUILD VS BUY ============ -->
   <section class="block">
-    <p class="kicker">The build-vs-buy rule</p>
+    <p class="kicker">Bouwen versus kopen</p>
     <div class="callout">
-      <p><b>Don't build the declaratie engine.</b> Integrate <b>GZ-entry</b> (free, VECOZO-certified) for claims, <b>WeFact</b> for invoicing, <b>Jitsi</b> for video, <b>Zivver</b> for secure mail. Build only what is genuinely <em>your product</em>: the dossier, the e-health, the workflow, the clinician panel.</p>
-      <p>The 20% that is hardest — VECOZO claims + the yearly ZPM compliance chase — is exactly the 20% to let someone else own. It's a cost centre with legal risk, not a differentiator.</p>
+      <p><b>Bouw de declaratie-engine niet zelf.</b> Integreer <b>GZ-entry</b> (gratis, VECOZO-gecertificeerd) voor declaraties, <b>WeFact</b> voor facturatie, <b>Jitsi</b> voor video, <b>Zivver</b> voor beveiligde mail. Bouw alleen wat werkelijk <em>je eigen product</em> is: het dossier, de e-health, de workflow, het behandelaarspaneel.</p>
+      <p>De 20% die het lastigst is — VECOZO-declaraties + de jaarlijkse jacht op ZPM-compliance — is precies de 20% die je beter aan een ander overlaat. Het is een kostenpost met juridisch risico, geen onderscheidende factor.</p>
     </div>
   </section>
 
   <!-- ============ BOTTOM LINE ============ -->
   <section class="bottomline">
-    <p class="kicker">Bottom line</p>
-    <p>The picture is right — and reachable — but it's a <b>12–18-month product bet to become a CareWeb competitor</b>, not a cost-cut. So: <b>sell the Phase-0 e-health layer now</b>, ship the <b>Phase-1 low-risk wins</b>, and only cross into Phases 2–3 when revenue and a real product decision justify committing to insurer billing and 20-year records. The near-term <b>€6.244 doesn't wait for any of this</b> — it comes from selling what's already live.</p>
+    <p class="kicker">Onder de streep</p>
+    <p>Het plaatje klopt — en is haalbaar — maar het is een <b>strategische inzet van 12–18 maanden om een concurrent van CareWeb te worden</b>, geen kostenbesparing. Dus: <b>verkoop nu de e-health-laag van fase 0</b>, lever de <b>laagrisico-successen van fase 1</b>, en stap pas over naar fase 2–3 wanneer omzet en een echte productbeslissing het rechtvaardigen om je te binden aan facturatie aan verzekeraars en dossiers van 20 jaar. De <b>€6.244 op korte termijn wacht nergens op</b> — die komt uit het verkopen van wat al live staat.</p>
   </section>
 
   <footer class="aw-footer">
-    <span>WelBewust &middot; Aweris planning workspace</span>
-    <span>Scored against NZa, VECOZO, Vektis &amp; the current codebase &middot; July 2026</span>
+    <span>WelBewust &middot; Aweris planningswerkruimte</span>
+    <span>Getoetst aan NZa, VECOZO, Vektis &amp; de huidige codebase &middot; juli 2026</span>
   </footer>
 
 </article>

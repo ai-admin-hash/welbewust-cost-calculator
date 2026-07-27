@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NEN 7510 plan — WelBewust × Aweris</title>
+<title>NEN 7510-plan — WelBewust × Aweris</title>
 <link rel="stylesheet" href="aweris.css">
 <style>
   *{box-sizing:border-box}
@@ -149,202 +149,202 @@
 <nav class="aw-nav">
   <a class="aw-brand" href="overview.html"><span class="aw-wordmark">Aweris</span><small>WelBewust · planning</small></a>
   <div class="aw-nav-links">
-    <a href="overview.html">Overview</a>
-    <a href="index.html">Cost calculator</a>
-    <a href="assistenten.html">Digital assistants</a>
+    <a href="overview.html">Overzicht</a>
+    <a href="index.html">Kostencalculator</a>
+    <a href="assistenten.html">Digitale assistenten</a>
     <a href="modules.html">Modules</a>
-    <a href="compliance.html" aria-current="page">NEN 7510 plan</a>
-    <a href="epd-roadmap.html">EPD roadmap</a>
-    <a href="proposals.html">Proposals</a>
+    <a href="compliance.html" aria-current="page">NEN 7510-plan</a>
+    <a href="epd-roadmap.html">EPD-roadmap</a>
+    <a href="proposals.html">Voorstellen</a>
   </div>
 </nav>
 
 <article class="doc">
 
   <header class="mast">
-    <p class="kicker">Migration plan · Google Cloud · NEN 7510</p>
-    <h1>Everything on Google&nbsp;Cloud — and what that <em>really</em> does for NEN&nbsp;7510</h1>
-    <p class="dek">Moving the whole platform to Google&nbsp;Cloud in the Netherlands fixes our two worst data problems today and gives us a clean foundation to certify on. It does <b>not</b>, by itself, hand us the NEN&nbsp;7510 certificate. Here is the honest split — what the move settles, and what stays our job.</p>
-    <p class="backlink"><a href="index.html">↗ Cost calculator</a> <span class="mono-dim">the running numbers behind this plan</span></p>
+    <p class="kicker">Migratieplan · Google Cloud · NEN 7510</p>
+    <h1>Alles op Google&nbsp;Cloud — en wat dat <em>écht</em> betekent voor NEN&nbsp;7510</h1>
+    <p class="dek">Door het hele platform naar Google&nbsp;Cloud in Nederland te verhuizen, lossen we onze twee grootste dataproblemen van dit moment op en leggen we een solide fundament om op te certificeren. Het levert ons <b>niet</b> vanzelf het NEN&nbsp;7510-certificaat op. Hier is de eerlijke verdeling — wat de overstap regelt, en wat ons eigen werk blijft.</p>
+    <p class="backlink"><a href="index.html">↗ Kostencalculator</a> <span class="mono-dim">de actuele cijfers achter dit plan</span></p>
   </header>
 
   <section class="panel">
     <div class="panel-grid">
       <div>
-        <p class="panel-label">What the move delivers</p>
+        <p class="panel-label">Wat de overstap oplevert</p>
         <ul class="checks">
-          <li><span class="tick">✓</span> Patient data stays in the Netherlands <span class="mono-dim">europe-west4</span></li>
-          <li><span class="tick">✓</span> US AI removed <span class="mono-dim">OpenAI + Groq → Gemini, EU</span></li>
-          <li><span class="tick">✓</span> The office Mac-mini leaves the patient-data path</li>
-          <li><span class="tick">✓</span> One certified supplier, one audit trail</li>
+          <li><span class="tick">✓</span> Patiëntgegevens blijven in Nederland <span class="mono-dim">europe-west4</span></li>
+          <li><span class="tick">✓</span> Amerikaanse AI verwijderd <span class="mono-dim">OpenAI + Groq → Gemini, EU</span></li>
+          <li><span class="tick">✓</span> De Mac mini op kantoor verdwijnt uit het pad van patiëntgegevens</li>
+          <li><span class="tick">✓</span> Eén gecertificeerde leverancier, één audit trail</li>
         </ul>
       </div>
       <div class="verdict">
-        <p class="panel-label">The honest headline</p>
-        <p class="verdict-big">A <span class="hl">foundation</span> for NEN&nbsp;7510 — not the certificate.</p>
-        <p class="verdict-sub">The move settles the technical <b>~20%</b>. The certificate is earned on the organisational <b>~80%</b> — and that work is ours, not Google's.</p>
+        <p class="panel-label">De eerlijke conclusie</p>
+        <p class="verdict-big">Een <span class="hl">fundament</span> voor NEN&nbsp;7510 — niet het certificaat.</p>
+        <p class="verdict-sub">De overstap regelt de technische <b>~20%</b>. Het certificaat wordt verdiend op de organisatorische <b>~80%</b> — en dat werk is van ons, niet van Google.</p>
       </div>
     </div>
   </section>
 
   <section class="block">
-    <p class="kicker">The plan</p>
-    <h2>In one glance</h2>
+    <p class="kicker">Het plan</p>
+    <h2>In één oogopslag</h2>
     <div class="prepost">
       <div class="col before">
-        <p class="col-head">Today <span class="tag tag-warn">scattered · partly US</span></p>
+        <p class="col-head">Nu <span class="tag tag-warn">versnipperd · deels VS</span></p>
         <ul>
-          <li>App &amp; database on Amazon <span class="mono-dim">AWS</span></li>
-          <li>AI runs in the <b>United States</b> <span class="mono-dim">OpenAI, Groq</span></li>
-          <li>A Mac-mini in the office processes patient recordings</li>
-          <li>Some patient data sits in <b>Google&nbsp;Sheets</b></li>
+          <li>App &amp; database bij Amazon <span class="mono-dim">AWS</span></li>
+          <li>AI draait in de <b>Verenigde Staten</b> <span class="mono-dim">OpenAI, Groq</span></li>
+          <li>Een Mac mini op kantoor verwerkt patiëntopnames</li>
+          <li>Een deel van de patiëntgegevens staat in <b>Google&nbsp;Sheets</b></li>
         </ul>
       </div>
       <div class="arrow" aria-hidden="true">→</div>
       <div class="col after">
-        <p class="col-head">Target <span class="tag tag-ok">one EU cloud</span></p>
+        <p class="col-head">Doel <span class="tag tag-ok">één EU-cloud</span></p>
         <ul>
-          <li>App, database, files &amp; automations — all on <b>Google&nbsp;Cloud, NL</b></li>
-          <li>All AI → <b>Gemini</b>, kept inside the EU</li>
-          <li>No office hardware in the patient-data path</li>
-          <li>One processor, one place to audit</li>
+          <li>App, database, bestanden &amp; automatiseringen — allemaal op <b>Google&nbsp;Cloud, NL</b></li>
+          <li>Alle AI → <b>Gemini</b>, binnen de EU</li>
+          <li>Geen kantoorhardware meer in het pad van patiëntgegevens</li>
+          <li>Eén verwerker, één plek om te auditen</li>
         </ul>
       </div>
     </div>
   </section>
 
   <section class="block">
-    <p class="kicker">Why the move alone isn't the finish line</p>
-    <h2>Two tracks, and only one of them is Google's</h2>
-    <p class="lead">NEN&nbsp;7510 is a standard for how a <em>healthcare organisation</em> runs its security — not a badge a cloud can carry for us. So the work splits in two.</p>
+    <p class="kicker">Waarom de overstap alleen niet de eindstreep is</p>
+    <h2>Twee sporen, en maar één daarvan is van Google</h2>
+    <p class="lead">NEN&nbsp;7510 is een norm voor hoe een <em>zorgorganisatie</em> haar beveiliging inricht — geen keurmerk dat een cloud voor ons kan behalen. Het werk valt dus in twee delen uiteen.</p>
     <div class="tracks">
       <div class="track a">
-        <p class="track-status ok">Handled by the move</p>
-        <p class="track-head">The technical layer <span class="pct">~20%</span></p>
+        <p class="track-status ok">Geregeld door de overstap</p>
+        <p class="track-head">De technische laag <span class="pct">~20%</span></p>
         <ul class="track-list">
-          <li>Patient data kept in the EU / Netherlands</li>
-          <li>Encryption at rest and in transit</li>
-          <li>A certified cloud supplier <span class="mono-dim">ISO 27001, healthcare hosting</span></li>
-          <li>A single, auditable path for every AI decision</li>
-          <li>The technical ability to log who opened what</li>
+          <li>Patiëntgegevens blijven in de EU / Nederland</li>
+          <li>Versleuteling in rust en tijdens transport</li>
+          <li>Een gecertificeerde cloudleverancier <span class="mono-dim">ISO 27001, zorghosting</span></li>
+          <li>Eén controleerbaar pad voor elke AI-beslissing</li>
+          <li>De technische mogelijkheid om te loggen wie wat heeft geopend</li>
         </ul>
-        <p class="track-note">This is what "everything on Google Cloud" buys us. Real — but it's the floor.</p>
+        <p class="track-note">Dit is wat 'alles op Google Cloud' ons oplevert. Reëel — maar het is de ondergrens.</p>
       </div>
       <div class="track b">
-        <p class="track-status todo">Still ours to do</p>
-        <p class="track-head">The organisational layer <span class="pct">~80%</span></p>
+        <p class="track-status todo">Nog steeds aan ons</p>
+        <p class="track-head">De organisatorische laag <span class="pct">~80%</span></p>
         <ul class="track-list">
-          <li>The information-security management system — how we run security day to day</li>
-          <li>A formal risk assessment / <b>DPIA</b> on the patient data</li>
-          <li>Access logging to the <b>NEN&nbsp;7513</b> standard <span class="mono-dim">our app's job — Google supplies none</span></li>
-          <li>Staff policy, training, incident response, continuity</li>
-          <li>Signed processor agreements with every supplier</li>
-          <li>The independent certification audit</li>
+          <li>Het informatiebeveiligingsmanagementsysteem (ISMS) — hoe we beveiliging dagelijks organiseren</li>
+          <li>Een formele risicoanalyse / <b>DPIA</b> op de patiëntgegevens</li>
+          <li>Toegangslogging volgens de <b>NEN&nbsp;7513</b>-norm <span class="mono-dim">taak van onze app — Google levert dit niet</span></li>
+          <li>Personeelsbeleid, training, incidentrespons, continuïteit</li>
+          <li>Getekende verwerkersovereenkomsten met elke leverancier</li>
+          <li>De onafhankelijke certificeringsaudit</li>
         </ul>
-        <p class="track-note">None of this comes from a cloud. It needs a NEN consultant — which we have not yet lined up.</p>
+        <p class="track-note">Niets hiervan komt uit een cloud. Hiervoor is een NEN-adviseur nodig — die we nog niet geregeld hebben.</p>
       </div>
     </div>
   </section>
 
   <section class="block">
-    <p class="kicker">The build</p>
-    <h2>What moves where</h2>
+    <p class="kicker">De bouw</p>
+    <h2>Wat waarheen verhuist</h2>
     <div class="table-wrap">
       <table>
-        <thead><tr><th>What it does</th><th>Today</th><th>On Google Cloud&nbsp;(EU)</th><th>Why it matters</th></tr></thead>
+        <thead><tr><th>Wat het doet</th><th>Nu</th><th>Op Google Cloud&nbsp;(EU)</th><th>Waarom het ertoe doet</th></tr></thead>
         <tbody>
-          <tr><td>The app people log into</td><td class="t-old">AWS App Runner</td><td class="t-new">Cloud Run · NL</td><td>Runs where the data lives</td></tr>
-          <tr><td>The database</td><td class="t-old">AWS RDS</td><td class="t-new">Cloud SQL · NL</td><td>Patient records stay in the EU</td></tr>
-          <tr><td>Patient files &amp; documents</td><td class="t-old">AWS S3</td><td class="t-new">Cloud Storage · NL</td><td>Same EU boundary, encrypted</td></tr>
-          <tr><td>Session transcription</td><td class="t-old">Groq · US</td><td class="t-new">Chirp speech-to-text · NL</td><td>Recordings never leave the country</td></tr>
-          <tr><td>All the AI</td><td class="t-old">OpenAI + Groq · US</td><td class="t-new">Gemini · EU</td><td>Removes our clearest EU-residency gap</td></tr>
-          <tr><td>The automations <span class="mono-dim">n8n</span></td><td class="t-old">Office Mac-mini</td><td class="t-new">Google Cloud VM · NL</td><td>Back-office patient flows move in-country</td></tr>
-          <tr><td>The AI "verdict" model</td><td class="t-old">Office Mac-mini GPU</td><td class="t-new">Gemini</td><td>Kills ~€700/mo of hardware, closes a gap</td></tr>
+          <tr><td>De app waar mensen inloggen</td><td class="t-old">AWS App Runner</td><td class="t-new">Cloud Run · NL</td><td>Draait waar de data staat</td></tr>
+          <tr><td>De database</td><td class="t-old">AWS RDS</td><td class="t-new">Cloud SQL · NL</td><td>Patiëntdossiers blijven in de EU</td></tr>
+          <tr><td>Patiëntbestanden &amp; documenten</td><td class="t-old">AWS S3</td><td class="t-new">Cloud Storage · NL</td><td>Dezelfde EU-grens, versleuteld</td></tr>
+          <tr><td>Sessietranscriptie</td><td class="t-old">Groq · VS</td><td class="t-new">Chirp speech-to-text · NL</td><td>Opnames verlaten het land nooit</td></tr>
+          <tr><td>Alle AI</td><td class="t-old">OpenAI + Groq · VS</td><td class="t-new">Gemini · EU</td><td>Dicht ons duidelijkste gat in EU-dataresidentie</td></tr>
+          <tr><td>De automatiseringen <span class="mono-dim">n8n</span></td><td class="t-old">Mac mini op kantoor</td><td class="t-new">Google Cloud VM · NL</td><td>Patiëntstromen in de backoffice blijven in het land</td></tr>
+          <tr><td>Het AI-'verdict'-model</td><td class="t-old">Mac mini op kantoor · GPU</td><td class="t-new">Gemini</td><td>Schrapt ~€700/mnd aan hardware, dicht een gat</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="foot-note">≈ 7–10 build-days, run in parallel with the consultant track. Region <span class="mono-dim">europe-west4</span> = Eemshaven, Netherlands.</p>
+    <p class="foot-note">≈ 7–10 bouwdagen, parallel aan het adviesspoor. Regio <span class="mono-dim">europe-west4</span> = Eemshaven, Nederland.</p>
   </section>
 
   <section class="block">
-    <p class="kicker">The single biggest win</p>
-    <h2>All AI → Gemini. One catch.</h2>
+    <p class="kicker">De grootste winst</p>
+    <h2>Alle AI → Gemini. Eén addertje onder het gras.</h2>
     <div class="callout">
-      <p>Switching every AI to Gemini is the most valuable compliance move on the list — it ends patient text and audio being sent to the United States. But <b>"Gemini" only counts if we use Google's enterprise EU path</b> (Vertex&nbsp;AI, a European region).</p>
-      <p class="callout-warn">The free consumer Gemini app or API key does <b>not</b> keep data in Europe and cannot touch patient data. Same brand, different contract — and that difference is the whole point.</p>
+      <p>Alle AI overzetten naar Gemini is de waardevolste compliance-stap op de lijst — het maakt een einde aan het versturen van patiënttekst en -audio naar de Verenigde Staten. Maar <b>'Gemini' telt alleen mee als we het zakelijke EU-pad van Google gebruiken</b> (Vertex&nbsp;AI, een Europese regio).</p>
+      <p class="callout-warn">De gratis consumenten-app of API-key van Gemini houdt data <b>niet</b> in Europa en mag geen patiëntgegevens verwerken. Dezelfde merknaam, ander contract — en dat verschil is precies waar het om draait.</p>
     </div>
   </section>
 
   <section class="block">
-    <p class="kicker">The part that's easy to miss</p>
-    <h2>Don't forget the back office</h2>
+    <p class="kicker">Het onderdeel dat je makkelijk over het hoofd ziet</p>
+    <h2>Vergeet de backoffice niet</h2>
     <div class="callout">
-      <p>Our automations quietly handle patient data across <b>screening, intake, letters to GPs, and email</b> — and today they lean on Google&nbsp;Sheets as a filing cabinet and still call US AI. Moving them onto Google Cloud is necessary but not sufficient: the Sheets-as-database habit and the US AI calls have to go too, or the app is compliant while the workflows behind it are not.</p>
-      <p class="callout-warn">Google&nbsp;Sheets is only acceptable inside a proper Workspace account with a signed agreement — never a personal Google login.</p>
+      <p>Onze automatiseringen verwerken in alle stilte patiëntgegevens bij <b>screening, intake, huisartsbrieven en e-mail</b> — en leunen daarbij vandaag op Google&nbsp;Sheets als archiefkast en doen nog altijd een beroep op Amerikaanse AI. Ze verhuizen naar Google Cloud is noodzakelijk, maar niet voldoende: ook de gewoonte om Sheets als database te gebruiken en de aanroepen naar Amerikaanse AI moeten verdwijnen, anders is de app wél compliant maar de workflows erachter niet.</p>
+      <p class="callout-warn">Google&nbsp;Sheets is alleen acceptabel binnen een volwaardig Workspace-account met een getekende overeenkomst — nooit via een persoonlijke Google-login.</p>
     </div>
   </section>
 
   <section class="block">
-    <p class="kicker">Who is responsible for what</p>
-    <h2>What Google gives us — and what stays ours</h2>
+    <p class="kicker">Wie is waarvoor verantwoordelijk</p>
+    <h2>Wat Google ons geeft — en wat van ons blijft</h2>
     <div class="split">
       <div class="give">
-        <p class="split-head ok">Google gives us</p>
+        <p class="split-head ok">Google geeft ons</p>
         <ul class="mark-list">
-          <li><span class="m ok">✓</span> Patient data kept in the EU / Netherlands</li>
-          <li><span class="m ok">✓</span> Encryption, key management, physical security</li>
-          <li><span class="m ok">✓</span> A signed processor agreement <span class="mono-dim">covers AVG/GDPR art. 28</span></li>
-          <li><span class="m ok">✓</span> Certificates to show an auditor <span class="mono-dim">ISO 27001, 27017/27018, HDS health-hosting</span></li>
+          <li><span class="m ok">✓</span> Patiëntgegevens blijven in de EU / Nederland</li>
+          <li><span class="m ok">✓</span> Versleuteling, sleutelbeheer, fysieke beveiliging</li>
+          <li><span class="m ok">✓</span> Een getekende verwerkersovereenkomst <span class="mono-dim">dekt AVG/GDPR art. 28</span></li>
+          <li><span class="m ok">✓</span> Certificaten om aan een auditor te laten zien <span class="mono-dim">ISO 27001, 27017/27018, HDS-zorghosting</span></li>
         </ul>
-        <div class="caveat"><b>Caveat we must not get wrong:</b> Google does <u>not</u> hold a NEN&nbsp;7510 certificate. We lean on its ISO / health-hosting certificates instead. We must never tell an auditor "our cloud is NEN&nbsp;7510 certified" — it isn't.</div>
+        <div class="caveat"><b>Kanttekening die we niet verkeerd mogen voorstellen:</b> Google heeft <u>geen</u> NEN&nbsp;7510-certificaat. We leunen in plaats daarvan op de ISO- en zorghosting-certificaten. We mogen een auditor nooit vertellen dat 'onze cloud NEN&nbsp;7510-gecertificeerd is' — dat is niet zo.</div>
       </div>
       <div class="ours">
-        <p class="split-head todo">Stays ours</p>
+        <p class="split-head todo">Blijft van ons</p>
         <ul class="mark-list">
-          <li><span class="m todo">○</span> The management system + the audit that earns the certificate</li>
-          <li><span class="m todo">○</span> The DPIA / risk assessment</li>
-          <li><span class="m todo">○</span> NEN&nbsp;7513 access logging, inside our own app</li>
-          <li><span class="m todo">○</span> Contracts with every other supplier <span class="mono-dim">Zivver, …</span></li>
-          <li><span class="m todo">○</span> Staff training, policy, incident drills</li>
-          <li><span class="m todo">○</span> A NEN consultant for certification <span class="mono-dim">we have an FG, Maaike — not yet a consultant</span></li>
+          <li><span class="m todo">○</span> Het managementsysteem + de audit die het certificaat oplevert</li>
+          <li><span class="m todo">○</span> De DPIA / risicoanalyse</li>
+          <li><span class="m todo">○</span> NEN&nbsp;7513-toegangslogging, in onze eigen app</li>
+          <li><span class="m todo">○</span> Contracten met elke andere leverancier <span class="mono-dim">Zivver, …</span></li>
+          <li><span class="m todo">○</span> Personeelstraining, beleid, incidentoefeningen</li>
+          <li><span class="m todo">○</span> Een NEN-adviseur voor de certificering <span class="mono-dim">we hebben een FG, Maaike — nog geen adviseur</span></li>
         </ul>
       </div>
     </div>
   </section>
 
   <section class="block">
-    <p class="kicker">What this needs from you</p>
-    <h2>The decisions and the real cost</h2>
+    <p class="kicker">Wat dit van jullie vraagt</p>
+    <h2>De beslissingen en de echte kosten</h2>
     <div class="money">
       <div class="money-row">
-        <span class="money-label">Running it</span>
-        <span class="money-val">~€250–400<span class="per">/mo</span></span>
-        <span class="money-note">infrastructure to host everything. AI usage scales with volume — see the calculator.</span>
+        <span class="money-label">Draaien</span>
+        <span class="money-val">~€250–400<span class="per">/mnd</span></span>
+        <span class="money-note">infrastructuur om alles te hosten. AI-gebruik schaalt mee met het volume — zie de kostencalculator.</span>
       </div>
       <div class="money-row highlight">
-        <span class="money-label">Getting certified</span>
-        <span class="money-val accent">NEN consultant + audit</span>
-        <span class="money-note">the new line item this plan introduces. This — not the cloud — is the real first invoice.</span>
+        <span class="money-label">Certificeren</span>
+        <span class="money-val accent">NEN-adviseur + audit</span>
+        <span class="money-note">de nieuwe kostenpost die dit plan toevoegt. Dit — niet de cloud — is de eerste echte factuur.</span>
       </div>
     </div>
 
-    <p class="lead sign">Four build decisions — <span class="resolved">resolved</span>:</p>
+    <p class="lead sign">Vier bouwbesluiten — <span class="resolved">genomen</span>:</p>
     <ol class="decisions">
-      <li><b>Database</b> — start on a single-datacenter database; upgrade to a mirrored, guaranteed-uptime one before large patient volumes. Data is safe either way. <span class="rec">✓ Decided: lean now, revisit.</span></li>
-      <li><b>Office AI box</b> — retired. All AI moves to Gemini Flash. <span class="rec">✓ Decided: ~€700/mo → ~€2/mo.</span></li>
-      <li><b>AI location</b> — NL-pinned everywhere possible; the AI model runs EU-wide — the one thing Google can't keep NL-only. <span class="rec">✓ Decided: EU is the legal bar.</span></li>
-      <li><b>EU guardrail</b> — switch on the free, <em>enforced</em> EU-only boundary now; add the paid EU-support-staff tier later only if the auditor asks. <span class="rec">✓ Decided: free tier now.</span></li>
+      <li><b>Database</b> — starten met een database in één datacenter; upgraden naar een gespiegelde versie met gegarandeerde uptime voordat het patiëntvolume groot wordt. In beide gevallen zijn de gegevens veilig. <span class="rec">✓ Besloten: nu lean, later heroverwegen.</span></li>
+      <li><b>AI-box op kantoor</b> — uitgefaseerd. Alle AI verhuist naar Gemini Flash. <span class="rec">✓ Besloten: ~€700/mnd → ~€2/mnd.</span></li>
+      <li><b>Locatie van de AI</b> — overal waar mogelijk vastgepind op NL; het AI-model draait EU-breed — het enige onderdeel dat Google niet NL-only kan houden. <span class="rec">✓ Besloten: EU is de wettelijke ondergrens.</span></li>
+      <li><b>EU-waarborg</b> — zet nu de gratis, <em>afgedwongen</em> EU-only grens aan; voeg de betaalde laag met EU-supportpersoneel pas later toe, alleen als de auditor erom vraagt. <span class="rec">✓ Besloten: nu de gratis laag.</span></li>
     </ol>
   </section>
 
   <section class="bottomline">
-    <p class="kicker">Bottom line</p>
-    <p>Yes — we can run the whole platform, the automations, and all the AI on Google&nbsp;Cloud in the Netherlands, and we should: it removes our two worst data risks today and builds a clean foundation. But <b>"everything on Google Cloud" is the foundation for NEN&nbsp;7510, not the certificate.</b> The certificate is organisational work plus an independent audit — and the first real cost there is a consultant, not the cloud.</p>
+    <p class="kicker">Onder de streep</p>
+    <p>Ja — we kunnen het hele platform, de automatiseringen en alle AI op Google&nbsp;Cloud in Nederland draaien, en dat moeten we ook doen: het haalt onze twee grootste datarisico's van dit moment weg en legt een solide fundament. Maar <b>'alles op Google Cloud' is het fundament voor NEN&nbsp;7510, niet het certificaat.</b> Het certificaat is organisatorisch werk plus een onafhankelijke audit — en de eerste echte kostenpost daarbij is een adviseur, niet de cloud.</p>
   </section>
 
   <footer class="aw-footer">
-    <span>WelBewust · Aweris planning workspace</span>
-    <span>Modelled from Google Cloud's published terms &amp; certifications, July 2026</span>
+    <span>WelBewust · Aweris planningsomgeving</span>
+    <span>Gebaseerd op de gepubliceerde voorwaarden &amp; certificeringen van Google Cloud, juli 2026</span>
   </footer>
 
 </article>

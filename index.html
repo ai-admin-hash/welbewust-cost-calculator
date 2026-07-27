@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WelBewust — Transcription &amp; Email-AI Cost Calculator</title>
+<title>Kostencalculator — WelBewust × Aweris</title>
 <style>
   :root {
     --paper: #EFF2EF;
@@ -812,22 +812,22 @@
 <nav class="aw-nav">
   <a class="aw-brand" href="overview.html"><span class="aw-wordmark">Aweris</span><small>WelBewust &middot; planning</small></a>
   <div class="aw-nav-links">
-    <a href="overview.html">Overview</a>
-    <a href="index.html" aria-current="page">Cost calculator</a>
-    <a href="assistenten.html">Digital assistants</a>
+    <a href="overview.html">Overzicht</a>
+    <a href="index.html" aria-current="page">Kostencalculator</a>
+    <a href="assistenten.html">Digitale assistenten</a>
     <a href="modules.html">Modules</a>
-    <a href="compliance.html">NEN 7510 plan</a>
-    <a href="epd-roadmap.html">EPD roadmap</a>
-    <a href="proposals.html">Proposals</a>
+    <a href="compliance.html">NEN 7510-plan</a>
+    <a href="epd-roadmap.html">EPD-roadmap</a>
+    <a href="proposals.html">Voorstellen</a>
   </div>
 </nav>
 
 <div class="page">
 
   <header class="masthead">
-    <p class="eyebrow">Cost model &middot; Google Cloud &middot; editable</p>
-    <h1>Transcription &amp; email-AI, priced out</h1>
-    <p class="dek">Chirp speech-to-text and Gemini email drafting, modelled from Google's published rates. Every number below is live — drag a slider or type a value and the totals recompute.</p>
+    <p class="eyebrow">Kostenmodel &middot; Google Cloud &middot; bewerkbaar</p>
+    <h1>Transcriptie &amp; e-mail-AI, kosten doorgerekend</h1>
+    <p class="dek">Chirp spraak-naar-tekst en het opstellen van e-mails met Gemini, doorgerekend aan de hand van Google's gepubliceerde tarieven. Elk cijfer hieronder is live — versleep een schuifregelaar of typ een waarde, en de totalen worden meteen herberekend.</p>
     <p class="dek" style="margin-top:6px"><a href="assistenten.html" style="font-weight:600">📖 Gids digitale assistenten →</a> &nbsp;<span style="opacity:.75">wat er al draait, wat eraan komt, en wat het bespaart (NL/EN)</span></p>
   </header>
 
@@ -835,7 +835,7 @@
     <div class="total-block" id="blockTranscription">
       <label class="total-toggle">
         <input type="checkbox" id="includeTranscription" checked />
-        <span class="total-label">Transcription / mo</span>
+        <span class="total-label">Transcriptie / mnd</span>
       </label>
       <span class="total-value mono" id="outTotalTranscription">$0</span>
     </div>
@@ -843,7 +843,7 @@
     <div class="total-block" id="blockEmail">
       <label class="total-toggle">
         <input type="checkbox" id="includeEmail" checked />
-        <span class="total-label">Email-AI / mo</span>
+        <span class="total-label">E-mail-AI / mnd</span>
       </label>
       <span class="total-value mono" id="outTotalEmail">$0</span>
     </div>
@@ -851,7 +851,7 @@
     <div class="total-block" id="blockStorage">
       <label class="total-toggle">
         <input type="checkbox" id="includeStorage" checked />
-        <span class="total-label">Transcript storage / mo</span>
+        <span class="total-label">Transcriptopslag / mnd</span>
       </label>
       <span class="total-value mono" id="outTotalStorage">$0</span>
     </div>
@@ -859,7 +859,7 @@
     <div class="total-block" id="blockVoice">
       <label class="total-toggle">
         <input type="checkbox" id="includeVoice" checked />
-        <span class="total-label">Voice agent / mo</span>
+        <span class="total-label">Voice agent / mnd</span>
       </label>
       <span class="total-value mono" id="outTotalVoice">$0</span>
     </div>
@@ -867,19 +867,19 @@
     <div class="total-block" id="blockDocs">
       <label class="total-toggle">
         <input type="checkbox" id="includeDocs" checked />
-        <span class="total-label">Doc processing / mo</span>
+        <span class="total-label">Docverwerking / mnd</span>
       </label>
       <span class="total-value mono" id="outTotalDocs">$0</span>
     </div>
     <div class="total-equals">=</div>
     <div class="total-block grand">
-      <span class="total-label">Monthly total</span>
+      <span class="total-label">Maandtotaal</span>
       <span class="total-value grand-value mono" id="outGrandTotal">$0</span>
       <span class="total-eur mono" id="outGrandTotalEur">&asymp; &euro;0</span>
     </div>
     <div class="fx-row">
       <label for="fxRate">&euro; per $</label>
-      <input type="text" inputmode="decimal" id="fxRate" value="0.87" title="Verified 7 Jul 2026 (EUR/USD ≈ 1.143 per Xe/ECB) — edit to the live rate any time" />
+      <input type="text" inputmode="decimal" id="fxRate" value="0.87" title="Geverifieerd op 7 juli 2026 (EUR/USD ≈ 1.143 volgens Xe/ECB) — pas gerust aan naar de actuele koers" />
     </div>
   </section>
 
@@ -887,11 +887,11 @@
 
     <!-- ============ TRANSCRIPTION PANEL ============ -->
     <article class="panel">
-      <h2>Transcription <span class="unit-tag">Chirp &middot; per minute</span></h2>
+      <h2>Transcriptie <span class="unit-tag">Chirp &middot; per minuut</span></h2>
 
       <div class="field">
         <div class="field-head">
-          <label for="therapists">Therapists</label>
+          <label for="therapists">Behandelaren</label>
           <span class="field-value"><span id="valTherapists">25</span></span>
         </div>
         <div class="field-controls">
@@ -902,7 +902,7 @@
 
       <div class="field">
         <div class="field-head">
-          <label for="sessionsPerDay">Sessions per therapist / day</label>
+          <label for="sessionsPerDay">Sessies per behandelaar / dag</label>
           <span class="field-value"><span id="valSessionsPerDay">6</span></span>
         </div>
         <div class="field-controls">
@@ -913,7 +913,7 @@
 
       <div class="field">
         <div class="field-head">
-          <label for="minsPerSession">Minutes transcribed / session</label>
+          <label for="minsPerSession">Getranscribeerde minuten / sessie</label>
           <span class="field-value"><span id="valMinsPerSession">45</span> min</span>
         </div>
         <div class="field-controls">
@@ -924,7 +924,7 @@
 
       <div class="field">
         <div class="field-head">
-          <label for="workDaysT">Working days / month</label>
+          <label for="workDaysT">Werkdagen / maand</label>
           <span class="field-value"><span id="valWorkDaysT">20</span></span>
         </div>
         <div class="field-controls">
@@ -934,67 +934,67 @@
       </div>
 
       <div class="field">
-        <div class="field-head"><label>Mode</label></div>
+        <div class="field-head"><label>Modus</label></div>
         <div class="mode-toggle">
-          <label><input type="radio" name="mode" value="live" checked /> Live (real-time)</label>
-          <label><input type="radio" name="mode" value="batch" /> Dynamic Batch (up to 24h)</label>
+          <label><input type="radio" name="mode" value="live" checked /> Live (realtime)</label>
+          <label><input type="radio" name="mode" value="batch" /> Dynamic Batch (tot 24u)</label>
         </div>
 
         <div class="mode-compare">
           <div class="mode-card" id="modeCardLive">
             <div class="mode-card-head">
               <span class="mode-name">Live <span class="mode-price mono">$0.016/min</span></span>
-              <span class="mode-flag" id="flagLive">selected</span>
+              <span class="mode-flag" id="flagLive">geselecteerd</span>
             </div>
-            <p class="mode-desc">The system listens and writes the transcript down while the therapist and client are still talking. It's complete the instant the session ends.</p>
+            <p class="mode-desc">Het systeem luistert mee en schrijft het transcript live mee terwijl de behandelaar en cliënt nog aan het praten zijn. Zodra de sessie eindigt, is het transcript direct compleet.</p>
             <ul class="mode-points">
-              <li><span class="pt-label">Use it when</span>something needs to happen <em>during</em> the session — live safety-word flagging, live captions, or any tool that has to react to what's said in the moment.</li>
-              <li><span class="pt-label">Why it costs more</span>Google has to hold a continuous connection open and process audio as it arrives, which is priced as a premium "streaming" service.</li>
-              <li><span class="pt-label">Data footprint</span>no separate recording has to be made — audio is processed and discarded as it streams, so nothing extra is stored beforehand.</li>
+              <li><span class="pt-label">Gebruik dit wanneer</span>er iets moet gebeuren <em>tijdens</em> de sessie — het live signaleren van veiligheidswoorden, live ondertiteling, of een tool die direct moet reageren op wat er op dat moment gezegd wordt.</li>
+              <li><span class="pt-label">Waarom het meer kost</span>Google moet een continue verbinding open houden en audio verwerken zodra die binnenkomt — dat wordt geprijsd als een premium "streaming"-dienst.</li>
+              <li><span class="pt-label">Data-footprint</span>er hoeft geen aparte opname gemaakt te worden — audio wordt verwerkt en meteen weer weggegooid terwijl het binnenstroomt, dus er wordt vooraf niets extra opgeslagen.</li>
             </ul>
           </div>
 
           <div class="mode-card" id="modeCardBatch">
             <div class="mode-card-head">
               <span class="mode-name">Dynamic Batch <span class="mode-price mono">$0.003/min</span></span>
-              <span class="mode-flag" id="flagBatch">selected</span>
+              <span class="mode-flag" id="flagBatch">geselecteerd</span>
             </div>
-            <p class="mode-desc">The session is recorded, then submitted to Google's discounted "Dynamic Batch" queue — a specific, named pricing mode, not just "the non-live option." The discount is a deliberate trade: Google can take up to 24 hours to return it, in exchange for the lower price.</p>
+            <p class="mode-desc">De sessie wordt opgenomen en vervolgens ingediend bij Google's voordelige "Dynamic Batch"-wachtrij — een specifieke, met naam genoemde prijsmodus, niet zomaar "de niet-live optie." De korting is een bewuste ruil: Google mag er tot 24 uur over doen om het terug te leveren, in ruil voor de lagere prijs.</p>
             <ul class="mode-points">
-              <li><span class="pt-label">Use it when</span>a same-day (or next-day) transcript is genuinely fine — end-of-week documentation, billing records, retrospective note-writing. Not for anything you or the client will want to see today.</li>
-              <li><span class="pt-label">Why it costs less</span>this is Google's real, published "Dynamic Batch" rate (confirmed 4x cheaper than the standard $0.016/min) — it exists specifically to sell spare processing capacity in exchange for accepting a long, unguaranteed wait.</li>
-              <li><span class="pt-label">The trade-off</span>up to 24 hours before the transcript exists, by Google's own design — not a technical limitation to engineer around, but the deliberate price of the discount. It cannot support anything that needs to happen live, or even same-hour.</li>
-              <li><span class="pt-label">Data footprint</span>this mode needs a recording of the session to exist, even briefly. Recording a session is a separate thing to get patient consent for, on top of transcribing it, and needs its own privacy sign-off — the lower price comes with more paperwork, not less.</li>
+              <li><span class="pt-label">Gebruik dit wanneer</span>een transcript dat dezelfde dag (of de dag erna) klaar is prima is — documentatie aan het eind van de week, factuurgegevens, terugblikkende verslaglegging. Niet geschikt voor iets dat u of de cliënt nog vandaag wil inzien.</li>
+              <li><span class="pt-label">Waarom het minder kost</span>dit is Google's werkelijke, gepubliceerde "Dynamic Batch"-tarief (bevestigd 4x goedkoper dan het standaardtarief van $0.016/min) — het bestaat specifiek om overtollige verwerkingscapaciteit te verkopen, in ruil voor het accepteren van een lange, niet-gegarandeerde wachttijd.</li>
+              <li><span class="pt-label">De afweging</span>tot 24 uur voordat het transcript bestaat — dat is Google's eigen ontwerp, geen technische beperking om omheen te bouwen, maar de bewuste prijs van de korting. Deze modus is niet geschikt voor iets dat live, of zelfs binnen hetzelfde uur, moet gebeuren.</li>
+              <li><span class="pt-label">Data-footprint</span>deze modus vereist dat er een opname van de sessie bestaat, al is het maar kort. Het opnemen van een sessie is iets waar apart toestemming van de patiënt voor nodig is, bovenop het transcriberen zelf, en vraagt om een eigen privacy-akkoord — de lagere prijs komt met meer papierwerk, niet minder.</li>
             </ul>
           </div>
         </div>
 
-        <p class="mode-bottom-line"><strong>In short:</strong> live costs more because you're paying for the transcript to exist the instant it's spoken. Dynamic Batch costs a quarter as much, but the trade isn't a short delay — it's Google's own up-to-24-hour window, plus an extra consent/privacy step for keeping a recording in the first place. There's no cheaper middle ground: a "chunk the audio to fake live" approach doesn't get the discount, because the discount is specifically for accepting the 24-hour wait, not for using the batch endpoint (see notes below).</p>
+        <p class="mode-bottom-line"><strong>Kort gezegd:</strong> live kost meer omdat u betaalt om het transcript te laten bestaan op het moment zelf dat het gesproken wordt. Dynamic Batch kost een kwart daarvan, maar de ruil is geen korte vertraging — het is Google's eigen venster van tot 24 uur, plus een extra toestemmings-/privacystap voor het maken van een opname. Er is geen goedkopere tussenweg: een aanpak die "audio in stukjes opknipt om live na te bootsen" krijgt de korting niet, want de korting geldt specifiek voor het accepteren van de wachttijd van 24 uur, niet voor het gebruik van het batch-endpoint (zie de toelichting hieronder).</p>
       </div>
 
       <div class="ledger">
         <div class="ledger-row">
-          <span class="lbl">Total minutes / month</span>
+          <span class="lbl">Totaal aantal minuten / maand</span>
           <span class="leader"></span>
           <span class="val mono" id="outMinutes">0</span>
         </div>
         <div class="ledger-row">
-          <span class="lbl">Rate tier</span>
+          <span class="lbl">Tarieftier</span>
           <span class="leader"></span>
           <span class="val mono" id="outTier">&mdash;</span>
         </div>
         <div class="ledger-row">
-          <span class="lbl">Cost / session</span>
+          <span class="lbl">Kosten / sessie</span>
           <span class="leader"></span>
           <span class="val mono" id="outCostSession">$0</span>
         </div>
         <div class="ledger-row">
-          <span class="lbl">Cost / therapist / month</span>
+          <span class="lbl">Kosten / behandelaar / maand</span>
           <span class="leader"></span>
           <span class="val mono" id="outCostTherapistMonth">$0</span>
         </div>
         <div class="ledger-row headline">
-          <span class="lbl">Total transcription / month</span>
+          <span class="lbl">Totaal transcriptie / maand</span>
           <span class="leader"></span>
           <span class="val mono" id="outCostMonthT">$0</span>
         </div>
@@ -1003,11 +1003,11 @@
 
     <!-- ============ EMAIL PANEL ============ -->
     <article class="panel">
-      <h2>Email drafting <span class="unit-tag">Gemini &middot; per token</span></h2>
+      <h2>E-mailconcepten <span class="unit-tag">Gemini &middot; per token</span></h2>
 
       <div class="field">
         <div class="field-head">
-          <label for="emailsPerDay">Emails drafted / day</label>
+          <label for="emailsPerDay">E-mailconcepten / dag</label>
           <span class="field-value"><span id="valEmailsPerDay">25</span></span>
         </div>
         <div class="field-controls">
@@ -1018,7 +1018,7 @@
 
       <div class="field">
         <div class="field-head">
-          <label for="inputTokens">Input tokens / email</label>
+          <label for="inputTokens">Inputtokens / e-mail</label>
           <span class="field-value"><span id="valInputTokens">16,000</span></span>
         </div>
         <div class="field-controls">
@@ -1029,7 +1029,7 @@
 
       <div class="field">
         <div class="field-head">
-          <label for="outputTokens">Output tokens / email</label>
+          <label for="outputTokens">Outputtokens / e-mail</label>
           <span class="field-value"><span id="valOutputTokens">1,000</span></span>
         </div>
         <div class="field-controls">
@@ -1040,7 +1040,7 @@
 
       <div class="field">
         <div class="field-head">
-          <label for="workDaysE">Working days / month</label>
+          <label for="workDaysE">Werkdagen / maand</label>
           <span class="field-value"><span id="valWorkDaysE">22</span></span>
         </div>
         <div class="field-controls">
@@ -1050,13 +1050,13 @@
       </div>
 
       <div class="field">
-        <div class="field-head"><label for="modelSelect">Model in use</label></div>
+        <div class="field-head"><label for="modelSelect">Model in gebruik</label></div>
         <select id="modelSelect">
           <option value="flashlite">Gemini 2.5 Flash-Lite</option>
           <option value="flash">Gemini 2.5 Flash</option>
           <option value="pro" selected>Gemini 2.5 Pro (&le;200k context)</option>
         </select>
-        <p class="model-note">Pro is what the account was originally configured with (NL residency, 30 Jun). Flash-Lite was confirmed to also qualify for europe-west4 residency on 6 Jul, but nobody has verified which model the running app actually calls — compare below.</p>
+        <p class="model-note">Pro is het model waarmee het account oorspronkelijk is ingericht (NL-residency, 30 juni). Op 6 juli is bevestigd dat Flash-Lite ook in aanmerking komt voor europe-west4-residency, maar niemand heeft geverifieerd welk model de draaiende app daadwerkelijk aanroept — vergelijk hieronder.</p>
       </div>
 
       <div class="compare">
@@ -1065,10 +1065,10 @@
             <tr>
               <th>Model</th>
               <th class="mono">$/M in</th>
-              <th class="mono">$/M out</th>
-              <th class="mono">Cost/email</th>
-              <th class="mono">Cost/month</th>
-              <th>vs. cheapest</th>
+              <th class="mono">$/M uit</th>
+              <th class="mono">Kosten/e-mail</th>
+              <th class="mono">Kosten/maand</th>
+              <th>t.o.v. goedkoopste</th>
             </tr>
           </thead>
           <tbody id="compareBody"></tbody>
@@ -1077,17 +1077,17 @@
 
       <div class="ledger">
         <div class="ledger-row">
-          <span class="lbl">Cost / email <span id="selectedModelLabel"></span></span>
+          <span class="lbl">Kosten / e-mail <span id="selectedModelLabel"></span></span>
           <span class="leader"></span>
           <span class="val mono" id="outCostEmail">$0</span>
         </div>
         <div class="ledger-row">
-          <span class="lbl">Cost / day</span>
+          <span class="lbl">Kosten / dag</span>
           <span class="leader"></span>
           <span class="val mono" id="outCostDayE">$0</span>
         </div>
         <div class="ledger-row headline">
-          <span class="lbl">Total email-AI / month</span>
+          <span class="lbl">Totaal e-mail-AI / maand</span>
           <span class="leader"></span>
           <span class="val mono" id="outCostMonthE">$0</span>
         </div>
@@ -1095,14 +1095,14 @@
     </article>
 
     <article class="panel panel-wide">
-      <h2>Transcript storage <span class="unit-tag">Cloud Storage &middot; per GiB-month</span></h2>
-      <p class="panel-subnote">Storing the transcript as a small text/markdown file per session &mdash; separate from the transcription cost above, and separate from the Google contract question (the existing agreement already covers storage, see the notes below).</p>
+      <h2>Transcriptopslag <span class="unit-tag">Cloud Storage &middot; per GiB-maand</span></h2>
+      <p class="panel-subnote">Het opslaan van het transcript als een klein tekst-/markdownbestand per sessie &mdash; los van de transcriptiekosten hierboven, en los van de vraag over het Google-contract (de bestaande overeenkomst dekt opslag al, zie de toelichting hieronder).</p>
 
       <div class="storage-grid">
         <div class="storage-inputs">
           <div class="field">
             <div class="field-head">
-              <label for="fileSizeKb">Avg. size per transcript (.md)</label>
+              <label for="fileSizeKb">Gem. grootte per transcript (.md)</label>
               <span class="field-value"><span id="valFileSizeKb">40</span> KB</span>
             </div>
             <div class="field-controls">
@@ -1113,7 +1113,7 @@
 
           <div class="field">
             <div class="field-head">
-              <label for="storagePercent">Share of sessions saved</label>
+              <label for="storagePercent">Aandeel opgeslagen sessies</label>
               <span class="field-value"><span id="valStoragePercent">100</span>%</span>
             </div>
             <div class="field-controls">
@@ -1124,40 +1124,40 @@
 
           <div class="field">
             <div class="field-head">
-              <label for="retentionMonths">Retention period</label>
-              <span class="field-value"><span id="valRetentionMonths">24</span> mo</span>
+              <label for="retentionMonths">Bewaartermijn</label>
+              <span class="field-value"><span id="valRetentionMonths">24</span> mnd</span>
             </div>
             <div class="field-controls">
               <input type="range" id="retentionMonths" min="1" max="240" step="1" value="24" />
               <input type="number" id="retentionMonthsNum" min="1" max="600" step="1" value="24" />
             </div>
-            <p class="field-note">Set this to whatever the practice's actual record-retention policy requires &mdash; not a legal default.</p>
+            <p class="field-note">Stel dit in op wat het daadwerkelijke bewaarbeleid van de praktijk vereist &mdash; dit is geen wettelijke standaardwaarde.</p>
           </div>
         </div>
 
         <div class="ledger storage-ledger">
           <div class="ledger-row">
-            <span class="lbl">Sessions transcribed / month</span>
+            <span class="lbl">Getranscribeerde sessies / maand</span>
             <span class="leader"></span>
             <span class="val mono" id="outSessionsForStorage">0</span>
           </div>
           <div class="ledger-row">
-            <span class="lbl">Files stored / month</span>
+            <span class="lbl">Opgeslagen bestanden / maand</span>
             <span class="leader"></span>
             <span class="val mono" id="outFilesPerMonth">0</span>
           </div>
           <div class="ledger-row">
-            <span class="lbl">New data added / month</span>
+            <span class="lbl">Nieuwe data toegevoegd / maand</span>
             <span class="leader"></span>
             <span class="val mono" id="outNewDataMonth">0 MB</span>
           </div>
           <div class="ledger-row">
-            <span class="lbl">Steady-state total stored<span class="tier-pill" id="outRetentionPill">at 24 mo</span></span>
+            <span class="lbl">Totaal opgeslagen in stabiele situatie<span class="tier-pill" id="outRetentionPill">bij 24 mnd</span></span>
             <span class="leader"></span>
             <span class="val mono" id="outTotalStored">0 GiB</span>
           </div>
           <div class="ledger-row headline">
-            <span class="lbl">Total storage / month</span>
+            <span class="lbl">Totaal opslag / maand</span>
             <span class="leader"></span>
             <span class="val mono" id="outCostMonthS">$0</span>
           </div>
@@ -1166,14 +1166,14 @@
     </article>
 
     <article class="panel panel-wide">
-      <h2>Voice agent <span class="unit-tag">Telephony &middot; Chirp STT/TTS &middot; Gemini</span></h2>
-      <p class="panel-subnote">Reception-style phone calls — booking/rescheduling belafspraken, first-line "spoed" triage before human handoff — not open-ended conversation. Carrier + Chirp 2 (STT) + Gemini 2.5 Flash-Lite (LLM) + Chirp 3 HD (TTS). Cloud Run hosting for the orchestrator isn't priced below because it's effectively $0/month at this volume (inside the free tier) — see notes.</p>
+      <h2>Voice agent <span class="unit-tag">Telefonie &middot; Chirp STT/TTS &middot; Gemini</span></h2>
+      <p class="panel-subnote">Telefoongesprekken in receptiestijl — belafspraken inplannen/verzetten, eerstelijns "spoed"-triage voordat een medewerker het overneemt — geen open gesprekken zonder vaste structuur. Carrier + Chirp 2 (STT) + Gemini 2.5 Flash-Lite (LLM) + Chirp 3 HD (TTS). Cloud Run-hosting voor de orchestrator is hieronder niet meegerekend, omdat dit bij dit volume effectief $0/maand kost (binnen de free tier) — zie de toelichting.</p>
 
       <div class="storage-grid">
         <div class="storage-inputs">
           <div class="field">
             <div class="field-head">
-              <label for="callsPerDay">Calls / day</label>
+              <label for="callsPerDay">Gesprekken / dag</label>
               <span class="field-value"><span id="valCallsPerDay">15</span></span>
             </div>
             <div class="field-controls">
@@ -1184,7 +1184,7 @@
 
           <div class="field">
             <div class="field-head">
-              <label for="workDaysV">Working days / month</label>
+              <label for="workDaysV">Werkdagen / maand</label>
               <span class="field-value"><span id="valWorkDaysV">20</span></span>
             </div>
             <div class="field-controls">
@@ -1195,7 +1195,7 @@
 
           <div class="field">
             <div class="field-head">
-              <label for="callerTalkMin">Caller talk time / call</label>
+              <label for="callerTalkMin">Spreektijd beller / gesprek</label>
               <span class="field-value"><span id="valCallerTalkMin">2.5</span> min</span>
             </div>
             <div class="field-controls">
@@ -1206,19 +1206,19 @@
 
           <div class="field">
             <div class="field-head">
-              <label for="agentTalkMin">Agent talk time / call</label>
+              <label for="agentTalkMin">Spreektijd agent / gesprek</label>
               <span class="field-value"><span id="valAgentTalkMin">1.5</span> min</span>
             </div>
             <div class="field-controls">
               <input type="range" id="agentTalkMin" min="0.5" max="10" step="0.5" value="1.5" />
               <input type="text" inputmode="decimal" id="agentTalkMinNum" value="1.5" />
             </div>
-            <p class="field-note">Caller + agent talk time sets total connected-call duration, which is what telephony/streaming is billed on.</p>
+            <p class="field-note">Spreektijd beller + agent samen bepaalt de totale duur van het verbonden gesprek — en dát is waarop telefonie/streaming wordt afgerekend.</p>
           </div>
 
           <div class="field">
             <div class="field-head">
-              <label for="vInputTokens">LLM input tokens / call</label>
+              <label for="vInputTokens">LLM-inputtokens / gesprek</label>
               <span class="field-value"><span id="valVInputTokens">3,000</span></span>
             </div>
             <div class="field-controls">
@@ -1229,7 +1229,7 @@
 
           <div class="field">
             <div class="field-head">
-              <label for="vOutputTokens">LLM output tokens / call</label>
+              <label for="vOutputTokens">LLM-outputtokens / gesprek</label>
               <span class="field-value"><span id="valVOutputTokens">400</span></span>
             </div>
             <div class="field-controls">
@@ -1251,37 +1251,37 @@
               <thead>
                 <tr>
                   <th>Carrier</th>
-                  <th class="mono">Inbound</th>
+                  <th class="mono">Inkomend</th>
                   <th class="mono">Streaming</th>
-                  <th class="mono">Combined $/min</th>
-                  <th class="mono">Cost/month</th>
-                  <th>vs. cheapest</th>
+                  <th class="mono">Gecombineerd $/min</th>
+                  <th class="mono">Kosten/maand</th>
+                  <th>t.o.v. goedkoopste</th>
                 </tr>
               </thead>
               <tbody id="carrierCompareBody"></tbody>
             </table>
           </div>
-          <p class="mode-bottom-line"><strong>Neither carrier is sign-up-and-go for real patient calls.</strong> Twilio's EU voice region is opt-in, not default &mdash; patient audio processes in the US unless the Voice Region is explicitly set to IE1 (Dublin), and its HIPAA BAA needs an Enterprise/Security-tier upgrade plus a sales cycle. Telnyx's EU media-pinning ("AnchorSite") is currently a marketing claim, not a contract term &mdash; get it confirmed in writing for the specific Voice API/SIP product before relying on it, and its HIPAA position is a "conduit exception" argument rather than a formal BAA (push for one in writing, since the practice wants HIPAA). Telnyx also had a real supply-chain incident on its Python SDK in March 2026 (credential-stealing malware) &mdash; log it as a vendor-risk item in the DPIA regardless of which carrier is chosen. Both hold ISO 27001 + SOC 2; neither holds NEN 7510 (expected, not a disqualifier).</p>
+          <p class="mode-bottom-line"><strong>Geen van beide carriers is kant-en-klaar voor echte patiëntgesprekken.</strong> De EU-voice-regio van Twilio is opt-in, niet standaard &mdash; patiëntaudio wordt in de VS verwerkt tenzij de Voice Region expliciet op IE1 (Dublin) wordt gezet, en de HIPAA BAA vereist een upgrade naar Enterprise/Security-tier plus een verkooptraject. De EU-media-pinning van Telnyx ("AnchorSite") is momenteel een marketingclaim, geen contractuele bepaling &mdash; laat dit schriftelijk bevestigen voor het specifieke Voice API/SIP-product voordat u erop vertrouwt; hun HIPAA-positie is bovendien een "conduit exception"-argument in plaats van een formele BAA (dring aan op een schriftelijke BAA, aangezien de praktijk HIPAA wil). Telnyx had in maart 2026 ook een concreet supply-chain-incident met zijn Python-SDK (malware die inloggegevens steelt) &mdash; noteer dit als leveranciersrisico in de DPIA, ongeacht welke carrier gekozen wordt. Beide hebben ISO 27001 + SOC 2; geen van beide heeft NEN 7510 (verwacht, geen afwijzingsgrond).</p>
         </div>
 
         <div class="ledger storage-ledger">
           <div class="ledger-row">
-            <span class="lbl">Calls / month</span>
+            <span class="lbl">Gesprekken / maand</span>
             <span class="leader"></span>
             <span class="val mono" id="outCallsPerMonth">0</span>
           </div>
           <div class="ledger-row">
-            <span class="lbl">Total call minutes / month</span>
+            <span class="lbl">Totaal gespreksminuten / maand</span>
             <span class="leader"></span>
             <span class="val mono" id="outCallMinutes">0</span>
           </div>
           <div class="ledger-row">
-            <span class="lbl">STT (Chirp 2, caller minutes)</span>
+            <span class="lbl">STT (Chirp 2, minuten beller)</span>
             <span class="leader"></span>
             <span class="val mono" id="outCostSTT">$0</span>
           </div>
           <div class="ledger-row">
-            <span class="lbl">TTS (Chirp 3 HD, agent minutes)<span class="tier-pill" id="outTtsFreeTierPill"></span></span>
+            <span class="lbl">TTS (Chirp 3 HD, minuten agent)<span class="tier-pill" id="outTtsFreeTierPill"></span></span>
             <span class="leader"></span>
             <span class="val mono" id="outCostTTS">$0</span>
           </div>
@@ -1291,12 +1291,12 @@
             <span class="val mono" id="outCostLLM">$0</span>
           </div>
           <div class="ledger-row">
-            <span class="lbl">Telephony (<span id="carrierLabelInline"></span>)</span>
+            <span class="lbl">Telefonie (<span id="carrierLabelInline"></span>)</span>
             <span class="leader"></span>
             <span class="val mono" id="outCostTelephony">$0</span>
           </div>
           <div class="ledger-row headline">
-            <span class="lbl">Total voice agent / month</span>
+            <span class="lbl">Totaal voice agent / maand</span>
             <span class="leader"></span>
             <span class="val mono" id="outCostMonthV">$0</span>
           </div>
@@ -1305,14 +1305,14 @@
     </article>
 
     <article class="panel panel-wide">
-      <h2>Document processing <span class="unit-tag">Gemini &middot; image &amp; PDF input</span></h2>
-      <p class="panel-subnote">Reading scanned documents &mdash; referral letters, screening forms &mdash; with Gemini's vision input. Image and PDF-page tokens bill at the same rate as text, no separate multimodal surcharge. A PDF page costs exactly what one small image costs, so a multi-page PDF's cost is simply page count &times; that number.</p>
+      <h2>Documentverwerking <span class="unit-tag">Gemini &middot; afbeelding- &amp; PDF-input</span></h2>
+      <p class="panel-subnote">Het lezen van gescande documenten &mdash; verwijsbrieven, screeningformulieren &mdash; via Gemini's vision-input. Afbeelding- en PDF-paginatokens worden tegen hetzelfde tarief afgerekend als tekst, zonder aparte multimodale toeslag. Eén PDF-pagina kost precies evenveel als één kleine afbeelding, dus de kosten van een meerpagina-PDF zijn simpelweg het aantal pagina's &times; dat bedrag.</p>
 
       <div class="storage-grid">
         <div class="storage-inputs">
           <div class="field">
             <div class="field-head">
-              <label for="docsPerDay">Documents / day</label>
+              <label for="docsPerDay">Documenten / dag</label>
               <span class="field-value"><span id="valDocsPerDay">12</span></span>
             </div>
             <div class="field-controls">
@@ -1323,7 +1323,7 @@
 
           <div class="field">
             <div class="field-head">
-              <label for="workDaysD">Working days / month</label>
+              <label for="workDaysD">Werkdagen / maand</label>
               <span class="field-value"><span id="valWorkDaysD">20</span></span>
             </div>
             <div class="field-controls">
@@ -1334,19 +1334,19 @@
 
           <div class="field">
             <div class="field-head">
-              <label for="pagesPerPdf">Pages per PDF</label>
+              <label for="pagesPerPdf">Pagina's per PDF</label>
               <span class="field-value"><span id="valPagesPerPdf">4</span></span>
             </div>
             <div class="field-controls">
               <input type="range" id="pagesPerPdf" min="1" max="50" step="1" value="4" />
               <input type="number" id="pagesPerPdfNum" min="1" max="1000" step="1" value="4" />
             </div>
-            <p class="field-note">Used for the PDF row below &mdash; the single-image row is always 1 page.</p>
+            <p class="field-note">Wordt gebruikt voor de PDF-rij hieronder &mdash; de rij voor een losse afbeelding is altijd 1 pagina.</p>
           </div>
 
           <div class="field">
             <div class="field-head">
-              <label for="docOutputTokens">Output tokens / document</label>
+              <label for="docOutputTokens">Outputtokens / document</label>
               <span class="field-value"><span id="valDocOutputTokens">300</span></span>
             </div>
             <div class="field-controls">
@@ -1365,10 +1365,10 @@
           </div>
 
           <div class="field">
-            <div class="field-head"><label>What's actually processed</label></div>
+            <div class="field-head"><label>Wat er daadwerkelijk verwerkt wordt</label></div>
             <div class="mode-toggle">
-              <label><input type="radio" name="docType" value="image" checked /> Single image</label>
-              <label><input type="radio" name="docType" value="pdf" /> Multi-page PDF</label>
+              <label><input type="radio" name="docType" value="image" checked /> Losse afbeelding</label>
+              <label><input type="radio" name="docType" value="pdf" /> Meerpagina-PDF</label>
             </div>
           </div>
 
@@ -1377,32 +1377,32 @@
               <thead>
                 <tr>
                   <th>Type</th>
-                  <th class="mono">Pages</th>
-                  <th class="mono">Input tokens</th>
-                  <th class="mono">Cost/doc</th>
-                  <th class="mono">Cost/month</th>
-                  <th>vs. 1 page</th>
+                  <th class="mono">Pagina's</th>
+                  <th class="mono">Inputtokens</th>
+                  <th class="mono">Kosten/doc</th>
+                  <th class="mono">Kosten/maand</th>
+                  <th>t.o.v. 1 pagina</th>
                 </tr>
               </thead>
               <tbody id="docCompareBody"></tbody>
             </table>
           </div>
-          <p class="field-note">The "vs. 1 page" factor is the actual cost multiple, not the raw page count &mdash; only the page/image tokens scale with pages; the output tokens (the extracted answer) stay fixed either way, so a 4-page PDF costs less than a literal 4&times; a single image.</p>
+          <p class="field-note">De factor "t.o.v. 1 pagina" is de werkelijke kostenvermenigvuldiger, niet het aantal pagina's zelf &mdash; alleen de pagina-/afbeeldingstokens schalen mee met het aantal pagina's; de outputtokens (het geëxtraheerde antwoord) blijven in beide gevallen gelijk, waardoor een PDF van 4 pagina's minder kost dan een letterlijke 4&times; een losse afbeelding.</p>
         </div>
 
         <div class="ledger storage-ledger">
           <div class="ledger-row">
-            <span class="lbl">Documents / month</span>
+            <span class="lbl">Documenten / maand</span>
             <span class="leader"></span>
             <span class="val mono" id="outDocsPerMonth">0</span>
           </div>
           <div class="ledger-row">
-            <span class="lbl">Cost / document (<span id="docTypeLabelInline"></span>)</span>
+            <span class="lbl">Kosten / document (<span id="docTypeLabelInline"></span>)</span>
             <span class="leader"></span>
             <span class="val mono" id="outCostPerDoc">$0</span>
           </div>
           <div class="ledger-row headline">
-            <span class="lbl">Total document processing / month</span>
+            <span class="lbl">Totaal documentverwerking / maand</span>
             <span class="leader"></span>
             <span class="val mono" id="outCostMonthD">$0</span>
           </div>
@@ -1413,27 +1413,27 @@
   </section>
 
   <section class="scenarios">
-    <h3>Saved scenarios</h3>
-    <p class="scenarios-intro">Save the current settings under a name to compare different assumptions side by side — e.g. "25 therapists, live" vs. "25 therapists, Dynamic Batch." Saved in this browser only, not shared between devices.</p>
+    <h3>Opgeslagen scenario's</h3>
+    <p class="scenarios-intro">Sla de huidige instellingen op onder een naam om verschillende aannames naast elkaar te vergelijken — bijvoorbeeld "25 behandelaren, live" versus "25 behandelaren, Dynamic Batch." Wordt alleen in deze browser bewaard, niet gedeeld tussen apparaten.</p>
 
     <div class="scenario-save-row">
-      <input type="text" id="scenarioName" placeholder="Name this scenario…" maxlength="60" />
-      <button type="button" id="saveScenarioBtn">Save current as…</button>
+      <input type="text" id="scenarioName" placeholder="Naam voor dit scenario…" maxlength="60" />
+      <button type="button" id="saveScenarioBtn">Huidige opslaan als…</button>
     </div>
 
-    <p class="scenarios-empty" id="scenariosEmpty">No scenarios saved yet — set up the calculator above the way you want, then save it.</p>
+    <p class="scenarios-empty" id="scenariosEmpty">Nog geen scenario's opgeslagen — stel de calculator hierboven naar wens in en sla die dan op.</p>
 
     <div class="scenario-table-wrap" id="scenarioTableWrap" style="display:none;">
       <table class="scenario-table">
         <thead>
           <tr>
             <th>Scenario</th>
-            <th class="mono">Transcription</th>
-            <th class="mono">Email-AI</th>
-            <th class="mono">Storage</th>
+            <th class="mono">Transcriptie</th>
+            <th class="mono">E-mail-AI</th>
+            <th class="mono">Opslag</th>
             <th class="mono">Voice agent</th>
-            <th class="mono">Doc processing</th>
-            <th class="mono">Total</th>
+            <th class="mono">Docverwerking</th>
+            <th class="mono">Totaal</th>
             <th></th>
           </tr>
         </thead>
@@ -1443,20 +1443,20 @@
   </section>
 
   <footer class="notes">
-    <h3>Notes on these figures</h3>
+    <h3>Toelichting bij deze cijfers</h3>
     <ul>
-      <li>Rates sourced from Google's official pricing pages, verified 7 Jul 2026. Both Chirp and the Gemini 2.5 series price identically regardless of region — europe-west4 (NL) costs the same as global, so residency is free here.</li>
-      <li>Transcription volume tiers ($0.016 &rarr; $0.010 &rarr; $0.008 &rarr; $0.004 per minute) are applied as graduated bands past 500k / 1M / 2M minutes a month, the standard model for usage-based cloud pricing &mdash; worth confirming against Google's actual billing behaviour if volume gets close to a threshold.</li>
-      <li>The &#36;0.003/min Dynamic Batch rate is confirmed directly against the live Speech-to-Text pricing page (SKU 7700-6778-EF8E), not a placeholder &mdash; but it only applies when the request explicitly opts into Google's <code>DYNAMIC_BATCHING</code> processing strategy, which caps latency at up to 24 hours. There is no cheaper tier for "batch, but fast": sending short audio chunks to the batch endpoint without that flag bills at the same $0.016/min as live, and Google's own docs say batch recognition isn't designed for clips under 60 seconds in the first place &mdash; so chunking audio to emulate live transcription would not save any money.</li>
-      <li>Figures are model-inference and storage cost only: orchestration (e.g. n8n), logging and human-review time are not included.</li>
-      <li>The transcript storage total assumes a steady state: once the practice has been running longer than the chosen retention period, old files age out roughly as fast as new ones arrive, so total stored data plateaus at (monthly volume &times; retention) rather than growing forever. In the first few months &mdash; before that many months have actually elapsed &mdash; the real bill will be lower than this figure.</li>
-      <li>The 40 KB default transcript size is a rough estimate for a 45&ndash;60 minute conversation rendered as plain-text/markdown &mdash; measure an actual sample transcript and adjust the slider once one exists.</li>
-      <li>Voice agent scope is grounded in the practice's actual phone workflows (belafspraak scheduling, cancellations, first-line "spoed" triage before human handoff) rather than open-ended conversation &mdash; call volume itself isn't published anywhere, so treat calls/day as your own assumption to tune.</li>
-      <li>Telnyx undercuts Twilio on every telephony metric checked (inbound, outbound, and WebSocket media streaming) &mdash; it's the default carrier here. Number rental isn't counted since the practice would port its existing +31307984022 rather than rent a new one.</li>
-      <li>Chirp 3 HD (TTS) gets 1,000,000 free characters/month before the $30/1M-character rate applies &mdash; at low call volume this can fully absorb the bill, which is why the TTS line may show $0 with an "within free tier" tag.</li>
-      <li>Cloud Run hosting for the Pipecat orchestrator isn't in the total because it's effectively $0/month at this call volume (well inside the free tier) &mdash; but that only holds if the orchestrator's work happens synchronously within the request/WebSocket context. If it needs independent background threads (e.g. for turn-detection), it requires "always-on CPU" billing instead, which is materially more expensive and worth a design review before committing to Cloud Run at higher volume.</li>
-      <li>Document processing assumes Google's documented spec: a flat 258 tokens for a small image or one PDF page, regardless of resolution, at the same rate as text input (no multimodal surcharge). <strong>One live caveat:</strong> an open, unresolved Google issue reports Vertex AI (what this account runs on) sometimes returning up to 7&times; more tokens than that spec for the same image compared to the separate Gemini Developer API &mdash; confirmed for standalone images, not yet confirmed either way for PDF pages specifically. Worth testing against a real sample document with the CountTokens API before finalizing a budget on this line.</li>
-      <li>The &euro; figure is a simple conversion at the rate entered above &mdash; edit it to the live rate for precision.</li>
+      <li>Tarieven afkomstig van Google's officiële prijspagina's, geverifieerd op 7 juli 2026. Zowel Chirp als de Gemini 2.5-serie rekenen overal hetzelfde tarief, ongeacht regio — europe-west4 (NL) kost evenveel als global, dus residency is hier gratis.</li>
+      <li>Transcriptievolumetiers ($0.016 &rarr; $0.010 &rarr; $0.008 &rarr; $0.004 per minuut) worden toegepast als oplopende schijven boven 500k / 1M / 2M minuten per maand — het standaardmodel voor cloudprijzen op basis van gebruik. Het is de moeite waard dit te verifiëren tegen Google's daadwerkelijke facturatiegedrag zodra het volume een drempel nadert.</li>
+      <li>Het &#36;0.003/min Dynamic Batch-tarief is rechtstreeks geverifieerd tegen de actuele Speech-to-Text-prijspagina (SKU 7700-6778-EF8E) — geen ruwe schatting. Het geldt echter alleen wanneer het verzoek expliciet kiest voor Google's <code>DYNAMIC_BATCHING</code>-verwerkingsstrategie, die de latency begrenst op tot 24 uur. Er bestaat geen goedkopere tier voor "batch, maar snel": korte audiofragmenten zonder die instelling naar het batch-endpoint sturen wordt tegen hetzelfde tarief van $0.016/min afgerekend als live — en Google's eigen documentatie stelt dat batch-herkenning sowieso niet bedoeld is voor clips korter dan 60 seconden. Audio opknippen om live-transcriptie na te bootsen zou dus geen geld besparen.</li>
+      <li>De cijfers omvatten alleen model-inference- en opslagkosten: orchestratie (bijv. n8n), logging en tijd voor menselijke controle zijn niet inbegrepen.</li>
+      <li>Het totaal voor transcriptopslag gaat uit van een stabiele situatie: zodra de praktijk langer draait dan de gekozen bewaartermijn, vervallen oude bestanden ongeveer even snel als er nieuwe bijkomen, waardoor de totale opgeslagen data afvlakt op (maandvolume &times; bewaartermijn) in plaats van eindeloos door te groeien. In de eerste maanden &mdash; voordat die periode daadwerkelijk verstreken is &mdash; zal de werkelijke rekening lager uitvallen dan dit cijfer.</li>
+      <li>De standaardgrootte van 40 KB per transcript is een ruwe schatting voor een gesprek van 45&ndash;60 minuten, weergegeven als platte tekst/markdown &mdash; meet een echt voorbeeldtranscript zodra dat er is en pas de schuifregelaar daarop aan.</li>
+      <li>De scope van de voice agent is gebaseerd op de daadwerkelijke telefonische workflows van de praktijk (belafspraken inplannen, annuleringen, eerstelijns "spoed"-triage voordat een medewerker het overneemt) in plaats van open gesprekken zonder vaste structuur &mdash; het belvolume zelf staat nergens gepubliceerd, dus behandel gesprekken/dag als uw eigen aanname om naar wens bij te stellen.</li>
+      <li>Telnyx is op elke gecontroleerde telefoniemetric goedkoper dan Twilio (inkomend, uitgaand en WebSocket-mediastreaming) &mdash; daarom is het hier de standaardcarrier. Nummerhuur wordt niet meegeteld, omdat de praktijk het bestaande nummer +31307984022 zou overzetten (porteren) in plaats van een nieuw nummer te huren.</li>
+      <li>Chirp 3 HD (TTS) krijgt 1,000,000 gratis tekens/maand voordat het tarief van $30/1M tekens van toepassing wordt &mdash; bij een laag belvolume kan dit de hele rekening absorberen, waardoor de TTS-regel soms $0 toont met het label "binnen free tier".</li>
+      <li>Cloud Run-hosting voor de Pipecat-orchestrator zit niet in het totaal, omdat dit bij dit belvolume effectief $0/maand kost (ruim binnen de free tier) &mdash; maar dat geldt alleen zolang het werk van de orchestrator synchroon verloopt binnen de request-/WebSocket-context. Als er onafhankelijke achtergrondthreads nodig zijn (bijv. voor turn-detection), is in plaats daarvan "always-on CPU"-facturatie vereist, wat aanzienlijk duurder is en een ontwerpbeoordeling verdient voordat definitief voor Cloud Run gekozen wordt bij hoger volume.</li>
+      <li>Documentverwerking gaat uit van Google's gedocumenteerde specificatie: een vast aantal van 258 tokens voor een kleine afbeelding of één PDF-pagina, ongeacht de resolutie, tegen hetzelfde tarief als tekstinvoer (geen multimodale toeslag). <strong>Eén actueel voorbehoud:</strong> een open, onopgeloste Google-issue meldt dat Vertex AI (waar dit account op draait) voor dezelfde afbeelding soms tot 7&times; meer tokens teruggeeft dan die specificatie, vergeleken met de aparte Gemini Developer API &mdash; bevestigd voor losse afbeeldingen, nog niet bevestigd (in beide richtingen) specifiek voor PDF-pagina's. Het is de moeite waard dit te testen tegen een echt voorbeelddocument met de CountTokens-API voordat er een budget op deze regel wordt vastgesteld.</li>
+      <li>Het bedrag in &euro; is een eenvoudige omrekening tegen de hierboven ingevoerde koers &mdash; pas deze aan naar de actuele koers voor meer precisie.</li>
     </ul>
   </footer>
 
@@ -1534,13 +1534,13 @@
 
     $("modeCardLive").classList.toggle("active", mode === "live");
     $("modeCardBatch").classList.toggle("active", mode === "batch");
-    $("flagLive").textContent = mode === "live" ? "in use below" : "";
-    $("flagBatch").textContent = mode === "batch" ? "in use below" : "";
+    $("flagLive").textContent = mode === "live" ? "hieronder in gebruik" : "";
+    $("flagBatch").textContent = mode === "batch" ? "hieronder in gebruik" : "";
 
     let costT = 0, tierLabel = "";
     if (mode === "batch") {
       costT = totalMinutes * BATCH_RATE;
-      tierLabel = "Dynamic Batch · $0.004/min (up to 24h)";
+      tierLabel = "Dynamic Batch · $0.004/min (tot 24u)";
     } else {
       let remaining = totalMinutes, prevCap = 0, topTier = TIERS[0];
       for (const t of TIERS) {
@@ -1587,7 +1587,7 @@
     for (const key in results) {
       const r = results[key];
       const mult = r.costPerEmail / results[cheapestKey].costPerEmail;
-      let chipClass = "cheap", chipText = "baseline";
+      let chipClass = "cheap", chipText = "basis";
       if (mult > 1.01 && mult <= 4) { chipClass = "mid"; chipText = mult.toFixed(1) + "×"; }
       else if (mult > 4) { chipClass = "costly"; chipText = mult.toFixed(1) + "×"; }
 
@@ -1632,7 +1632,7 @@
     $("outNewDataMonth").textContent = newDataPerMonthGiB >= 1
       ? newDataPerMonthGiB.toLocaleString("en-US", { maximumFractionDigits: 2 }) + " GiB"
       : (newDataPerMonthKb / 1024).toLocaleString("en-US", { maximumFractionDigits: 1 }) + " MB";
-    $("outRetentionPill").textContent = "at " + retentionMonths + " mo";
+    $("outRetentionPill").textContent = "bij " + retentionMonths + " mnd";
     $("outTotalStored").textContent = steadyStateGiB.toLocaleString("en-US", { maximumFractionDigits: 2 }) + " GiB";
     $("outCostMonthS").textContent = fmtUsd(costS);
     $("outTotalStorage").textContent = fmtUsd(costS);
@@ -1674,7 +1674,7 @@
     for (const key in carrierResults) {
       const c = carrierResults[key];
       const mult = c.combinedRate / carrierResults[cheapestCarrier].combinedRate;
-      let chipClass = "cheap", chipText = "baseline";
+      let chipClass = "cheap", chipText = "basis";
       if (mult > 1.01 && mult <= 4) { chipClass = "mid"; chipText = mult.toFixed(1) + "×"; }
       else if (mult > 4) { chipClass = "costly"; chipText = mult.toFixed(1) + "×"; }
       const tr = document.createElement("tr");
@@ -1694,7 +1694,7 @@
     $("outCallsPerMonth").textContent = fmtInt(callsPerMonth);
     $("outCallMinutes").textContent = fmtInt(callMinutesPerMonth);
     $("outCostSTT").textContent = fmtUsd(costSTT);
-    $("outTtsFreeTierPill").textContent = ttsBillableChars === 0 ? "within free tier" : "over free tier";
+    $("outTtsFreeTierPill").textContent = ttsBillableChars === 0 ? "binnen free tier" : "boven free tier";
     $("outCostTTS").textContent = fmtUsd(costTTS);
     $("outCostLLM").textContent = fmtUsd(costLLM);
     $("carrierLabelInline").textContent = carrierResults[carrierKey].label;
@@ -1722,13 +1722,13 @@
 
     const docTbody = $("docCompareBody");
     docTbody.innerHTML = "";
-    const docLabels = { image: "Single image", pdf: "Multi-page PDF" };
+    const docLabels = { image: "Losse afbeelding", pdf: "Meerpagina-PDF" };
     for (const key in docRows) {
       const r = docRows[key];
       // Cost multiple, not page count — fixed output tokens dilute the raw
       // page ratio, so a 4-page PDF is NOT automatically a 4x cost.
       const mult = r.costPerDoc / docRows.image.costPerDoc;
-      let chipClass = "cheap", chipText = "baseline";
+      let chipClass = "cheap", chipText = "basis";
       if (mult > 1.01 && mult <= 4) { chipClass = "mid"; chipText = mult.toFixed(1) + "×"; }
       else if (mult > 4) { chipClass = "costly"; chipText = mult.toFixed(1) + "×"; }
       const tr = document.createElement("tr");
@@ -1930,13 +1930,13 @@
       actionsCell.className = "scenario-row-actions";
 
       const loadBtn = document.createElement("button");
-      loadBtn.type = "button"; loadBtn.className = "secondary"; loadBtn.textContent = "Load";
+      loadBtn.type = "button"; loadBtn.className = "secondary"; loadBtn.textContent = "Laden";
       loadBtn.addEventListener("click", () => applyInputs(list[i].inputs));
 
       const delBtn = document.createElement("button");
-      delBtn.type = "button"; delBtn.className = "secondary"; delBtn.textContent = "Delete";
+      delBtn.type = "button"; delBtn.className = "secondary"; delBtn.textContent = "Verwijderen";
       delBtn.addEventListener("click", () => {
-        if (!confirm("Delete scenario \"" + list[i].name + "\"?")) return;
+        if (!confirm("Scenario \"" + list[i].name + "\" verwijderen?")) return;
         const updated = loadScenarios();
         updated.splice(i, 1);
         persistScenarios(updated);
