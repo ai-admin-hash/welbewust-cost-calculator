@@ -83,6 +83,19 @@
   .combined-note{font-size:.82rem;color:#AEB5C7;margin:0;line-height:1.5;max-width:78ch}
   .combined-note b{color:#EDEFF5;font-weight:600}
 
+  /* "already live" proof callout */
+  .proof{margin-top:16px;background:var(--aw-green-soft);border:1px solid #CDE0D4;border-left:4px solid var(--aw-green);border-radius:var(--aw-radius-sm);padding:18px 22px}
+  .proof-tag{font-family:var(--aw-font-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--aw-green);font-weight:700;margin:0 0 8px;display:flex;align-items:center;gap:7px}
+  .proof-tag::before{content:"●";font-size:.85em}
+  .proof h4{font-family:var(--aw-font-display);font-size:1.1rem;font-weight:600;margin:0 0 9px;color:var(--aw-ink);line-height:1.25}
+  .proof p{margin:0 0 10px;font-size:.9rem;line-height:1.52;color:var(--aw-ink-soft);max-width:78ch}
+  .proof p:last-child{margin-bottom:0}
+  .proof b{color:var(--aw-ink);font-weight:600}
+  .proof a{color:var(--aw-green);font-weight:600;text-decoration:none;border-bottom:1px solid #A9CBB6}
+  .proof a:hover{border-bottom-color:var(--aw-green)}
+  .proof .caution{font-size:.83rem;color:var(--aw-muted);border-top:1px solid #CDE0D4;padding-top:11px;margin-top:13px}
+  .proof .caution b{color:var(--aw-orange-dark)}
+
   .table-wrap{overflow-x:auto;border:1px solid var(--aw-line);border-radius:var(--aw-radius);background:var(--aw-card)}
   table{border-collapse:collapse;width:100%;min-width:640px;font-size:.88rem}
   thead th{text-align:left;font-family:var(--aw-font-mono);text-transform:uppercase;letter-spacing:.05em;font-size:.66rem;color:var(--aw-muted);font-weight:400;padding:13px 16px;border-bottom:1px solid var(--aw-line);background:#F6F0E5}
@@ -196,6 +209,13 @@
         </div>
         <p class="fin-note"><b>CAC is the swing factor.</b> Organic channels (waitlist, former clients, one employer deal) are profitable; paid ads at €15–30 per sale can erase the €23 margin. Best run as a lead funnel into Proposal 1, not a standalone bet.</p>
       </div>
+    </div>
+    <div class="proof">
+      <p class="proof-tag">Already live — this isn't hypothetical</p>
+      <h4>WelBewust already sells to the public: Sport &amp; Therapie, €60/mo on Stripe</h4>
+      <p><b><a href="https://www.welbewust.life/en" target="_blank" rel="noopener">welbewust.life</a></b> is a working <b>Shopify + Stripe</b> storefront. <b>Sport &amp; Therapie</b> runs as a <b>€60/month subscription</b> — up to 5 personal-training sessions/week at NUL30 Gym, with a free intake (normally €120) as the hook — alongside ~60 <b>supplements</b> and a <b>gut-health test kit</b> sold as one-offs. Multilingual checkout, iDEAL / card / SEPA, recurring billing: all built.</p>
+      <p>So Proposal 2 doesn't start from zero — <b>the consumer rails already exist.</b> A self-help module subscription plugs into the same storefront, and the €60/mo sport sub already shows people will pay a recurring consumer price for an <em>optional</em> service that sits beside their insured care.</p>
+      <p class="caution"><b>The one line to hold:</b> sport is sellable precisely because personal training is a genuinely separate, non-insured service. Same test for modules — a therapist-<em>assigned</em> module stays free (it's insured care); only a genuinely separate, opt-in self-help version can be charged for.</p>
     </div>
   </section>
 
