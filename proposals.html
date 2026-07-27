@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three proposals — making money from the modules</title>
+<link rel="stylesheet" href="aweris.css">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--aw-paper);color:var(--aw-ink);font-family:var(--aw-font-body);line-height:1.62;-webkit-font-smoothing:antialiased}
+  .doc{max-width:1000px;margin:0 auto;padding:44px clamp(18px,4vw,40px) 40px}
+  .mono-dim{font-family:var(--aw-font-mono);font-size:.82em;color:var(--aw-muted);letter-spacing:.01em}
+  em{font-style:italic}
+
+  .mast{border-bottom:1px solid var(--aw-line);padding-bottom:32px;margin-bottom:40px}
+  .mast h1{font-family:var(--aw-font-display);font-weight:600;font-size:clamp(2rem,4.8vw,3rem);line-height:1.06;letter-spacing:.005em;text-wrap:balance;margin:16px 0 20px;max-width:20ch}
+  .mast h1 em{font-style:italic;color:var(--aw-orange)}
+  .dek{font-size:1.12rem;line-height:1.6;max-width:66ch;color:var(--aw-ink-soft);margin:0 0 22px}
+  .dek b{color:var(--aw-ink);font-weight:600}
+  .backlink{font-size:.9rem;margin:0;display:flex;gap:14px;flex-wrap:wrap;align-items:baseline}
+  .backlink a{color:var(--aw-orange-dark);text-decoration:none;font-weight:600;border-bottom:1px solid #e6c3b3;padding-bottom:1px}
+  .backlink a:hover{border-bottom-color:var(--aw-orange-dark)}
+
+  .panel{background:var(--aw-blue-dark);border-radius:var(--aw-radius);padding:30px 32px;margin-bottom:48px;color:#EDEFF5}
+  .panel .panel-label{font-family:var(--aw-font-mono);text-transform:uppercase;letter-spacing:.13em;font-size:.7rem;color:var(--aw-gold);margin:0 0 14px}
+  .panel h2{font-family:var(--aw-font-display);font-size:1.5rem;font-weight:600;margin:0 0 14px;color:#fff;line-height:1.2}
+  .panel h2 em{color:var(--aw-orange-light);font-style:italic}
+  .panel p{margin:0 0 14px;font-size:.98rem;line-height:1.55;color:#D7DBE6;max-width:74ch}
+  .panel p:last-child{margin-bottom:0}
+  .panel p b{color:#fff;font-weight:600}
+  .walls{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}
+  .wall{background:#20263C;border-radius:var(--aw-radius-sm);padding:16px 18px}
+  .wall b{display:block;color:var(--aw-orange-light);font-size:.9rem;margin-bottom:4px}
+  .wall span{font-size:.86rem;color:#AEB5C7;line-height:1.45}
+
+  .block{margin-bottom:46px}
+  .kicker{font-family:var(--aw-font-mono);text-transform:uppercase;letter-spacing:.13em;font-size:.7rem;color:var(--aw-orange);margin:0 0 10px}
+  h2.sec{font-family:var(--aw-font-display);font-weight:600;font-size:clamp(1.4rem,3vw,1.85rem);line-height:1.15;margin:0 0 18px;text-wrap:balance}
+  .lead{font-size:1.04rem;color:var(--aw-ink-soft);max-width:66ch;margin:0 0 24px}
+  .lead em{color:var(--aw-ink);font-style:normal;font-weight:600}
+
+  .prop{background:var(--aw-card);border:1px solid var(--aw-line);border-radius:var(--aw-radius);padding:26px 28px;margin-bottom:20px;border-top:4px solid var(--aw-line)}
+  .prop.p1{border-top-color:var(--aw-orange)}
+  .prop.p2{border-top-color:var(--aw-gold)}
+  .prop.p3{border-top-color:var(--aw-blue)}
+  .prop-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+  .prop-num{font-family:var(--aw-font-mono);font-size:.72rem;font-weight:600;letter-spacing:.08em;color:var(--aw-orange)}
+  .prop h3{font-family:var(--aw-font-display);font-size:1.35rem;font-weight:600;margin:0}
+  .prop .oneline{font-size:1rem;color:var(--aw-ink-soft);margin:0 0 18px;max-width:70ch}
+  .prop-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px 24px}
+  .pg{border-left:2px solid var(--aw-line);padding-left:12px}
+  .pg .l{font-family:var(--aw-font-mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--aw-muted);display:block;margin-bottom:2px}
+  .pg .v{font-size:.9rem;color:var(--aw-ink);line-height:1.4}
+  .pg .v b{font-weight:600}
+  .pg.pot .v{color:var(--aw-green);font-weight:600}
+  .pg.risk .v{color:var(--aw-orange-dark)}
+
+  .table-wrap{overflow-x:auto;border:1px solid var(--aw-line);border-radius:var(--aw-radius);background:var(--aw-card)}
+  table{border-collapse:collapse;width:100%;min-width:640px;font-size:.88rem}
+  thead th{text-align:left;font-family:var(--aw-font-mono);text-transform:uppercase;letter-spacing:.05em;font-size:.66rem;color:var(--aw-muted);font-weight:400;padding:13px 16px;border-bottom:1px solid var(--aw-line);background:#F6F0E5}
+  thead th:first-child{color:var(--aw-muted)}
+  tbody td{padding:12px 16px;border-bottom:1px solid #F0E9DC;vertical-align:top;line-height:1.4}
+  tbody tr:last-child td{border-bottom:none}
+  td:first-child{font-weight:600;color:var(--aw-ink);font-family:var(--aw-font-mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.05em}
+
+  .callout{background:#FBF3EC;border:1px solid #EAD3C2;border-radius:var(--aw-radius);padding:24px 26px;margin-top:6px}
+  .callout .kicker{color:var(--aw-orange-dark)}
+  .callout p{margin:0;font-size:1rem;line-height:1.58;color:#7A3418;max-width:74ch}
+  .callout p b{color:var(--aw-orange-dark)}
+  .callout p + p{margin-top:12px}
+
+  .rec-list{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+  .rec-list li{font-size:.98rem;line-height:1.5;color:var(--aw-ink-soft);padding-left:20px;position:relative}
+  .rec-list li::before{content:"→";position:absolute;left:0;color:var(--aw-orange);font-weight:700}
+  .rec-list li b{color:var(--aw-ink);font-weight:600}
+
+  .bottomline{background:var(--aw-blue-dark);border-radius:var(--aw-radius);padding:32px 34px;margin-bottom:8px}
+  .bottomline .kicker{color:var(--aw-gold)}
+  .bottomline p:not(.kicker){font-family:var(--aw-font-display);font-size:1.22rem;line-height:1.5;color:#EDEFF5;margin:0;max-width:68ch}
+  .bottomline b{color:#fff;font-weight:600}
+
+  @media (max-width:720px){ .walls,.prop-grid{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<nav class="aw-nav">
+  <a class="aw-brand" href="overview.html"><span class="aw-wordmark">Aweris</span><small>WelBewust &middot; planning</small></a>
+  <div class="aw-nav-links">
+    <a href="overview.html">Overview</a>
+    <a href="index.html">Cost calculator</a>
+    <a href="assistenten.html">Digital assistants</a>
+    <a href="modules.html">Modules</a>
+    <a href="compliance.html">NEN 7510 plan</a>
+    <a href="epd-roadmap.html">EPD roadmap</a>
+    <a href="proposals.html" aria-current="page">Proposals</a>
+  </div>
+</nav>
+
+<article class="doc">
+
+  <header class="mast">
+    <p class="kicker">The module system · challenge + three proposals</p>
+    <h1>How do we make money from the <em>modules?</em></h1>
+    <p class="dek">Massy asked for two things: <b>define the challenge in detail</b>, then <b>three proposals to solve it</b> — and a call to decide. Here they are: the problem stated honestly, three distinct routes to revenue, a side-by-side comparison, and a recommendation. Grounded in the legal and market research already done.</p>
+    <p class="backlink"><a href="modules.html">↗ Module library</a> <span class="mono-dim">the underlying facts (who may be charged, how results work) live there</span></p>
+  </header>
+
+  <!-- ============ THE CHALLENGE ============ -->
+  <section class="panel">
+    <p class="panel-label">The challenge, defined</p>
+    <h2>We built something valuable — and it earns <em>€0.</em></h2>
+    <p>We have <b>304 evidence-cited therapy modules</b> (CBT / ACT / DBT), automatic ROM (SQ-48, CQi, PHQ-9…), and a working platform around them. Inside our own practice it saves ~<b>€3.000/month</b>. As an <em>external</em> product it currently makes nothing. Two walls explain why the obvious moves don't work:</p>
+    <div class="walls">
+      <div class="wall"><b>Wall 1 — we can't charge our patients.</b><span>Anything a therapist assigns is insured care, already paid inside the consult. The NZa forbids an extra patient fee — verified. So our own clients can never be the customer.</span></div>
+      <div class="wall"><b>Wall 2 — modules alone are a commodity.</b><span>Therapieland and Embloom sell libraries too. A pile of content isn't a moat; the value has to be in how it's delivered, to whom, and what it's bundled with.</span></div>
+    </div>
+    <p><b>So the challenge is:</b> turn the module library from an internal cost-saver into external revenue — knowing we can never bill our own patients, and content by itself isn't defensible. Every proposal below is really an answer to one question: <b>who pays, and what exactly are they buying — the platform, the experience, or the content?</b> <span class="mono-dim">(Constraints to respect throughout: a handful of licensed questionnaires can't be resold; NEN 7510 is the entry ticket for selling to practices; and we're a small team.)</span></p>
+  </section>
+
+  <!-- ============ PROPOSAL 1 ============ -->
+  <section class="block">
+    <p class="kicker">Proposal 1 — the platform play</p>
+    <h2 class="sec">Sell the whole platform to other practices</h2>
+    <p class="lead">License Aweris — modules + ROM + screening + the clinician panel — to other GGZ practices, per clinician per month. <em>You become a software company;</em> WelBewust is customer #1 and the proof. This is the Therapieland model.</p>
+    <div class="prop p1">
+      <div class="prop-grid">
+        <div class="pg"><span class="l">Who pays</span><span class="v">Other GGZ practices &amp; institutions. Their patients stay free.</span></div>
+        <div class="pg"><span class="l">What they buy</span><span class="v">The running platform + support — not just content.</span></div>
+        <div class="pg"><span class="l">Price</span><span class="v"><b>€25–35 / clinician / mo</b> (Therapieland: €35,75)</span></div>
+        <div class="pg pot"><span class="l">Revenue potential</span><span class="v">HIGH — 10 practices ≈ €9k/mo; ceiling €50k+/mo</span></div>
+        <div class="pg"><span class="l">Effort</span><span class="v">Multi-tenant build (~3–6 wks) + sales + processor agreements + NEN 7510.</span></div>
+        <div class="pg risk"><span class="l">Main risk</span><span class="v">It's a real company: sales, support, competing with incumbents.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROPOSAL 2 ============ -->
+  <section class="block">
+    <p class="kicker">Proposal 2 — the consumer play</p>
+    <h2 class="sec">Sell self-help directly to the public</h2>
+    <p class="lead">Package the library as a consumer self-help product — for <em>non-patients</em>: former clients, people on a waitlist, the general public, or employers. <em>You become a consumer brand.</em> The on-device workbook is already built; this adds payment, accounts and reach.</p>
+    <div class="prop p2">
+      <div class="prop-grid">
+        <div class="pg"><span class="l">Who pays</span><span class="v">Consumers directly — or an employer / insurer subsidising them.</span></div>
+        <div class="pg"><span class="l">What they buy</span><span class="v">The self-guided experience (programs, tracking).</span></div>
+        <div class="pg"><span class="l">Price</span><span class="v"><b>€19–39 per program</b> or €5–10/mo · 21% BTW</span></div>
+        <div class="pg pot"><span class="l">Revenue potential</span><span class="v">MEDIUM — volume-driven; also a lead funnel to the practice</span></div>
+        <div class="pg"><span class="l">Effort</span><span class="v">Workbook ≈ built; add payment + accounts (~2–4 wks). Marketing-heavy.</span></div>
+        <div class="pg risk"><span class="l">Main risk</span><span class="v">Customer-acquisition cost; must stay strictly non-patient.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROPOSAL 3 ============ -->
+  <section class="block">
+    <p class="kicker">Proposal 3 — the wholesale play</p>
+    <h2 class="sec">License the content to other platforms</h2>
+    <p class="lead">Sell the module <em>content itself</em> — 304 items, NL + EN, evidence-cited — to other e-health platforms or EPDs that have distribution but thin content. <em>You become a content supplier,</em> not a platform. Lowest build: the content already exists.</p>
+    <div class="prop p3">
+      <div class="prop-grid">
+        <div class="pg"><span class="l">Who pays</span><span class="v">Other software vendors / EPDs (Careweb-type players).</span></div>
+        <div class="pg"><span class="l">What they buy</span><span class="v">A licence to our content library, in their product.</span></div>
+        <div class="pg"><span class="l">Price</span><span class="v"><b>Per-module licence</b> or a 10–30% revenue share</span></div>
+        <div class="pg pot"><span class="l">Revenue potential</span><span class="v">MEDIUM — a few €k–€20k/mo per partner; deal-dependent</span></div>
+        <div class="pg"><span class="l">Effort</span><span class="v">Lowest build (content ready) — but the licensed-instrument red-list must be cleared first.</span></div>
+        <div class="pg risk"><span class="l">Main risk</span><span class="v">Commoditised; partner owns the customer; not defensible.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPARISON ============ -->
+  <section class="block">
+    <p class="kicker">Side by side</p>
+    <h2 class="sec">The three, compared</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th></th><th>1 · Platform → practices</th><th>2 · Self-help → public</th><th>3 · Content → platforms</th></tr></thead>
+        <tbody>
+          <tr><td>Who pays</td><td>GGZ practices</td><td>Consumers / employers</td><td>Other software vendors</td></tr>
+          <tr><td>Price</td><td>€25–35 / clinician / mo</td><td>€19–39 / program</td><td>Licence or rev-share</td></tr>
+          <tr><td>Revenue ceiling</td><td><b>High</b> (€50k+/mo)</td><td>Medium</td><td>Medium</td></tr>
+          <tr><td>Build effort</td><td>Medium (multi-tenant)</td><td>Low (payment + accounts)</td><td>Lowest (content ready)</td></tr>
+          <tr><td>Time to first €</td><td>1–3 months</td><td>Weeks (volume slow)</td><td>Months (deal cycles)</td></tr>
+          <tr><td>Defensibility</td><td><b>High</b> — platform + relationships</td><td>Low–medium — brand</td><td>Low — commodity</td></tr>
+          <tr><td>We own the customer?</td><td>Yes</td><td>Yes</td><td>No</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ RECOMMENDATION ============ -->
+  <section class="block">
+    <p class="kicker">My recommendation for the call</p>
+    <h2 class="sec">Lead with Proposal 1 — but they stack</h2>
+    <div class="callout">
+      <p><b>Proposal 1 (platform → practices) is the engine.</b> It has the highest ceiling, we own the customer, WelBewust is a live proof-point, and it's the path already scoped in the roadmap. It's the one worth committing real focus to.</p>
+      <p>The other two are cheap add-ons that <b>feed</b> #1, not competitors to it:</p>
+    </div>
+    <ul class="rec-list">
+      <li><b>#2 (self-help)</b> is a low-cost funnel + brand builder — the same workbook doubles as the sales demo for #1. Ship it small, let it generate leads.</li>
+      <li><b>#3 (content licensing)</b> is opportunistic — take a deal if a platform comes knocking, but don't lead with it: it turns us into a replaceable supplier.</li>
+      <li><b>All three respect the wall:</b> none of them ever charges our own patients-in-treatment. That's non-negotiable and already verified.</li>
+    </ul>
+  </section>
+
+  <!-- ============ BOTTOM LINE ============ -->
+  <section class="bottomline">
+    <p class="kicker">Bottom line for the call</p>
+    <p>The challenge is real: a valuable library that legally can't be sold to our own patients and isn't unique on its own. The answer is to <b>sell it to someone else</b> — and the strongest "someone else" is <b>other practices, buying the whole platform (Proposal 1)</b>, with self-help as the funnel and content-licensing as opportunistic upside. Recommendation: pick Proposal 1 as the focus, run Proposal 2 alongside as the demo/funnel. Let's decide on the call.</p>
+  </section>
+
+  <footer class="aw-footer">
+    <span>WelBewust &middot; Aweris planning workspace</span>
+    <span>Prepared for the module-system call with Massy &middot; grounded in the verified legal + market research</span>
+  </footer>
+
+</article>
+
+</body>
+</html>

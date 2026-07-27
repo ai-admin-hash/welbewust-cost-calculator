@@ -14,6 +14,7 @@ All pages share one design system (`aweris.css`) built from the live Aweris bran
 | [`compliance.html`](compliance.html) | **NEN 7510 plan** — the all-Google-Cloud move and what it does (and doesn't) do for compliance | The board |
 | [`modules.html`](modules.html) | **Module library** — how the 304-module library is used in care, who pays (never the patient), how results are handled, and the revenue model | Massy |
 | [`epd-roadmap.html`](epd-roadmap.html) | **Aweris → EPD roadmap** — phased plan to grow into a full EPD (build/buy/integrate per box, risk, sequence) | Massy |
+| [`proposals.html`](proposals.html) | **Three proposals** — the module-money challenge + 3 revenue routes (platform / self-help / content licensing), compared, for the Massy call | Massy |
 
 ## Design system
 

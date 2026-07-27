@@ -79,10 +79,10 @@ h1, h2, h3 { font-family:var(--aw-font-display); }
 }
 .aw-wordmark::after{ content:"■"; font-size:.42em; color:var(--aw-yellow-dark); margin-left:2px; vertical-align:super; }
 .aw-brand small{ font-family:var(--aw-font-mono); font-size:.66rem; letter-spacing:.14em; text-transform:uppercase; color:var(--aw-muted); }
-.aw-nav-links{ display:flex; align-items:center; gap:4px; flex-wrap:wrap; }
+.aw-nav-links{ display:flex; align-items:center; gap:2px; flex-wrap:wrap; }
 .aw-nav-links a{
-  font-size:.86rem; font-weight:500; color:var(--aw-ink-soft); text-decoration:none;
-  padding:7px 12px; border-radius:var(--aw-radius-pill); line-height:1;
+  font-size:.84rem; font-weight:500; color:var(--aw-ink-soft); text-decoration:none;
+  padding:7px 10px; border-radius:var(--aw-radius-pill); line-height:1; white-space:nowrap;
   transition:color .16s var(--aw-ease), background .16s var(--aw-ease);
 }
 .aw-nav-links a:hover{ color:var(--aw-orange); background:#F3EADF; }
