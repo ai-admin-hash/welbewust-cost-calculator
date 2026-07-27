@@ -62,14 +62,12 @@
   .tag-ok{background:var(--aw-green-soft);color:var(--aw-green)}
   .tag-warn{background:#FBE7DE;color:var(--aw-orange-dark)}
 
-  /* fase cards */
+  /* stap cards */
   .prop{background:var(--aw-card);border:1px solid var(--aw-line);border-radius:var(--aw-radius);padding:24px 26px;margin-bottom:18px;border-top:4px solid var(--aw-line)}
   .prop.f0{border-top-color:var(--aw-blue)}
-  .prop.f1{border-top-color:var(--aw-orange)}
-  .prop.f2{border-top-color:var(--aw-gold)}
-  .prop.f3{border-top-color:var(--aw-green)}
-  .prop.f4{border-top-color:var(--aw-orange-light)}
-  .prop.f5{border-top-color:var(--aw-blue-light)}
+  .prop.f1{border-top-color:var(--aw-gold)}
+  .prop.f2{border-top-color:var(--aw-green)}
+  .prop.f3{border-top-color:var(--aw-orange)}
   .prop h3{font-family:var(--aw-font-display);font-weight:600;font-size:1.25rem;margin:0 0 6px}
   .prop .sub{margin:0 0 14px;color:var(--aw-ink-soft);font-size:.95rem;max-width:70ch}
   .pg{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px 22px;margin:0 0 14px;padding:12px 14px;background:#F8F3EA;border-radius:var(--aw-radius-sm)}
@@ -79,6 +77,12 @@
   .prop li{margin-bottom:5px;font-size:.94rem}
   .risk{font-size:.86rem;color:var(--aw-ink-soft);border-left:3px solid var(--aw-line-strong);padding-left:12px;margin:0}
   .risk b{color:var(--aw-orange-dark)}
+
+  /* later-strip */
+  .later{background:#F8F3EA;border:1px dashed var(--aw-line-strong);border-radius:var(--aw-radius);padding:20px 24px}
+  .later h4{font-family:var(--aw-font-display);font-size:1.05rem;margin:0 0 10px}
+  .later ul{margin:0;padding-left:20px}
+  .later li{margin-bottom:6px;font-size:.92rem;color:var(--aw-ink-soft)}
 
   /* proof / callout */
   .proof{margin-top:16px;background:var(--aw-green-soft);border:1px solid #CDE0D4;border-left:4px solid var(--aw-green);border-radius:var(--aw-radius-sm);padding:18px 22px}
@@ -100,10 +104,11 @@
   .field-controls input[type=range]{flex:1;accent-color:var(--aw-orange)}
   .field-controls input[type=number]{width:74px;padding:5px 8px;border:1px solid var(--aw-line-strong);border-radius:var(--aw-radius-sm);font:inherit;font-size:.85rem;background:#fff}
   .calc-note{font-size:.82rem;color:var(--aw-muted);margin:0 0 20px;max-width:76ch}
-  .calc-out{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:20px}
+  .calc-out{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:14px}
   .out-card{background:var(--aw-blue-dark);border-radius:var(--aw-radius-sm);padding:18px 20px;text-align:center}
   .out-card b{display:block;font-family:var(--aw-font-display);font-size:1.7rem;color:#fff;line-height:1.1}
   .out-card span{font-family:var(--aw-font-mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;color:var(--aw-gold)}
+  .core-line{font-size:.9rem;color:var(--aw-ink-soft);margin:0 0 20px}
   .calc table{min-width:0}
   .calc td.num{text-align:right;font-family:var(--aw-font-mono);font-size:.82rem;white-space:nowrap}
 
@@ -135,8 +140,8 @@
 <article class="doc">
   <header class="mast">
     <p class="kicker">Integratievoorstel — facturatie</p>
-    <h1>Van drie losse systemen naar <em>één facturatie-hub</em></h1>
-    <p class="dek">Aweris leest al elke leveranciersfactuur automatisch uit en boekt naar Exact. WeFact verstuurt al elke cliëntfactuur. Maar daartussen zit een wekelijks handmatig bijgehouden Excel-bestand, een stapel bankafschriften en een herinnerladder die iemand met de hand afloopt. Dit voorstel koppelt Aweris aan de WeFact&nbsp;API en laat dat handwerk verdwijnen — terwijl elke boeking, herinnering en incasso een menselijke bevestiging houdt.</p>
+    <h1>De herinnerladder die <em>zichzelf draait</em></h1>
+    <p class="dek">Vandaag houdt het secretariaat een Excel-bestand bij, loopt wekelijks bankafschriften na en verstuurt elke herinnering met de hand. Na deze integratie ziet iedere medewerker de betaalstatus gewoon in Aweris — bijvoorbeeld tijdens een telefoongesprek met een cliënt — en verstuurt het systeem de 1e en 2e herinnering zelf, met harde waarborgen. WeFact blijft gewoon bestaan als bronsysteem waar de admin alles kan naslaan; niemand anders heeft er nog een login voor nodig.</p>
     <p class="backlink">
       <a href="epd-roadmap.html">↗ EPD-roadmap</a> <span class="mono-dim">WeFact staat daar al als "integreren, fase 1, laag risico"</span>
       <a href="proposals.html">↗ Voorstellen</a> <span class="mono-dim">de omzetvoorstellen rond de modules</span>
@@ -145,35 +150,35 @@
 
   <!-- ============ DE SITUATIE ============ -->
   <section class="panel">
-    <p class="panel-label">De situatie vandaag</p>
+    <p class="panel-label">Wat de admin nu met de hand doet</p>
     <div class="panel-grid">
       <div>
-        <h4>Careweb → verzekeraars</h4>
-        <p>Declaraties lopen al automatisch via Vecozo (elke 10e van de maand + wekelijkse correcties). Blijft volledig ongewijzigd — buiten scope.</p>
+        <h4>Controleren</h4>
+        <p>Welke facturen zijn verstuurd? Welke zijn betaald? Elke week bankafschriften nalopen en betalingen overtikken naar het Excel-factuuroverzicht.</p>
       </div>
       <div>
-        <h4>WeFact → cliënten</h4>
-        <p>No-show-, OVP-, AON- en informatieverstrekking-facturen, herinneringen, aanmaningen en incasso. Het systeem werkt — maar alles eromheen is handwerk.</p>
+        <h4>Bijhouden</h4>
+        <p>Betaalde facturen op betaald zetten, verstuur- en herinnerdatums registreren, de wekelijkse check-tab invullen — dubbel werk naast wat WeFact al weet.</p>
       </div>
       <div>
-        <h4>Aweris → Exact</h4>
-        <p>Inkomende leveranciersfacturen: automatisch uitgelezen door de LLM, door een mens bevestigd, geboekt in Exact Online. Draait in productie.</p>
+        <h4>Herinneren</h4>
+        <p>Uitrekenen wie aan de beurt is, de factuur in WeFact opzoeken, de 1e of 2e herinnering versturen en de datum weer in het Excel-bestand noteren.</p>
       </div>
     </div>
-    <p>De lijm tussen die systemen is nu een <b>Excel-factuuroverzicht</b> op de Drive: elke factuur, betaaldatum, herinnering en aanmaning wordt er met de hand in bijgehouden, elke week worden bankafschriften nagelopen, en de betaaltermijn-ladder telt iemand zelf uit. Dat is precies het soort werk dat een API-koppeling hoort te doen.</p>
+    <p>Alles hierboven verdwijnt of wordt automatisch. Wat bewust <b>mensenwerk blijft</b>: de aanmaning (een brief met juridische werking), het incasso-traject (altijd in overleg met Maaike of Anna) en creditfacturen (altijd in overleg met Anna).</p>
   </section>
 
   <!-- ============ DE ARCHITECTUUR ============ -->
   <section class="block">
     <p class="kicker">De architectuur</p>
-    <h2 class="sec">WeFact wordt de hub — Exact blijft het grootboek</h2>
-    <p class="lead">Aweris krijgt twee rollen: <b>schrijver</b> (inkoopfacturen aanmaken in WeFact, met de originele PDF als bijlage) en <b>lezer</b> (factuurstatus, betaaldatum en banktransacties ophalen om te signaleren wie een herinnering, aanmaning of incasso nodig heeft). WeFact's eigen boekhoudkoppeling stuurt alles door naar Exact Online — de grootboek-waarheid verandert niet.</p>
+    <h2 class="sec">Aweris kijkt, bewaakt en verstuurt — WeFact blijft de bron</h2>
+    <p class="lead">Aweris leest elk kwartier de facturen, betaalstatus en banktransacties uit WeFact, toont die als alleen-lezen betaalstatus aan de medewerkers (geen volledige WeFact-toegang nodig), en draait de herinnerladder automatisch via de officiële API. Boekhoudkundig verandert er niets: WeFact's bestaande koppeling naar Exact blijft het grootboek voeden.</p>
     <div class="flow">
       <div class="node"><b>Careweb</b><span>cliënten &amp; declaraties<br>bestaande koppeling</span></div>
       <div class="arrow">→</div>
-      <div class="node hub"><b>WeFact</b><span>facturatie-hub<br>verkoop én inkoop</span></div>
-      <div class="arrow">←</div>
-      <div class="node"><b>Aweris</b><span>leest facturen uit,<br>bewaakt de ladder <em>(nieuw)</em></span></div>
+      <div class="node hub"><b>WeFact</b><span>bronsysteem facturatie<br>admin kan alles naslaan</span></div>
+      <div class="arrow">⇄</div>
+      <div class="node"><b>Aweris</b><span>betaalstatus voor iedereen<br>+ automatische herinneringen</span></div>
     </div>
     <div class="flow-down">↓</div>
     <div class="flow flow-exact">
@@ -191,14 +196,13 @@
       <table>
         <thead><tr><th>Functie</th><th>API-call</th><th>Status</th></tr></thead>
         <tbody>
-          <tr><td class="lbl">Inkoopfactuur aanmaken &amp; betaalstatus volgen</td><td><span class="api-call">creditinvoice add / list / partpayment</span></td><td><span class="tag tag-ok">bevestigd</span></td></tr>
-          <tr><td class="lbl">Originele factuur-PDF meesturen</td><td><span class="api-call">attachment add (base64)</span></td><td><span class="tag tag-ok">bevestigd</span></td></tr>
-          <tr><td class="lbl">Herinnering per e-mail versturen</td><td><span class="api-call">invoice sendreminderbyemail</span></td><td><span class="tag tag-ok">bevestigd</span></td></tr>
+          <tr><td class="lbl">Verstuurd/betaald/vervallen uitlezen</td><td><span class="api-call">invoice list · status · PayDate · SentDate</span></td><td><span class="tag tag-ok">bevestigd</span></td></tr>
+          <tr><td class="lbl">Herinnerhistorie per factuur</td><td><span class="api-call">ReminderDate · SummationDate · Reminders</span></td><td><span class="tag tag-ok">bevestigd</span></td></tr>
+          <tr><td class="lbl">1e/2e herinnering per e-mail versturen</td><td><span class="api-call">invoice sendreminderbyemail</span></td><td><span class="tag tag-ok">bevestigd</span></td></tr>
           <tr><td class="lbl">Aanmaning per e-mail versturen</td><td><span class="api-call">invoice sendsummationbyemail</span></td><td><span class="tag tag-ok">bevestigd</span></td></tr>
-          <tr><td class="lbl">Vervallen facturen signaleren</td><td><span class="api-call">invoice list status=9 · ReminderDate · SummationDate</span></td><td><span class="tag tag-ok">bevestigd</span></td></tr>
-          <tr><td class="lbl">Conceptfactuur klaarzetten (mens verstuurt)</td><td><span class="api-call">invoice add (Status 0 = concept)</span></td><td><span class="tag tag-ok">bevestigd</span></td></tr>
-          <tr><td class="lbl">Banktransacties lezen én matchen aan facturen</td><td><span class="api-call">transaction list / show / match</span></td><td><span class="tag tag-ok">bevestigd</span></td></tr>
-          <tr><td class="lbl">Kostencategorieën ophalen voor inkoopregels</td><td><span class="api-call">settings costcategory_list</span></td><td><span class="tag tag-ok">bevestigd</span></td></tr>
+          <tr><td class="lbl">Banktransacties lezen én matchen (betaald zetten)</td><td><span class="api-call">transaction list / show / match</span></td><td><span class="tag tag-ok">bevestigd</span></td></tr>
+          <tr><td class="lbl">Ladder pauzeren per factuur (betalingsregeling)</td><td><span class="api-call">SubStatus PAUSED · PaymentPausedEndDate</span></td><td><span class="tag tag-ok">bevestigd</span></td></tr>
+          <tr><td class="lbl">Inkoopfacturen aanmaken (optionele vervolgfase)</td><td><span class="api-call">creditinvoice add + attachment add</span></td><td><span class="tag tag-ok">bevestigd</span></td></tr>
           <tr><td class="lbl">Realtime meldingen (webhooks)</td><td><span class="api-call">—</span></td><td><span class="tag tag-warn">bestaat niet → polling</span></td></tr>
         </tbody>
       </table>
@@ -208,11 +212,11 @@
   <!-- ============ HET PLAN ============ -->
   <section class="block">
     <p class="kicker">Het plan</p>
-    <h2 class="sec">Zes fases, elk zelfstandig waardevol</h2>
-    <p class="lead">Totaal ≈ 21–33 ontwikkeldagen (4–7 weken doorlooptijd bij één ontwikkelaar). Fase&nbsp;0 is de randvoorwaarde voor alles; fase&nbsp;1 en 2 zijn onderling onafhankelijk, dus de volgorde daarna is een keuze — zie de beslispunten onderaan.</p>
+    <h2 class="sec">Vier stappen naar automatisch</h2>
+    <p class="lead">Totaal ≈ 11–17 ontwikkeldagen (2–4 weken doorlooptijd bij één ontwikkelaar). De volgorde is bewust: eerst betrouwbaar <em>kijken</em> (stap 1), dan betrouwbaar <em>betaald markeren</em> (stap 2), en pas dán automatisch <em>versturen</em> (stap 3) — want een herinnering naar iemand die al betaald heeft is precies het soort fout dat vertrouwen kost.</p>
 
     <div class="prop f0">
-      <h3>Fase 0 — Fundament</h3>
+      <h3>Stap 0 — Fundament</h3>
       <p class="sub">De technische randvoorwaarde: WeFact accepteert alleen aanvragen van gewhiteliste IP-adressen, en Cloud Run heeft standaard geen vast uitgaand IP.</p>
       <div class="pg">
         <div><b>Bouwtijd</b>3–4 dagen</div>
@@ -223,95 +227,68 @@
         <li>Statisch uitgaand IP voor Cloud Run (VPC-connector + Cloud NAT) en whitelisten in WeFact</li>
         <li>API-sleutel in Google Secret Manager — nooit in code of repo</li>
         <li>WeFact API-client in de Aweris-backend, analoog aan de bestaande Exact-client</li>
-        <li>Mapping-tabellen: crediteuren, BTW-codes, kostencategorieën, en Careweb-cliëntnummer ↔ WeFact-debiteur</li>
-        <li>Controleren dat de WeFact→Exact boekhoudkoppeling actief en correct staat</li>
+        <li>Mapping: Careweb-cliëntnummer ↔ WeFact-debiteur, zodat betaalstatus per cliënt opzoekbaar is</li>
       </ul>
       <p class="risk"><b>Let op:</b> eerst valideren in een testomgeving vóór er productieverkeer overheen loopt.</p>
     </div>
 
     <div class="prop f1">
-      <h3>Fase 1 — Inkoopfacturen naar WeFact</h3>
-      <p class="sub">Aweris' bestaande pijplijn (e-mail → LLM-extractie → menselijke bevestiging) krijgt WeFact als boekingsdoel: de inkoopfactuur ontstaat in WeFact, mét de originele PDF als bijlage, en stroomt via de koppeling door naar Exact.</p>
-      <div class="pg">
-        <div><b>Bouwtijd</b>3–5 dagen</div>
-        <div><b>Bouwt op</b>Fase 0</div>
-        <div><b>Wie</b>Javad (dev) · Massy (steekproef eerste weken)</div>
-      </div>
-      <ul>
-        <li>Veldmapping: leverancier, factuurnummer, datum, regels (netto · BTW-code · kostencategorie)</li>
-        <li>PDF-bijlage via <span class="api-call">attachment add</span> — bevestigd door de API-docs</li>
-        <li>Bestaande duplicaat-bewaking uitbreiden naar WeFact-inkoopfacturen</li>
-        <li>Menselijke bevestiging blijft exact zoals vandaag bij Exact-boekingen</li>
-      </ul>
-      <p class="risk"><b>Scope-grens:</b> creditnota's van leveranciers blijven buiten fase 1 — Aweris heeft daar een bekende, nog niet opgeloste beperking, en die fout doorgeven aan WeFact maakt hem niet beter.</p>
-    </div>
-
-    <div class="prop f2">
-      <h3>Fase 2 — Het factuuroverzicht vervangen</h3>
-      <p class="sub">De kern van het secretariaats-handwerk. Aweris leest elk kwartier alle facturen uit WeFact en toont het AR-overzicht dat nu met de hand in Excel wordt bijgehouden — inclusief automatisch berekende actie per factuur: 1e herinnering, 2e herinnering, aanmaning of incasso.</p>
+      <h3>Stap 1 — Betaalstatus in Aweris (het Excel-bestand vervalt)</h3>
+      <p class="sub">Aweris leest elk kwartier alle facturen uit WeFact en toont per cliënt: verstuurd, betaald, openstaand, hoeveel dagen, en welke herinneringen al zijn geweest. Precies wat een medewerker nodig heeft tijdens een telefoongesprek — zonder WeFact-login.</p>
       <div class="pg">
         <div><b>Bouwtijd</b>4–6 dagen</div>
-        <div><b>Bouwt op</b>Fase 0 (niet fase 1)</div>
+        <div><b>Bouwt op</b>Stap 0</div>
         <div><b>Wie</b>Javad (dev) · secretariaat (2–4 wkn parallel testen)</div>
       </div>
       <ul>
-        <li>Meevaller: WeFact registreert <span class="api-call">ReminderDate</span> en <span class="api-call">SummationDate</span> zelf — de herinner-kolommen komen dus rechtstreeks uit de API</li>
-        <li>De wekelijkse "check tab" wordt een automatisch gevulde weergave</li>
-        <li>Handmatig blijven (voorlopig): DAS-vorderingsdatum en de uitbetaling-aan-psycholoog-kolommen</li>
+        <li>Alleen-lezen betaalstatus voor medewerkers — bedrag, status, datums; geen volledige WeFact-toegang</li>
+        <li>Meevaller: WeFact registreert <span class="api-call">ReminderDate</span> en <span class="api-call">SummationDate</span> zelf — de herinnerhistorie komt rechtstreeks uit de API</li>
+        <li>Het Excel-factuuroverzicht en de wekelijkse check-tab vervallen na een parallelperiode</li>
+        <li>Aanmaning- en incasso-kandidaten verschijnen als "actie nodig"-lijst voor de mens</li>
       </ul>
-      <p class="risk"><b>Blokkerend beslispunt:</b> de SOP noemt op vier plekken twee verschillende eerste betaaltermijnen — 14 én 30 dagen, waarvan één in de juridische aanmaningsbrief zelf. Vóór deze fase moet Massy/Anna vaststellen welke ladder canoniek is, anders automatiseren we een onduidelijke regel.</p>
       <div class="proof">
         <p><b>Eerste winst na de koppeling:</b> de werkelijke volumes van de afgelopen 12 maanden ophalen uit WeFact en de aannames in de rekentool hieronder vervangen door echte cijfers.</p>
       </div>
     </div>
 
-    <div class="prop f3">
-      <h3>Fase 3 — Bankafstemming</h3>
-      <p class="sub">Vervangt het wekelijks nalopen van bankafschriften. Aweris leest ongematchte transacties uit WeFact, stelt een match voor (bedrag + factuurnummer + cliënt), en schrijft na menselijke bevestiging de match terug — inclusief automatisch op betaald zetten.</p>
+    <div class="prop f2">
+      <h3>Stap 2 — Betaald markeren via de bank</h3>
+      <p class="sub">Vervangt het wekelijkse afschriften-nalopen. Aweris leest ongematchte banktransacties uit WeFact, matcht ze op bedrag + factuurnummer + cliënt en zet facturen op betaald via <span class="api-call">transaction match</span>. Twijfelgevallen (deelbetalingen, betaling zonder kenmerk) komen op een korte uitzonderingenlijst voor de admin.</p>
       <div class="pg">
         <div><b>Bouwtijd</b>2–4 dagen</div>
-        <div><b>Bouwt op</b>Fase 0 + 2</div>
-        <div><b>Wie</b>Javad (dev) · secretariaat (steekproef)</div>
+        <div><b>Bouwt op</b>Stap 0 + 1</div>
+        <div><b>Wie</b>Javad (dev) · secretariaat (steekproef eerste weken)</div>
       </div>
       <ul>
-        <li><span class="api-call">transaction list</span> met statusfilter (unmatched / proposed_match) — bevestigd</li>
-        <li><span class="api-call">transaction match</span> met MarkAsPaid schrijft de koppeling terug — bevestigd</li>
-        <li>Deelbetalingen (betalingsregelingen) en betalingen zonder factuurnummer worden apart gemarkeerd voor menselijke controle</li>
+        <li>Eenduidige matches automatisch; alles met twijfel expliciet naar de mens</li>
+        <li>Deelbetalingen bij betalingsregelingen worden herkend en niet als "volledig betaald" gemarkeerd</li>
       </ul>
-      <p class="risk"><b>Randvoorwaarde:</b> de banktransacties moeten in WeFact's Bank-module binnenkomen (bankkoppeling of periodieke import) — check hoe dat nu is ingericht.</p>
+      <p class="risk"><b>Randvoorwaarde:</b> de banktransacties moeten in WeFact's Bank-module binnenkomen (bankkoppeling of periodieke import) — hoe dat nu is ingericht is een openstaande vraag, zie beslispunten.</p>
     </div>
 
-    <div class="prop f4">
-      <h3>Fase 4 — Herinnerladder &amp; incassopakket</h3>
-      <p class="sub">Eén klik in plaats van zoeken, kopiëren en registreren. Aweris toont wie aan de beurt is en verstuurt de herinnering of aanmaning via de API; voor incasso stelt het een compleet DAS-dossier samen dat pas na bevestiging door Maaike of Anna vrijkomt.</p>
+    <div class="prop f3">
+      <h3>Stap 3 — De automatische herinnerladder</h3>
+      <p class="sub">De kern van de wens: de 1e en 2e herinnering versturen zichzelf via <span class="api-call">sendreminderbyemail</span>, op de vaste termijnen na de vervaldatum. Geen klik per herinnering — wel toezicht: het secretariaat krijgt elke ochtend een kort overzicht van wat gisteren automatisch is verstuurd en wat vandaag gepland staat, met een pauzeknop per factuur.</p>
       <div class="pg">
-        <div><b>Bouwtijd</b>4–6 dagen</div>
-        <div><b>Bouwt op</b>Fase 2</div>
-        <div><b>Wie</b>Javad (dev) · Maaike/Anna (goedkeuring, ongewijzigd)</div>
+        <div><b>Bouwtijd</b>2–3 dagen</div>
+        <div><b>Bouwt op</b>Stap 1 + 2</div>
+        <div><b>Wie</b>Javad (dev) · secretariaat (ontvangt dagelijkse digest)</div>
       </div>
       <ul>
-        <li>Eén-klik 1e/2e herinnering en aanmaning via <span class="api-call">sendreminderbyemail</span> / <span class="api-call">sendsummationbyemail</span> — bevestigd</li>
-        <li>Aanmaningssjabloon (Wet Incassokosten) wordt automatisch gevuld — byte-identiek sjabloon, alleen variabelen</li>
-        <li>DAS-pakket: factuur-PDF + aanmaning-PDF + de standaard verantwoordingstekst, klaar om te uploaden — indienen op das.nl blijft mensenwerk (geen DAS-API)</li>
-        <li>Het telefoongesprek vóór een incasso blijft áltijd mensenwerk</li>
+        <li><b>Verstuurt nooit</b> als: de factuur betaald of deels betaald is · een betalingsregeling loopt (<span class="api-call">SubStatus PAUSED</span>) · het een creditfactuur is · het een post-route betreft (informatieverstrekking gaat per post) · de bankdata ouder is dan 3 dagen (eerst betaald-status zeker weten, dan pas herinneren)</li>
+        <li>Aanmaning en incasso gaan <b>nooit</b> automatisch — die verschijnen als "actie nodig" met alles voorbereid, en de mens beslist</li>
+        <li>De begeleidende herinnerteksten blijven de bestaande WeFact-sjablonen — geen nieuwe teksten</li>
       </ul>
-      <p class="risk"><b>Uitzondering:</b> herinneringen op informatieverstrekking-facturen gaan per post, niet per e-mail — die route blijft handmatig.</p>
+      <p class="risk"><b>Blokkerend beslispunt:</b> de SOP noemt op vier plekken twee verschillende eerste betaaltermijnen — 14 én 30 dagen, waarvan één in de juridische aanmaningsbrief. Een robot die op een dubbelzinnige regel verstuurt is een slecht idee; dit moet eerst eenduidig worden vastgesteld.</p>
     </div>
 
-    <div class="prop f5">
-      <h3>Fase 5 — Uitgaande facturen voorbereiden</h3>
-      <p class="sub">De eerste keer dat Aweris' LLM-aanpak op uitgaande in plaats van inkomende post wordt toegepast: no-show-, OVP- en informatieverstrekking-facturen worden als concept klaargezet — de mens controleert en verstuurt.</p>
-      <div class="pg">
-        <div><b>Bouwtijd</b>5–8 dagen</div>
-        <div><b>Bouwt op</b>Fase 0 · liefst na 1–4</div>
-        <div><b>Wie</b>Javad (dev) · secretariaat (validatie) · Anna/Massy (tarieven)</div>
-      </div>
+    <div class="later">
+      <h4>Bewust naar later geschoven (kan altijd nog)</h4>
       <ul>
-        <li>No-show: conceptregel (cliënt, datum, tarief) met één klik naar WeFact via <span class="api-call">invoice add</span> (Status 0 = concept — bevestigd)</li>
-        <li>Informatieverstrekking: ontvanger, bedrijfsnaam en omschrijving automatisch voorgesteld uit het verzoekdocument — nu een handmatige zoekactie per geval</li>
-        <li>Versturen blijft een menselijke handeling, exact zoals vandaag</li>
+        <li><b>Inkoopfacturen via WeFact</b> (leveranciers-PDF's uit Aweris als inkoopfactuur in WeFact, met bijlage) — API is er klaar voor; nu geen prioriteit. ≈ 3–5 dagen.</li>
+        <li><b>Incassopakket</b> (DAS-dossier automatisch samenstellen: factuur + aanmaning + verantwoordingstekst) — ≈ 2–3 dagen.</li>
+        <li><b>Uitgaande facturen voorbereiden</b> (no-show/informatieverstrekking als concept klaarzetten) — ≈ 5–8 dagen.</li>
       </ul>
-      <p class="risk"><b>Nieuw terrein:</b> ander brontype, nieuwe prompts — extra zorgvuldig testen vóór livegang.</p>
     </div>
   </section>
 
@@ -324,12 +301,12 @@
       <table>
         <thead><tr><th>Handwerk nu</th><th>SOP-procedure</th><th>Tijd nu*</th><th>Frequentie*</th><th>Wordt</th></tr></thead>
         <tbody>
-          <tr><td class="lbl">Factuur opstellen + registreren in Excel</td><td>Factuur opstellen en versturen</td><td>~10 min</td><td>30/maand</td><td>concept staat klaar, mens bevestigt</td></tr>
-          <tr><td class="lbl">Herinnering zoeken, versturen, registreren</td><td>Herinneringsfacturen</td><td>~8 min</td><td>10/maand</td><td>één klik</td></tr>
-          <tr><td class="lbl">Aanmaning opstellen, archiveren, registreren</td><td>Aanmaning</td><td>~15 min</td><td>3/maand</td><td>gevuld sjabloon, mens keurt</td></tr>
-          <tr><td class="lbl">DAS-dossier samenstellen</td><td>Incasso indienen</td><td>~25 min</td><td>6/jaar</td><td>pakket klaar; Maaike/Anna keuren; bellen blijft</td></tr>
-          <tr><td class="lbl">Bankafschriften nalopen</td><td>Facturen — FAQ</td><td>45 min</td><td>wekelijks</td><td>automatische match-voorstellen</td></tr>
-          <tr><td class="lbl">Factuuroverzicht + check-tab bijwerken</td><td>Factuur opstellen en versturen</td><td>60 min</td><td>wekelijks</td><td>live dashboard</td></tr>
+          <tr><td class="lbl">Factuuroverzicht + check-tab bijwerken</td><td>Factuur opstellen en versturen</td><td>60 min</td><td>wekelijks</td><td>vervalt — live status in Aweris (stap 1)</td></tr>
+          <tr><td class="lbl">Bankafschriften nalopen, betaald noteren</td><td>Facturen — FAQ</td><td>45 min</td><td>wekelijks</td><td>automatisch gematcht (stap 2)</td></tr>
+          <tr><td class="lbl">Herinnering zoeken, versturen, registreren</td><td>Herinneringsfacturen</td><td>~8 min</td><td>10/maand</td><td><b>volautomatisch</b> (stap 3)</td></tr>
+          <tr><td class="lbl">Aanmaning opstellen, archiveren, registreren</td><td>Aanmaning</td><td>~15 min</td><td>3/maand</td><td>voorbereid; mens keurt en verstuurt</td></tr>
+          <tr><td class="lbl">DAS-dossier samenstellen</td><td>Incasso indienen</td><td>~25 min</td><td>6/jaar</td><td>blijft mensenwerk (latere fase: voorbereid pakket)</td></tr>
+          <tr><td class="lbl">Factuur opstellen in WeFact</td><td>Factuur opstellen en versturen</td><td>~10 min</td><td>30/maand</td><td>blijft — optionele vervolgfase</td></tr>
           <tr><td class="lbl">EHIC-batch (export, printen, post)</td><td>EHIC facturen</td><td>~3 uur</td><td>maandelijks</td><td><b>blijft handwerk</b> — post naar Zilveren Kruis</td></tr>
         </tbody>
       </table>
@@ -379,17 +356,18 @@
         <div class="out-card"><span>waarde per maand</span><b id="outEur">—</b></div>
         <div class="out-card"><span>waarde per jaar</span><b id="outJaar">—</b></div>
       </div>
+      <p class="core-line">De grote getallen tonen het volledige beeld inclusief de optionele vervolgfases. Alleen stap&nbsp;1–3 (dit voorstel): <b id="coreLine">—</b>.</p>
       <div class="table-wrap">
         <table>
           <thead><tr><th>Onderdeel</th><th style="text-align:right">Min/maand</th></tr></thead>
           <tbody>
-            <tr><td>Facturen (fase 5)</td><td class="num" id="bFacturen">—</td></tr>
-            <tr><td>Herinneringen (fase 4)</td><td class="num" id="bHerinneringen">—</td></tr>
-            <tr><td>Aanmaningen (fase 4)</td><td class="num" id="bAanmaningen">—</td></tr>
-            <tr><td>Incasso-voorbereiding (fase 4)</td><td class="num" id="bIncassos">—</td></tr>
-            <tr><td>Bankafstemming (fase 3)</td><td class="num" id="bBank">—</td></tr>
-            <tr><td>Factuuroverzicht (fase 2)</td><td class="num" id="bOverzicht">—</td></tr>
-            <tr><td><b>Totaal</b></td><td class="num" id="bTotaal">—</td></tr>
+            <tr><td>Factuuroverzicht (stap 1)</td><td class="num" id="bOverzicht">—</td></tr>
+            <tr><td>Bankafstemming (stap 2)</td><td class="num" id="bBank">—</td></tr>
+            <tr><td>Herinneringen — volautomatisch (stap 3)</td><td class="num" id="bHerinneringen">—</td></tr>
+            <tr><td>Aanmaningen — voorbereid (stap 1)</td><td class="num" id="bAanmaningen">—</td></tr>
+            <tr><td>Incasso-voorbereiding (latere fase)</td><td class="num" id="bIncassos">—</td></tr>
+            <tr><td>Facturen opstellen (latere fase)</td><td class="num" id="bFacturen">—</td></tr>
+            <tr><td><b>Totaal (alles)</b></td><td class="num" id="bTotaal">—</td></tr>
           </tbody>
         </table>
       </div>
@@ -401,15 +379,16 @@
     <p class="kicker">Eerlijk over de grenzen</p>
     <h2 class="sec">Risico's &amp; randvoorwaarden</h2>
     <ul class="plain">
-      <li><b>Statisch IP is de poort.</b> Zonder VPC-connector + Cloud NAT met gereserveerd IP accepteert WeFact geen enkele API-aanvraag van Cloud Run. Dit is de eerste bouwsteen, niet een detail voor later.</li>
-      <li><b>Geen webhooks — bevestigd.</b> Alles is polling (elk kwartier, met de modified-filter). Voor een facturatie-overzicht ruim voldoende; het is geen realtime-systeem.</li>
-      <li><b>AVG:</b> deze integratie voegt geen nieuwe categorie persoonsgegevens toe — Aweris ziet een subset van wat al tussen Careweb en WeFact stroomt (naam, factuurnummer, bedrag, betaalstatus; geen diagnose-data, geen BSN). Wel: Aweris hoort als systeem in het verwerkingsregister.</li>
-      <li><b>Goedkeuringsregels blijven hard.</b> Creditfactuur altijd in overleg met Anna; incasso altijd met Maaike of Anna — als blokkerende bevestigingsstap in de UI, nooit "auto-approve na X dagen".</li>
-      <li><b>Nog open bij WeFact-support:</b> hoeveel IP's mag de whitelist bevatten · heeft een debiteur een vrij referentieveld voor het Careweb-cliëntnummer · hoe vertaalt de Exact-koppeling kostencategorieën precies naar grootboekrekeningen.</li>
+      <li><b>Betaald-zekerheid gaat vóór verstuur-automatiek.</b> De ladder verstuurt alleen als de betaalstatus vers en betrouwbaar is (bankdata &lt; 3 dagen oud). Liever een dag later herinneren dan één cliënt onterecht aanmanen.</li>
+      <li><b>Statisch IP is de poort.</b> Zonder VPC-connector + Cloud NAT met gereserveerd IP accepteert WeFact geen enkele API-aanvraag van Cloud Run. Eerste bouwsteen, geen detail.</li>
+      <li><b>Geen webhooks — bevestigd.</b> Alles is polling (elk kwartier). Voor betaalstatus en een dagelijkse ladder ruim voldoende; het is geen realtime-systeem.</li>
+      <li><b>AVG:</b> geen nieuwe categorie persoonsgegevens — Aweris toont een subset van wat al in WeFact staat (naam, factuurnummer, bedrag, betaalstatus; geen diagnose-data, geen BSN). Wel: Aweris hoort als systeem in het verwerkingsregister, en medewerkers zien alléén betaalstatus, geen volledige facturatie-omgeving.</li>
+      <li><b>Goedkeuringsregels blijven hard.</b> Aanmaning: mens verstuurt. Incasso: altijd Maaike of Anna. Creditfactuur: altijd Anna. Nooit "auto-approve na X dagen".</li>
+      <li><b>Nog open bij WeFact:</b> heeft WeFact al een eigen automatische-herinneringen-functie die (deels) volstaat? · zit er een bankkoppeling op de Bank-module of is het handmatige import? · hoeveel IP's mag de whitelist bevatten · heeft een debiteur een vrij referentieveld voor het Careweb-cliëntnummer.</li>
     </ul>
     <div class="callout">
       <p class="kicker">Gevonden tijdens dit onderzoek</p>
-      <p><b>De SOP spreekt zichzelf tegen over de betaaltermijn.</b> De facturen-FAQ zegt 14 dagen; de herinner-procedure en de juridische aanmaningsbrief zeggen 30 dagen; WeFact staat ingesteld op 14. Vier plekken, twee getallen — en één ervan staat in een brief met juridische werking. Dit moet eenduidig worden vastgesteld vóór fase 2, anders automatiseren we een onduidelijke regel.</p>
+      <p><b>De SOP spreekt zichzelf tegen over de betaaltermijn.</b> De facturen-FAQ zegt 14 dagen; de herinner-procedure en de juridische aanmaningsbrief zeggen 30 dagen; WeFact staat ingesteld op 14. Vier plekken, twee getallen — en één ervan staat in een brief met juridische werking. Voor een <em>handmatige</em> ladder is dat slordig; voor een <em>automatische</em> ladder is het blokkerend. Dit moet eenduidig worden vastgesteld vóór stap 3 aangaat.</p>
     </div>
   </section>
 
@@ -419,11 +398,11 @@
     <h2 class="sec">Vijf beslispunten voor Massy</h2>
     <div class="callout">
       <ol>
-        <li><b>Exact blijft grootboek</b> via WeFact's koppeling — een rechtstreekse Aweris→Exact-route heroverwegen is een latere beslissing, geen dag-1-keuze.</li>
-        <li><b>Welke fase eerst?</b> Fase 2 (het factuuroverzicht) levert de snelste zichtbare winst, is onafhankelijk van fase 1 en raakt de boekhoudketen niet. Fase 1 bouwt voort op Aweris' bewezen sterkte.</li>
+        <li><b>Welke betaaltermijn is canoniek:</b> 14 of 30 dagen? Bepaalt wanneer de automatische ladder mag vuren — blokkerend voor stap 3.</li>
+        <li><b>Automatiseringsgrens akkoord?</b> Voorstel: 1e + 2e herinnering volautomatisch; aanmaning en incasso altijd door een mens. (Dit is de grens die in dit voorstel is uitgewerkt.)</li>
+        <li><b>Hoe komt de bank binnen?</b> Heeft WeFact's Bank-module al een bankkoppeling, of moet er wekelijks geïmporteerd worden? Bepaalt de betrouwbaarheid van "betaald" — en dus van de hele ladder.</li>
+        <li><b>Wie ontvangt de dagelijkse digest</b> (wat is verstuurd, wat staat gepland) en mag pauzeren — secretariaat, Anna, of beiden?</li>
         <li><b>Wie beheert</b> de WeFact API-sleutel en de IP-whitelist — Massy functioneel, Javad technisch?</li>
-        <li><b>Welke betaaltermijn is canoniek:</b> 14 of 30 dagen? (Zie het gevonden SOP-conflict hierboven.)</li>
-        <li><b>Fase 5 nu of later:</b> de LLM op uitgaande post is nieuw terrein — wachten tot fase 1–4 stabiel draaien, of parallel voorbereiden?</li>
       </ol>
     </div>
   </section>
@@ -431,7 +410,7 @@
   <!-- ============ KERN ============ -->
   <section class="bottomline">
     <p class="kicker">De kern</p>
-    <p>Begin met fase 0 + fase 2 — zo'n 7 à 10 bouwdagen. Dat vervangt het meest zichtbare wekelijkse handwerk zonder de boekhouding aan te raken, en levert meteen de echte cijfers op waarmee de rest van dit voorstel van aannames naar feiten gaat. Bij de huidige aannames: ruim <b>11 uur secretariaatstijd per maand</b> terug, zo'n <b>€4.300 per jaar</b> — en een herinnerladder die zichzelf bewaakt.</p>
+    <p>In 11 à 17 bouwdagen: het Excel-bestand weg, de betaalstatus voor iedereen zichtbaar in Aweris tijdens elk cliëntgesprek, betalingen automatisch gematcht, en een herinnerladder die zichzelf draait — met harde waarborgen, en de aanmaning en incasso nadrukkelijk bij de mens. Bij de huidige aannames zo'n <b>8 uur secretariaatstijd per maand</b> terug; met de optionele vervolgfases groeit dat naar ruim 11.</p>
   </section>
 
   <footer class="aw-footer">
@@ -459,14 +438,15 @@
           b = toNum($("bankminNum").value), o = toNum($("overzichtminNum").value),
           t = toNum($("uurtariefNum").value);
 
-    const mFact = f * MIN_PER_FACTUUR;
-    const mHer  = h * MIN_PER_HERINNERING;
-    const mAan  = a * MIN_PER_AANMANING;
-    const mInc  = (i * MIN_PER_INCASSO) / 12;
-    const mBank = b * BANK_PCT * WEKEN_PER_MAAND;
-    const mOvz  = o * OVERZICHT_PCT * WEKEN_PER_MAAND;
+    const mFact = f * MIN_PER_FACTUUR;            // latere fase
+    const mHer  = h * MIN_PER_HERINNERING;        // stap 3
+    const mAan  = a * MIN_PER_AANMANING;          // stap 1 (voorbereid)
+    const mInc  = (i * MIN_PER_INCASSO) / 12;     // latere fase
+    const mBank = b * BANK_PCT * WEKEN_PER_MAAND; // stap 2
+    const mOvz  = o * OVERZICHT_PCT * WEKEN_PER_MAAND; // stap 1
     const totMin = mFact + mHer + mAan + mInc + mBank + mOvz;
-    const uur = totMin / 60;
+    const coreMin = totMin - mFact - mInc;        // alleen stap 1-3
+    const uur = totMin / 60, coreUur = coreMin / 60;
 
     $("bFacturen").textContent = fmtInt(mFact);
     $("bHerinneringen").textContent = fmtInt(mHer);
@@ -478,6 +458,7 @@
     $("outUur").textContent = fmtUur(uur) + " uur";
     $("outEur").textContent = fmtEur(uur * t);
     $("outJaar").textContent = fmtEur(uur * t * 12);
+    $("coreLine").textContent = fmtUur(coreUur) + " uur/maand · " + fmtEur(coreUur * t) + "/maand · " + fmtEur(coreUur * t * 12) + "/jaar";
   }
 
   function link(sliderId, numberId, valueSpanId) {
