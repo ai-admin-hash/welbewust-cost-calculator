@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WeFact-integratie — WelBewust × Aweris</title>
+<link rel="stylesheet" href="aweris.css">
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--aw-paper);color:var(--aw-ink);font-family:var(--aw-font-body);line-height:1.62;-webkit-font-smoothing:antialiased}
+  .doc{max-width:1000px;margin:0 auto;padding:44px clamp(18px,4vw,40px) 40px}
+  .mono-dim{font-family:var(--aw-font-mono);font-size:.82em;color:var(--aw-muted);letter-spacing:.01em}
+  em{font-style:italic}
+
+  /* mast */
+  .mast{border-bottom:1px solid var(--aw-line);padding-bottom:32px;margin-bottom:40px}
+  .mast h1{font-family:var(--aw-font-display);font-weight:600;font-size:clamp(2rem,4.8vw,3rem);line-height:1.06;letter-spacing:.005em;text-wrap:balance;margin:16px 0 20px;max-width:22ch}
+  .mast h1 em{font-style:italic;color:var(--aw-orange)}
+  .dek{font-size:1.12rem;line-height:1.6;max-width:66ch;color:var(--aw-ink-soft);margin:0 0 22px}
+  .backlink{font-size:.9rem;margin:0;display:flex;gap:14px;flex-wrap:wrap;align-items:baseline}
+  .backlink a{color:var(--aw-orange-dark);text-decoration:none;font-weight:600;border-bottom:1px solid #e6c3b3;padding-bottom:1px}
+  .backlink a:hover{border-bottom-color:var(--aw-orange-dark)}
+
+  /* sections */
+  .kicker{font-family:var(--aw-font-mono);text-transform:uppercase;letter-spacing:.13em;font-size:.7rem;color:var(--aw-orange);margin:0 0 10px}
+  .block{margin-bottom:46px}
+  h2.sec{font-family:var(--aw-font-display);font-weight:600;font-size:clamp(1.4rem,3vw,1.85rem);line-height:1.15;margin:0 0 18px;text-wrap:balance}
+  .lead{font-size:1.04rem;color:var(--aw-ink-soft);max-width:66ch;margin:0 0 24px}
+
+  /* dark panel */
+  .panel{background:var(--aw-blue-dark);border-radius:var(--aw-radius);padding:30px 32px;margin-bottom:48px;color:#EDEFF5}
+  .panel .panel-label{font-family:var(--aw-font-mono);text-transform:uppercase;letter-spacing:.13em;font-size:.7rem;color:var(--aw-gold);margin:0 0 14px}
+  .panel-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;margin-top:18px}
+  .panel-grid h4{font-family:var(--aw-font-display);font-size:1.05rem;margin:0 0 6px;color:#fff}
+  .panel-grid p{margin:0;font-size:.92rem;color:#C6CBDA;line-height:1.5}
+  .panel > p{margin:14px 0 0;color:#EDEFF5;max-width:72ch}
+
+  /* flow diagram */
+  .flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:stretch;margin:20px 0 8px}
+  .flow .node{background:var(--aw-card);border:1px solid var(--aw-line);border-radius:var(--aw-radius);padding:16px 18px;text-align:center}
+  .flow .node b{display:block;font-family:var(--aw-font-display);font-size:1.05rem;margin-bottom:4px}
+  .flow .node span{font-size:.8rem;color:var(--aw-muted);line-height:1.4;display:block}
+  .flow .node.hub{border:2px solid var(--aw-orange);box-shadow:var(--aw-shadow)}
+  .flow .arrow{align-self:center;font-size:1.3rem;color:var(--aw-orange);font-weight:600;padding:0 2px}
+  .flow-down{text-align:center;color:var(--aw-orange);font-size:1.3rem;line-height:1;margin:2px 0}
+  .flow-exact{max-width:340px;margin:0 auto}
+  .flow-note{text-align:center;margin-top:14px}
+  @media (max-width:700px){
+    .flow{grid-template-columns:1fr}
+    .flow .arrow{transform:rotate(90deg);justify-self:center;padding:2px 0}
+  }
+
+  /* API table + pills */
+  .table-wrap{overflow-x:auto;border:1px solid var(--aw-line);border-radius:var(--aw-radius);background:var(--aw-card)}
+  table{border-collapse:collapse;width:100%;min-width:640px;font-size:.88rem}
+  thead th{text-align:left;font-family:var(--aw-font-mono);text-transform:uppercase;letter-spacing:.05em;font-size:.66rem;color:var(--aw-muted);font-weight:400;padding:13px 16px;border-bottom:1px solid var(--aw-line);background:#F6F0E5}
+  tbody td{padding:12px 16px;border-bottom:1px solid #F0E9DC;vertical-align:top;line-height:1.45}
+  tbody tr:last-child td{border-bottom:none}
+  td.lbl{font-weight:600;color:var(--aw-ink)}
+  .api-call{font-family:var(--aw-font-mono);font-size:.78rem;color:var(--aw-ink-soft);white-space:nowrap}
+  .tag{border-radius:var(--aw-radius-pill);padding:3px 10px;font-size:.66rem;font-family:var(--aw-font-mono);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap}
+  .tag-ok{background:var(--aw-green-soft);color:var(--aw-green)}
+  .tag-warn{background:#FBE7DE;color:var(--aw-orange-dark)}
+
+  /* fase cards */
+  .prop{background:var(--aw-card);border:1px solid var(--aw-line);border-radius:var(--aw-radius);padding:24px 26px;margin-bottom:18px;border-top:4px solid var(--aw-line)}
+  .prop.f0{border-top-color:var(--aw-blue)}
+  .prop.f1{border-top-color:var(--aw-orange)}
+  .prop.f2{border-top-color:var(--aw-gold)}
+  .prop.f3{border-top-color:var(--aw-green)}
+  .prop.f4{border-top-color:var(--aw-orange-light)}
+  .prop.f5{border-top-color:var(--aw-blue-light)}
+  .prop h3{font-family:var(--aw-font-display);font-weight:600;font-size:1.25rem;margin:0 0 6px}
+  .prop .sub{margin:0 0 14px;color:var(--aw-ink-soft);font-size:.95rem;max-width:70ch}
+  .pg{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px 22px;margin:0 0 14px;padding:12px 14px;background:#F8F3EA;border-radius:var(--aw-radius-sm)}
+  .pg div b{display:block;font-family:var(--aw-font-mono);font-size:.62rem;text-transform:uppercase;letter-spacing:.08em;color:var(--aw-muted);font-weight:400;margin-bottom:2px}
+  .pg div{font-size:.9rem}
+  .prop ul{margin:0 0 12px;padding-left:20px}
+  .prop li{margin-bottom:5px;font-size:.94rem}
+  .risk{font-size:.86rem;color:var(--aw-ink-soft);border-left:3px solid var(--aw-line-strong);padding-left:12px;margin:0}
+  .risk b{color:var(--aw-orange-dark)}
+
+  /* proof / callout */
+  .proof{margin-top:16px;background:var(--aw-green-soft);border:1px solid #CDE0D4;border-left:4px solid var(--aw-green);border-radius:var(--aw-radius-sm);padding:18px 22px}
+  .proof p{margin:0;font-size:.94rem}
+  .callout{background:#FBF3EC;border:1px solid #EAD3C2;border-radius:var(--aw-radius);padding:24px 26px;margin-top:6px}
+  .callout .kicker{color:var(--aw-orange-dark)}
+  .callout p{margin:0 0 10px;max-width:72ch}
+  .callout p:last-child{margin-bottom:0}
+  .callout ol{margin:0;padding-left:20px}
+  .callout ol li{margin-bottom:8px}
+
+  /* calculator */
+  .calc{background:var(--aw-card);border:1px solid var(--aw-line);border-radius:var(--aw-radius);padding:26px 28px;box-shadow:var(--aw-shadow)}
+  .calc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px 28px;margin-bottom:22px}
+  .field-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:4px}
+  .field-head label{font-size:.88rem;font-weight:600}
+  .field-value{font-family:var(--aw-font-mono);font-size:.8rem;color:var(--aw-orange-dark);white-space:nowrap}
+  .field-controls{display:flex;gap:10px;align-items:center}
+  .field-controls input[type=range]{flex:1;accent-color:var(--aw-orange)}
+  .field-controls input[type=number]{width:74px;padding:5px 8px;border:1px solid var(--aw-line-strong);border-radius:var(--aw-radius-sm);font:inherit;font-size:.85rem;background:#fff}
+  .calc-note{font-size:.82rem;color:var(--aw-muted);margin:0 0 20px;max-width:76ch}
+  .calc-out{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:20px}
+  .out-card{background:var(--aw-blue-dark);border-radius:var(--aw-radius-sm);padding:18px 20px;text-align:center}
+  .out-card b{display:block;font-family:var(--aw-font-display);font-size:1.7rem;color:#fff;line-height:1.1}
+  .out-card span{font-family:var(--aw-font-mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.08em;color:var(--aw-gold)}
+  .calc table{min-width:0}
+  .calc td.num{text-align:right;font-family:var(--aw-font-mono);font-size:.82rem;white-space:nowrap}
+
+  /* bottomline */
+  .bottomline{background:var(--aw-blue-dark);border-radius:var(--aw-radius);padding:32px 34px;margin-bottom:8px}
+  .bottomline .kicker{color:var(--aw-gold)}
+  .bottomline p:not(.kicker){font-family:var(--aw-font-display);font-size:1.22rem;line-height:1.5;color:#EDEFF5;margin:0;max-width:68ch}
+
+  ul.plain{margin:0 0 24px;padding-left:20px}
+  ul.plain li{margin-bottom:8px;max-width:76ch}
+</style>
+</head>
+<body>
+
+<nav class="aw-nav">
+  <a class="aw-brand" href="overview.html"><span class="aw-wordmark">Aweris</span><small>WelBewust &middot; planning</small></a>
+  <div class="aw-nav-links">
+    <a href="overview.html">Overzicht</a>
+    <a href="index.html">Kostencalculator</a>
+    <a href="assistenten.html">Digitale assistenten</a>
+    <a href="modules.html">Modules</a>
+    <a href="compliance.html">NEN 7510-plan</a>
+    <a href="epd-roadmap.html">EPD-roadmap</a>
+    <a href="proposals.html">Voorstellen</a>
+    <a href="wefact.html" aria-current="page">WeFact</a>
+  </div>
+</nav>
+
+<article class="doc">
+  <header class="mast">
+    <p class="kicker">Integratievoorstel — facturatie</p>
+    <h1>Van drie losse systemen naar <em>één facturatie-hub</em></h1>
+    <p class="dek">Aweris leest al elke leveranciersfactuur automatisch uit en boekt naar Exact. WeFact verstuurt al elke cliëntfactuur. Maar daartussen zit een wekelijks handmatig bijgehouden Excel-bestand, een stapel bankafschriften en een herinnerladder die iemand met de hand afloopt. Dit voorstel koppelt Aweris aan de WeFact&nbsp;API en laat dat handwerk verdwijnen — terwijl elke boeking, herinnering en incasso een menselijke bevestiging houdt.</p>
+    <p class="backlink">
+      <a href="epd-roadmap.html">↗ EPD-roadmap</a> <span class="mono-dim">WeFact staat daar al als "integreren, fase 1, laag risico"</span>
+      <a href="proposals.html">↗ Voorstellen</a> <span class="mono-dim">de omzetvoorstellen rond de modules</span>
+    </p>
+  </header>
+
+  <!-- ============ DE SITUATIE ============ -->
+  <section class="panel">
+    <p class="panel-label">De situatie vandaag</p>
+    <div class="panel-grid">
+      <div>
+        <h4>Careweb → verzekeraars</h4>
+        <p>Declaraties lopen al automatisch via Vecozo (elke 10e van de maand + wekelijkse correcties). Blijft volledig ongewijzigd — buiten scope.</p>
+      </div>
+      <div>
+        <h4>WeFact → cliënten</h4>
+        <p>No-show-, OVP-, AON- en informatieverstrekking-facturen, herinneringen, aanmaningen en incasso. Het systeem werkt — maar alles eromheen is handwerk.</p>
+      </div>
+      <div>
+        <h4>Aweris → Exact</h4>
+        <p>Inkomende leveranciersfacturen: automatisch uitgelezen door de LLM, door een mens bevestigd, geboekt in Exact Online. Draait in productie.</p>
+      </div>
+    </div>
+    <p>De lijm tussen die systemen is nu een <b>Excel-factuuroverzicht</b> op de Drive: elke factuur, betaaldatum, herinnering en aanmaning wordt er met de hand in bijgehouden, elke week worden bankafschriften nagelopen, en de betaaltermijn-ladder telt iemand zelf uit. Dat is precies het soort werk dat een API-koppeling hoort te doen.</p>
+  </section>
+
+  <!-- ============ DE ARCHITECTUUR ============ -->
+  <section class="block">
+    <p class="kicker">De architectuur</p>
+    <h2 class="sec">WeFact wordt de hub — Exact blijft het grootboek</h2>
+    <p class="lead">Aweris krijgt twee rollen: <b>schrijver</b> (inkoopfacturen aanmaken in WeFact, met de originele PDF als bijlage) en <b>lezer</b> (factuurstatus, betaaldatum en banktransacties ophalen om te signaleren wie een herinnering, aanmaning of incasso nodig heeft). WeFact's eigen boekhoudkoppeling stuurt alles door naar Exact Online — de grootboek-waarheid verandert niet.</p>
+    <div class="flow">
+      <div class="node"><b>Careweb</b><span>cliënten &amp; declaraties<br>bestaande koppeling</span></div>
+      <div class="arrow">→</div>
+      <div class="node hub"><b>WeFact</b><span>facturatie-hub<br>verkoop én inkoop</span></div>
+      <div class="arrow">←</div>
+      <div class="node"><b>Aweris</b><span>leest facturen uit,<br>bewaakt de ladder <em>(nieuw)</em></span></div>
+    </div>
+    <div class="flow-down">↓</div>
+    <div class="flow flow-exact">
+      <div class="node" style="grid-column:1/-1"><b>Exact Online</b><span>grootboek — via WeFact's bestaande boekhoudkoppeling</span></div>
+    </div>
+    <p class="flow-note mono-dim">Polling elk kwartier (WeFact heeft geen webhooks) · limiet 200 calls/min — ruim voldoende</p>
+  </section>
+
+  <!-- ============ WAT DE API KAN ============ -->
+  <section class="block">
+    <p class="kicker">Geverifieerd — juli 2026</p>
+    <h2 class="sec">Wat de WeFact&nbsp;API aantoonbaar kan</h2>
+    <p class="lead">Elke functie in dit voorstel is vooraf getoetst aan de officiële API-documentatie (developer.wefact.com). Geen aannames over haalbaarheid — dit is bevestigd:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Functie</th><th>API-call</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl">Inkoopfactuur aanmaken &amp; betaalstatus volgen</td><td><span class="api-call">creditinvoice add / list / partpayment</span></td><td><span class="tag tag-ok">bevestigd</span></td></tr>
+          <tr><td class="lbl">Originele factuur-PDF meesturen</td><td><span class="api-call">attachment add (base64)</span></td><td><span class="tag tag-ok">bevestigd</span></td></tr>
+          <tr><td class="lbl">Herinnering per e-mail versturen</td><td><span class="api-call">invoice sendreminderbyemail</span></td><td><span class="tag tag-ok">bevestigd</span></td></tr>
+          <tr><td class="lbl">Aanmaning per e-mail versturen</td><td><span class="api-call">invoice sendsummationbyemail</span></td><td><span class="tag tag-ok">bevestigd</span></td></tr>
+          <tr><td class="lbl">Vervallen facturen signaleren</td><td><span class="api-call">invoice list status=9 · ReminderDate · SummationDate</span></td><td><span class="tag tag-ok">bevestigd</span></td></tr>
+          <tr><td class="lbl">Conceptfactuur klaarzetten (mens verstuurt)</td><td><span class="api-call">invoice add (Status 0 = concept)</span></td><td><span class="tag tag-ok">bevestigd</span></td></tr>
+          <tr><td class="lbl">Banktransacties lezen én matchen aan facturen</td><td><span class="api-call">transaction list / show / match</span></td><td><span class="tag tag-ok">bevestigd</span></td></tr>
+          <tr><td class="lbl">Kostencategorieën ophalen voor inkoopregels</td><td><span class="api-call">settings costcategory_list</span></td><td><span class="tag tag-ok">bevestigd</span></td></tr>
+          <tr><td class="lbl">Realtime meldingen (webhooks)</td><td><span class="api-call">—</span></td><td><span class="tag tag-warn">bestaat niet → polling</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ============ HET PLAN ============ -->
+  <section class="block">
+    <p class="kicker">Het plan</p>
+    <h2 class="sec">Zes fases, elk zelfstandig waardevol</h2>
+    <p class="lead">Totaal ≈ 21–33 ontwikkeldagen (4–7 weken doorlooptijd bij één ontwikkelaar). Fase&nbsp;0 is de randvoorwaarde voor alles; fase&nbsp;1 en 2 zijn onderling onafhankelijk, dus de volgorde daarna is een keuze — zie de beslispunten onderaan.</p>
+
+    <div class="prop f0">
+      <h3>Fase 0 — Fundament</h3>
+      <p class="sub">De technische randvoorwaarde: WeFact accepteert alleen aanvragen van gewhiteliste IP-adressen, en Cloud Run heeft standaard geen vast uitgaand IP.</p>
+      <div class="pg">
+        <div><b>Bouwtijd</b>3–4 dagen</div>
+        <div><b>Bouwt op</b>—</div>
+        <div><b>Wie</b>Javad (GCP) · WeFact-beheerder (whitelist)</div>
+      </div>
+      <ul>
+        <li>Statisch uitgaand IP voor Cloud Run (VPC-connector + Cloud NAT) en whitelisten in WeFact</li>
+        <li>API-sleutel in Google Secret Manager — nooit in code of repo</li>
+        <li>WeFact API-client in de Aweris-backend, analoog aan de bestaande Exact-client</li>
+        <li>Mapping-tabellen: crediteuren, BTW-codes, kostencategorieën, en Careweb-cliëntnummer ↔ WeFact-debiteur</li>
+        <li>Controleren dat de WeFact→Exact boekhoudkoppeling actief en correct staat</li>
+      </ul>
+      <p class="risk"><b>Let op:</b> eerst valideren in een testomgeving vóór er productieverkeer overheen loopt.</p>
+    </div>
+
+    <div class="prop f1">
+      <h3>Fase 1 — Inkoopfacturen naar WeFact</h3>
+      <p class="sub">Aweris' bestaande pijplijn (e-mail → LLM-extractie → menselijke bevestiging) krijgt WeFact als boekingsdoel: de inkoopfactuur ontstaat in WeFact, mét de originele PDF als bijlage, en stroomt via de koppeling door naar Exact.</p>
+      <div class="pg">
+        <div><b>Bouwtijd</b>3–5 dagen</div>
+        <div><b>Bouwt op</b>Fase 0</div>
+        <div><b>Wie</b>Javad (dev) · Massy (steekproef eerste weken)</div>
+      </div>
+      <ul>
+        <li>Veldmapping: leverancier, factuurnummer, datum, regels (netto · BTW-code · kostencategorie)</li>
+        <li>PDF-bijlage via <span class="api-call">attachment add</span> — bevestigd door de API-docs</li>
+        <li>Bestaande duplicaat-bewaking uitbreiden naar WeFact-inkoopfacturen</li>
+        <li>Menselijke bevestiging blijft exact zoals vandaag bij Exact-boekingen</li>
+      </ul>
+      <p class="risk"><b>Scope-grens:</b> creditnota's van leveranciers blijven buiten fase 1 — Aweris heeft daar een bekende, nog niet opgeloste beperking, en die fout doorgeven aan WeFact maakt hem niet beter.</p>
+    </div>
+
+    <div class="prop f2">
+      <h3>Fase 2 — Het factuuroverzicht vervangen</h3>
+      <p class="sub">De kern van het secretariaats-handwerk. Aweris leest elk kwartier alle facturen uit WeFact en toont het AR-overzicht dat nu met de hand in Excel wordt bijgehouden — inclusief automatisch berekende actie per factuur: 1e herinnering, 2e herinnering, aanmaning of incasso.</p>
+      <div class="pg">
+        <div><b>Bouwtijd</b>4–6 dagen</div>
+        <div><b>Bouwt op</b>Fase 0 (niet fase 1)</div>
+        <div><b>Wie</b>Javad (dev) · secretariaat (2–4 wkn parallel testen)</div>
+      </div>
+      <ul>
+        <li>Meevaller: WeFact registreert <span class="api-call">ReminderDate</span> en <span class="api-call">SummationDate</span> zelf — de herinner-kolommen komen dus rechtstreeks uit de API</li>
+        <li>De wekelijkse "check tab" wordt een automatisch gevulde weergave</li>
+        <li>Handmatig blijven (voorlopig): DAS-vorderingsdatum en de uitbetaling-aan-psycholoog-kolommen</li>
+      </ul>
+      <p class="risk"><b>Blokkerend beslispunt:</b> de SOP noemt op vier plekken twee verschillende eerste betaaltermijnen — 14 én 30 dagen, waarvan één in de juridische aanmaningsbrief zelf. Vóór deze fase moet Massy/Anna vaststellen welke ladder canoniek is, anders automatiseren we een onduidelijke regel.</p>
+      <div class="proof">
+        <p><b>Eerste winst na de koppeling:</b> de werkelijke volumes van de afgelopen 12 maanden ophalen uit WeFact en de aannames in de rekentool hieronder vervangen door echte cijfers.</p>
+      </div>
+    </div>
+
+    <div class="prop f3">
+      <h3>Fase 3 — Bankafstemming</h3>
+      <p class="sub">Vervangt het wekelijks nalopen van bankafschriften. Aweris leest ongematchte transacties uit WeFact, stelt een match voor (bedrag + factuurnummer + cliënt), en schrijft na menselijke bevestiging de match terug — inclusief automatisch op betaald zetten.</p>
+      <div class="pg">
+        <div><b>Bouwtijd</b>2–4 dagen</div>
+        <div><b>Bouwt op</b>Fase 0 + 2</div>
+        <div><b>Wie</b>Javad (dev) · secretariaat (steekproef)</div>
+      </div>
+      <ul>
+        <li><span class="api-call">transaction list</span> met statusfilter (unmatched / proposed_match) — bevestigd</li>
+        <li><span class="api-call">transaction match</span> met MarkAsPaid schrijft de koppeling terug — bevestigd</li>
+        <li>Deelbetalingen (betalingsregelingen) en betalingen zonder factuurnummer worden apart gemarkeerd voor menselijke controle</li>
+      </ul>
+      <p class="risk"><b>Randvoorwaarde:</b> de banktransacties moeten in WeFact's Bank-module binnenkomen (bankkoppeling of periodieke import) — check hoe dat nu is ingericht.</p>
+    </div>
+
+    <div class="prop f4">
+      <h3>Fase 4 — Herinnerladder &amp; incassopakket</h3>
+      <p class="sub">Eén klik in plaats van zoeken, kopiëren en registreren. Aweris toont wie aan de beurt is en verstuurt de herinnering of aanmaning via de API; voor incasso stelt het een compleet DAS-dossier samen dat pas na bevestiging door Maaike of Anna vrijkomt.</p>
+      <div class="pg">
+        <div><b>Bouwtijd</b>4–6 dagen</div>
+        <div><b>Bouwt op</b>Fase 2</div>
+        <div><b>Wie</b>Javad (dev) · Maaike/Anna (goedkeuring, ongewijzigd)</div>
+      </div>
+      <ul>
+        <li>Eén-klik 1e/2e herinnering en aanmaning via <span class="api-call">sendreminderbyemail</span> / <span class="api-call">sendsummationbyemail</span> — bevestigd</li>
+        <li>Aanmaningssjabloon (Wet Incassokosten) wordt automatisch gevuld — byte-identiek sjabloon, alleen variabelen</li>
+        <li>DAS-pakket: factuur-PDF + aanmaning-PDF + de standaard verantwoordingstekst, klaar om te uploaden — indienen op das.nl blijft mensenwerk (geen DAS-API)</li>
+        <li>Het telefoongesprek vóór een incasso blijft áltijd mensenwerk</li>
+      </ul>
+      <p class="risk"><b>Uitzondering:</b> herinneringen op informatieverstrekking-facturen gaan per post, niet per e-mail — die route blijft handmatig.</p>
+    </div>
+
+    <div class="prop f5">
+      <h3>Fase 5 — Uitgaande facturen voorbereiden</h3>
+      <p class="sub">De eerste keer dat Aweris' LLM-aanpak op uitgaande in plaats van inkomende post wordt toegepast: no-show-, OVP- en informatieverstrekking-facturen worden als concept klaargezet — de mens controleert en verstuurt.</p>
+      <div class="pg">
+        <div><b>Bouwtijd</b>5–8 dagen</div>
+        <div><b>Bouwt op</b>Fase 0 · liefst na 1–4</div>
+        <div><b>Wie</b>Javad (dev) · secretariaat (validatie) · Anna/Massy (tarieven)</div>
+      </div>
+      <ul>
+        <li>No-show: conceptregel (cliënt, datum, tarief) met één klik naar WeFact via <span class="api-call">invoice add</span> (Status 0 = concept — bevestigd)</li>
+        <li>Informatieverstrekking: ontvanger, bedrijfsnaam en omschrijving automatisch voorgesteld uit het verzoekdocument — nu een handmatige zoekactie per geval</li>
+        <li>Versturen blijft een menselijke handeling, exact zoals vandaag</li>
+      </ul>
+      <p class="risk"><b>Nieuw terrein:</b> ander brontype, nieuwe prompts — extra zorgvuldig testen vóór livegang.</p>
+    </div>
+  </section>
+
+  <!-- ============ WAT VERDWIJNT ============ -->
+  <section class="block">
+    <p class="kicker">Het handwerk</p>
+    <h2 class="sec">Wat er verdwijnt — en wat bewust blijft</h2>
+    <p class="lead">Elke rij verwijst naar een bestaande procedure in de interne financiën-SOP. De minuten zijn inschattingen op basis van het aantal stappen — de SOP zelf noemt geen tijden; laat secretariaat ze toetsen.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Handwerk nu</th><th>SOP-procedure</th><th>Tijd nu*</th><th>Frequentie*</th><th>Wordt</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl">Factuur opstellen + registreren in Excel</td><td>Factuur opstellen en versturen</td><td>~10 min</td><td>30/maand</td><td>concept staat klaar, mens bevestigt</td></tr>
+          <tr><td class="lbl">Herinnering zoeken, versturen, registreren</td><td>Herinneringsfacturen</td><td>~8 min</td><td>10/maand</td><td>één klik</td></tr>
+          <tr><td class="lbl">Aanmaning opstellen, archiveren, registreren</td><td>Aanmaning</td><td>~15 min</td><td>3/maand</td><td>gevuld sjabloon, mens keurt</td></tr>
+          <tr><td class="lbl">DAS-dossier samenstellen</td><td>Incasso indienen</td><td>~25 min</td><td>6/jaar</td><td>pakket klaar; Maaike/Anna keuren; bellen blijft</td></tr>
+          <tr><td class="lbl">Bankafschriften nalopen</td><td>Facturen — FAQ</td><td>45 min</td><td>wekelijks</td><td>automatische match-voorstellen</td></tr>
+          <tr><td class="lbl">Factuuroverzicht + check-tab bijwerken</td><td>Factuur opstellen en versturen</td><td>60 min</td><td>wekelijks</td><td>live dashboard</td></tr>
+          <tr><td class="lbl">EHIC-batch (export, printen, post)</td><td>EHIC facturen</td><td>~3 uur</td><td>maandelijks</td><td><b>blijft handwerk</b> — post naar Zilveren Kruis</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="mono-dim" style="margin-top:10px">* alle tijden en volumes zijn aannames — zie de rekentool hieronder om ze aan te passen. Declaraties (Careweb/Vecozo) en validatiemeldingen zijn geen onderdeel van deze integratie. Creditfacturen blijven altijd in overleg met Anna; incasso altijd met Maaike of Anna.</p>
+  </section>
+
+  <!-- ============ REKENTOOL ============ -->
+  <section class="block">
+    <p class="kicker">Reken het zelf door</p>
+    <h2 class="sec">Wat levert het op — met jouw cijfers</h2>
+    <p class="lead">De standaardwaarden zijn aannames (de echte praktijkvolumes zijn nog niet uit WeFact opgehaald). Schuif ze naar jullie werkelijkheid — de besparing rekent live mee.</p>
+    <div class="calc">
+      <div class="calc-grid">
+        <div class="field">
+          <div class="field-head"><label for="facturen">Facturen per maand</label><span class="field-value"><span id="valFacturen">30</span></span></div>
+          <div class="field-controls"><input type="range" id="facturen" min="0" max="100" step="1" value="30"><input type="number" id="facturenNum" min="0" max="500" step="1" value="30"></div>
+        </div>
+        <div class="field">
+          <div class="field-head"><label for="herinneringen">Herinneringen per maand</label><span class="field-value"><span id="valHerinneringen">10</span></span></div>
+          <div class="field-controls"><input type="range" id="herinneringen" min="0" max="50" step="1" value="10"><input type="number" id="herinneringenNum" min="0" max="200" step="1" value="10"></div>
+        </div>
+        <div class="field">
+          <div class="field-head"><label for="aanmaningen">Aanmaningen per maand</label><span class="field-value"><span id="valAanmaningen">3</span></span></div>
+          <div class="field-controls"><input type="range" id="aanmaningen" min="0" max="20" step="1" value="3"><input type="number" id="aanmaningenNum" min="0" max="100" step="1" value="3"></div>
+        </div>
+        <div class="field">
+          <div class="field-head"><label for="incassos">Incasso's per jaar</label><span class="field-value"><span id="valIncassos">6</span></span></div>
+          <div class="field-controls"><input type="range" id="incassos" min="0" max="50" step="1" value="6"><input type="number" id="incassosNum" min="0" max="200" step="1" value="6"></div>
+        </div>
+        <div class="field">
+          <div class="field-head"><label for="bankmin">Bankafstemming (min/week)</label><span class="field-value"><span id="valBankmin">45</span> min</span></div>
+          <div class="field-controls"><input type="range" id="bankmin" min="0" max="180" step="5" value="45"><input type="number" id="bankminNum" min="0" max="600" step="5" value="45"></div>
+        </div>
+        <div class="field">
+          <div class="field-head"><label for="overzichtmin">Factuuroverzicht bijwerken (min/week)</label><span class="field-value"><span id="valOverzichtmin">60</span> min</span></div>
+          <div class="field-controls"><input type="range" id="overzichtmin" min="0" max="180" step="5" value="60"><input type="number" id="overzichtminNum" min="0" max="600" step="5" value="60"></div>
+        </div>
+        <div class="field">
+          <div class="field-head"><label for="uurtarief">Uurtarief secretariaat</label><span class="field-value">€<span id="valUurtarief">32</span>/uur</span></div>
+          <div class="field-controls"><input type="range" id="uurtarief" min="15" max="60" step="1" value="32"><input type="number" id="uurtariefNum" min="15" max="120" step="1" value="32"></div>
+        </div>
+      </div>
+      <p class="calc-note">Vaste aannames in het model: 6 min bespaard per factuur en per herinnering, 10 min per aanmaning, 20 min per incasso-voorbereiding, 80% van de bankafstemming en 90% van het overzichtswerk vervalt. EHIC wordt bewust op €0 besparing gehouden — dat blijft postwerk.</p>
+      <div class="calc-out">
+        <div class="out-card"><span>besparing per maand</span><b id="outUur">—</b></div>
+        <div class="out-card"><span>waarde per maand</span><b id="outEur">—</b></div>
+        <div class="out-card"><span>waarde per jaar</span><b id="outJaar">—</b></div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Onderdeel</th><th style="text-align:right">Min/maand</th></tr></thead>
+          <tbody>
+            <tr><td>Facturen (fase 5)</td><td class="num" id="bFacturen">—</td></tr>
+            <tr><td>Herinneringen (fase 4)</td><td class="num" id="bHerinneringen">—</td></tr>
+            <tr><td>Aanmaningen (fase 4)</td><td class="num" id="bAanmaningen">—</td></tr>
+            <tr><td>Incasso-voorbereiding (fase 4)</td><td class="num" id="bIncassos">—</td></tr>
+            <tr><td>Bankafstemming (fase 3)</td><td class="num" id="bBank">—</td></tr>
+            <tr><td>Factuuroverzicht (fase 2)</td><td class="num" id="bOverzicht">—</td></tr>
+            <tr><td><b>Totaal</b></td><td class="num" id="bTotaal">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RISICO'S ============ -->
+  <section class="block">
+    <p class="kicker">Eerlijk over de grenzen</p>
+    <h2 class="sec">Risico's &amp; randvoorwaarden</h2>
+    <ul class="plain">
+      <li><b>Statisch IP is de poort.</b> Zonder VPC-connector + Cloud NAT met gereserveerd IP accepteert WeFact geen enkele API-aanvraag van Cloud Run. Dit is de eerste bouwsteen, niet een detail voor later.</li>
+      <li><b>Geen webhooks — bevestigd.</b> Alles is polling (elk kwartier, met de modified-filter). Voor een facturatie-overzicht ruim voldoende; het is geen realtime-systeem.</li>
+      <li><b>AVG:</b> deze integratie voegt geen nieuwe categorie persoonsgegevens toe — Aweris ziet een subset van wat al tussen Careweb en WeFact stroomt (naam, factuurnummer, bedrag, betaalstatus; geen diagnose-data, geen BSN). Wel: Aweris hoort als systeem in het verwerkingsregister.</li>
+      <li><b>Goedkeuringsregels blijven hard.</b> Creditfactuur altijd in overleg met Anna; incasso altijd met Maaike of Anna — als blokkerende bevestigingsstap in de UI, nooit "auto-approve na X dagen".</li>
+      <li><b>Nog open bij WeFact-support:</b> hoeveel IP's mag de whitelist bevatten · heeft een debiteur een vrij referentieveld voor het Careweb-cliëntnummer · hoe vertaalt de Exact-koppeling kostencategorieën precies naar grootboekrekeningen.</li>
+    </ul>
+    <div class="callout">
+      <p class="kicker">Gevonden tijdens dit onderzoek</p>
+      <p><b>De SOP spreekt zichzelf tegen over de betaaltermijn.</b> De facturen-FAQ zegt 14 dagen; de herinner-procedure en de juridische aanmaningsbrief zeggen 30 dagen; WeFact staat ingesteld op 14. Vier plekken, twee getallen — en één ervan staat in een brief met juridische werking. Dit moet eenduidig worden vastgesteld vóór fase 2, anders automatiseren we een onduidelijke regel.</p>
+    </div>
+  </section>
+
+  <!-- ============ BESLISPUNTEN ============ -->
+  <section class="block">
+    <p class="kicker">Voor het gesprek</p>
+    <h2 class="sec">Vijf beslispunten voor Massy</h2>
+    <div class="callout">
+      <ol>
+        <li><b>Exact blijft grootboek</b> via WeFact's koppeling — een rechtstreekse Aweris→Exact-route heroverwegen is een latere beslissing, geen dag-1-keuze.</li>
+        <li><b>Welke fase eerst?</b> Fase 2 (het factuuroverzicht) levert de snelste zichtbare winst, is onafhankelijk van fase 1 en raakt de boekhoudketen niet. Fase 1 bouwt voort op Aweris' bewezen sterkte.</li>
+        <li><b>Wie beheert</b> de WeFact API-sleutel en de IP-whitelist — Massy functioneel, Javad technisch?</li>
+        <li><b>Welke betaaltermijn is canoniek:</b> 14 of 30 dagen? (Zie het gevonden SOP-conflict hierboven.)</li>
+        <li><b>Fase 5 nu of later:</b> de LLM op uitgaande post is nieuw terrein — wachten tot fase 1–4 stabiel draaien, of parallel voorbereiden?</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ KERN ============ -->
+  <section class="bottomline">
+    <p class="kicker">De kern</p>
+    <p>Begin met fase 0 + fase 2 — zo'n 7 à 10 bouwdagen. Dat vervangt het meest zichtbare wekelijkse handwerk zonder de boekhouding aan te raken, en levert meteen de echte cijfers op waarmee de rest van dit voorstel van aannames naar feiten gaat. Bij de huidige aannames: ruim <b>11 uur secretariaatstijd per maand</b> terug, zo'n <b>€4.300 per jaar</b> — en een herinnerladder die zichzelf bewaakt.</p>
+  </section>
+
+  <footer class="aw-footer">
+    <span>WelBewust &middot; Aweris planningswerkruimte</span>
+    <span>Integratievoorstel WeFact &middot; gebaseerd op de interne financiën-SOP en de geverifieerde WeFact API v2-documentatie (juli 2026)</span>
+  </footer>
+</article>
+
+<script>
+(function () {
+  const $ = (id) => document.getElementById(id);
+  function toNum(v) { return Number(String(v).trim().replace(",", ".")); }
+
+  // Vaste model-aannames (zie tekst boven de uitkomsten)
+  const MIN_PER_FACTUUR = 6, MIN_PER_HERINNERING = 6, MIN_PER_AANMANING = 10, MIN_PER_INCASSO = 20;
+  const BANK_PCT = 0.8, OVERZICHT_PCT = 0.9, WEKEN_PER_MAAND = 52 / 12;
+
+  function fmtInt(n) { return Math.round(n).toLocaleString("nl-NL"); }
+  function fmtUur(n) { return n.toLocaleString("nl-NL", { minimumFractionDigits: 1, maximumFractionDigits: 1 }); }
+  function fmtEur(n) { return "€" + Math.round(n).toLocaleString("nl-NL"); }
+
+  function recalc() {
+    const f = toNum($("facturenNum").value), h = toNum($("herinneringenNum").value),
+          a = toNum($("aanmaningenNum").value), i = toNum($("incassosNum").value),
+          b = toNum($("bankminNum").value), o = toNum($("overzichtminNum").value),
+          t = toNum($("uurtariefNum").value);
+
+    const mFact = f * MIN_PER_FACTUUR;
+    const mHer  = h * MIN_PER_HERINNERING;
+    const mAan  = a * MIN_PER_AANMANING;
+    const mInc  = (i * MIN_PER_INCASSO) / 12;
+    const mBank = b * BANK_PCT * WEKEN_PER_MAAND;
+    const mOvz  = o * OVERZICHT_PCT * WEKEN_PER_MAAND;
+    const totMin = mFact + mHer + mAan + mInc + mBank + mOvz;
+    const uur = totMin / 60;
+
+    $("bFacturen").textContent = fmtInt(mFact);
+    $("bHerinneringen").textContent = fmtInt(mHer);
+    $("bAanmaningen").textContent = fmtInt(mAan);
+    $("bIncassos").textContent = fmtInt(mInc);
+    $("bBank").textContent = fmtInt(mBank);
+    $("bOverzicht").textContent = fmtInt(mOvz);
+    $("bTotaal").textContent = fmtInt(totMin);
+    $("outUur").textContent = fmtUur(uur) + " uur";
+    $("outEur").textContent = fmtEur(uur * t);
+    $("outJaar").textContent = fmtEur(uur * t * 12);
+  }
+
+  function link(sliderId, numberId, valueSpanId) {
+    const slider = $(sliderId), number = $(numberId), span = $(valueSpanId);
+    function set(v) {
+      v = toNum(v);
+      slider.value = v;
+      number.value = v;
+      if (span) span.textContent = v.toLocaleString("nl-NL");
+      recalc();
+    }
+    slider.addEventListener("input", () => set(slider.value));
+    number.addEventListener("input", () => { if (number.value !== "") set(number.value); });
+    set(slider.value);
+  }
+
+  link("facturen", "facturenNum", "valFacturen");
+  link("herinneringen", "herinneringenNum", "valHerinneringen");
+  link("aanmaningen", "aanmaningenNum", "valAanmaningen");
+  link("incassos", "incassosNum", "valIncassos");
+  link("bankmin", "bankminNum", "valBankmin");
+  link("overzichtmin", "overzichtminNum", "valOverzichtmin");
+  link("uurtarief", "uurtariefNum", "valUurtarief");
+})();
+</script>
+
+</body>
+</html>
