@@ -55,6 +55,34 @@
   .pg.pot .v{color:var(--aw-green);font-weight:600}
   .pg.risk .v{color:var(--aw-orange-dark)}
 
+  /* per-proposal financial model */
+  .fin{margin-top:24px;border-top:1px dashed var(--aw-line-strong);padding-top:20px}
+  .fin-h{font-family:var(--aw-font-mono);font-size:.68rem;text-transform:uppercase;letter-spacing:.1em;color:var(--aw-ink);margin:0 0 14px;font-weight:600}
+  .fin-h span{color:var(--aw-muted);text-transform:none;letter-spacing:0;font-weight:400}
+  .scen{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+  .col{background:#F8F2E6;border:1px solid var(--aw-line);border-radius:var(--aw-radius-sm);padding:14px 15px}
+  .col.base{background:#FBF3EC;border-color:#E6C3A9}
+  .col .tag{font-family:var(--aw-font-mono);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;color:var(--aw-muted);display:flex;justify-content:space-between;gap:6px;margin-bottom:9px}
+  .col.base .tag{color:var(--aw-orange-dark)}
+  .col .tag .star{color:var(--aw-orange);font-weight:700;white-space:nowrap}
+  .col .big{font-family:var(--aw-font-display);font-size:1.5rem;font-weight:600;color:var(--aw-ink);line-height:1;font-variant-numeric:tabular-nums;display:block}
+  .col .big small{font-size:.56em;color:var(--aw-muted);font-weight:400}
+  .col .calc{font-size:.78rem;color:var(--aw-ink-soft);margin:8px 0 0;line-height:1.38}
+  .col .yr{font-size:.72rem;color:var(--aw-muted);margin:5px 0 0;font-family:var(--aw-font-mono)}
+  .fin-note{font-size:.8rem;color:var(--aw-muted);margin:13px 0 0;line-height:1.5;max-width:78ch}
+  .fin-note b{color:var(--aw-ink-soft);font-weight:600}
+
+  /* stacked path-to-goal block */
+  .combined{margin-top:18px;background:var(--aw-blue-dark);border-radius:var(--aw-radius);padding:22px 26px;color:#EDEFF5}
+  .combined-h{font-family:var(--aw-font-mono);text-transform:uppercase;letter-spacing:.1em;font-size:.68rem;color:var(--aw-gold);margin:0 0 14px}
+  .combined-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:13px}
+  .ci{background:#20263C;border-radius:var(--aw-radius-sm);padding:9px 13px;font-size:.9rem;color:#D7DBE6}
+  .ci b{color:#fff;font-weight:600;display:block;font-size:.62rem;font-family:var(--aw-font-mono);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px;color:var(--aw-orange-light)}
+  .ci.total{background:var(--aw-orange);color:#fff;font-family:var(--aw-font-display);font-size:1.2rem;font-weight:600;padding:10px 17px}
+  .op{color:var(--aw-muted);font-size:1.05rem;font-weight:600}
+  .combined-note{font-size:.82rem;color:#AEB5C7;margin:0;line-height:1.5;max-width:78ch}
+  .combined-note b{color:#EDEFF5;font-weight:600}
+
   .table-wrap{overflow-x:auto;border:1px solid var(--aw-line);border-radius:var(--aw-radius);background:var(--aw-card)}
   table{border-collapse:collapse;width:100%;min-width:640px;font-size:.88rem}
   thead th{text-align:left;font-family:var(--aw-font-mono);text-transform:uppercase;letter-spacing:.05em;font-size:.66rem;color:var(--aw-muted);font-weight:400;padding:13px 16px;border-bottom:1px solid var(--aw-line);background:#F6F0E5}
@@ -80,6 +108,7 @@
   .bottomline b{color:#fff;font-weight:600}
 
   @media (max-width:720px){ .walls,.prop-grid{grid-template-columns:1fr} }
+  @media (max-width:520px){ .scen{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
@@ -132,6 +161,15 @@
         <div class="pg"><span class="l">Effort</span><span class="v">Multi-tenant build (~3–6 wks) + sales + processor agreements + NEN 7510.</span></div>
         <div class="pg risk"><span class="l">Main risk</span><span class="v">It's a real company: sales, support, competing with incumbents.</span></div>
       </div>
+      <div class="fin">
+        <p class="fin-h">Financial model <span>— €30 / seat / mo · ~85% gross margin · near-zero cost per extra seat</span></p>
+        <div class="scen">
+          <div class="col"><span class="tag"><span>Conservative</span><span>Year 1</span></span><span class="big">€1.200<small>/mo</small></span><p class="calc">40 seats · ~6 small practices</p><p class="yr">≈ €14k / yr</p></div>
+          <div class="col base"><span class="tag"><span>Base</span><span class="star">★ 12–18 mo</span></span><span class="big">€3.600<small>/mo</small></span><p class="calc">120 seats · ~15 practices</p><p class="yr">≈ €43k / yr</p></div>
+          <div class="col"><span class="tag"><span>Stretch</span><span>Year 2+</span></span><span class="big">€9.000<small>/mo</small></span><p class="calc">300 seats · ~10 mid-size practices</p><p class="yr">≈ €108k / yr</p></div>
+        </div>
+        <p class="fin-note"><b>Your €6.244/mo goal is cleared at ~210 seats</b> (~€6.300/mo) — between the base and stretch cases. Marginal cost per extra seat is near zero (Google Cloud + support); the real spend is the one-time multi-tenant + billing build.</p>
+      </div>
     </div>
   </section>
 
@@ -148,6 +186,15 @@
         <div class="pg pot"><span class="l">Revenue potential</span><span class="v">MEDIUM — volume-driven; also a lead funnel to the practice</span></div>
         <div class="pg"><span class="l">Effort</span><span class="v">Workbook ≈ built; add payment + accounts (~2–4 wks). Marketing-heavy.</span></div>
         <div class="pg risk"><span class="l">Main risk</span><span class="v">Customer-acquisition cost; must stay strictly non-patient.</span></div>
+      </div>
+      <div class="fin">
+        <p class="fin-h">Financial model <span>— €29 / program (incl. BTW) · net ≈ €23 after 21% BTW + ~3% fees</span></p>
+        <div class="scen">
+          <div class="col"><span class="tag"><span>Conservative</span><span>organic</span></span><span class="big">€870<small>/mo</small></span><p class="calc">30 sales/mo · net ≈ €700</p><p class="yr">≈ €8k / yr net</p></div>
+          <div class="col base"><span class="tag"><span>Base</span><span class="star">★ +1 employer</span></span><span class="big">€2.900<small>/mo</small></span><p class="calc">100 sales/mo · net ≈ €2.300</p><p class="yr">≈ €28k / yr net</p></div>
+          <div class="col"><span class="tag"><span>Stretch</span><span>paid + bulk</span></span><span class="big">€8.700<small>/mo</small></span><p class="calc">300 sales/mo · net ≈ €6.900</p><p class="yr">≈ €83k / yr net</p></div>
+        </div>
+        <p class="fin-note"><b>CAC is the swing factor.</b> Organic channels (waitlist, former clients, one employer deal) are profitable; paid ads at €15–30 per sale can erase the €23 margin. Best run as a lead funnel into Proposal 1, not a standalone bet.</p>
       </div>
     </div>
   </section>
@@ -166,6 +213,15 @@
         <div class="pg"><span class="l">Effort</span><span class="v">Lowest build (content ready) — but the licensed-instrument red-list must be cleared first.</span></div>
         <div class="pg risk"><span class="l">Main risk</span><span class="v">Commoditised; partner owns the customer; not defensible.</span></div>
       </div>
+      <div class="fin">
+        <p class="fin-h">Financial model <span>— per-partner deal · flat licence or 15–25% rev-share · near-100% margin</span></p>
+        <div class="scen">
+          <div class="col"><span class="tag"><span>Conservative</span><span>1 partner</span></span><span class="big">€1.500<small>/mo</small></span><p class="calc">1 flat-licence deal</p><p class="yr">≈ €18k / yr</p></div>
+          <div class="col base"><span class="tag"><span>Base</span><span class="star">★ 3 partners</span></span><span class="big">€4.500<small>/mo</small></span><p class="calc">€1.500 each, or rev-share</p><p class="yr">≈ €54k / yr</p></div>
+          <div class="col"><span class="tag"><span>Stretch</span><span>6 partners</span></span><span class="big">€9.000<small>/mo</small></span><p class="calc">€1.500 each, or 15–25% rev-share</p><p class="yr">≈ €108k / yr</p></div>
+        </div>
+        <p class="fin-note"><b>Deal-based, not volume</b> — long sales cycles (months) and each partner owns their customer. The licensed-instrument red-list (4DSQ, SQ-48, HoNOS…) must be stripped first: you license <em>your</em> content, not third-party questionnaires.</p>
+      </div>
     </div>
   </section>
 
@@ -179,7 +235,8 @@
         <tbody>
           <tr><td>Who pays</td><td>GGZ practices</td><td>Consumers / employers</td><td>Other software vendors</td></tr>
           <tr><td>Price</td><td>€25–35 / clinician / mo</td><td>€19–39 / program</td><td>Licence or rev-share</td></tr>
-          <tr><td>Revenue ceiling</td><td><b>High</b> (€50k+/mo)</td><td>Medium</td><td>Medium</td></tr>
+          <tr><td>Base case / mo</td><td><b>€3.600</b></td><td>€2.900 <span class="mono-dim">(net €2.300)</span></td><td>€4.500</td></tr>
+          <tr><td>Revenue ceiling</td><td><b>High</b> (€50k+/mo)</td><td>Medium (~€8k/mo)</td><td>Medium (~€10k/mo)</td></tr>
           <tr><td>Build effort</td><td>Medium (multi-tenant)</td><td>Low (payment + accounts)</td><td>Lowest (content ready)</td></tr>
           <tr><td>Time to first €</td><td>1–3 months</td><td>Weeks (volume slow)</td><td>Months (deal cycles)</td></tr>
           <tr><td>Defensibility</td><td><b>High</b> — platform + relationships</td><td>Low–medium — brand</td><td>Low — commodity</td></tr>
@@ -202,6 +259,19 @@
       <li><b>#3 (content licensing)</b> is opportunistic — take a deal if a platform comes knocking, but don't lead with it: it turns us into a replaceable supplier.</li>
       <li><b>All three respect the wall:</b> none of them ever charges our own patients-in-treatment. That's non-negotiable and already verified.</li>
     </ul>
+    <div class="combined">
+      <p class="combined-h">The stacked path to your €6.244 / mo goal</p>
+      <div class="combined-row">
+        <span class="ci"><b>Platform · base</b>€3.600</span>
+        <span class="op">+</span>
+        <span class="ci"><b>Self-help · base net</b>€2.300</span>
+        <span class="op">+</span>
+        <span class="ci"><b>1 licence deal</b>€1.500</span>
+        <span class="op">=</span>
+        <span class="ci total">€7.400 / mo</span>
+      </div>
+      <p class="combined-note">The three base cases stack to <b>€7.400/mo — past the €6.244 goal.</b> Platform alone also gets there, at ~210 seats (vs. 120 in its base case). This is the point of leading with #1 and running #2/#3 alongside: they add up, they don't compete.</p>
+    </div>
   </section>
 
   <!-- ============ BOTTOM LINE ============ -->
